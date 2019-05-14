@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- Modal dialog del alert -->
+    <div id="bids_del" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Заявка</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Удалить данную заявку</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="delbidsyes" class="btn btn-success primary-btn" data-dismiss="modal">Да
+                    </button>
+                    <button type="button" id="delbidsno" class="btn btn-danger secondary-btn" data-dismiss="modal">Нет
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget-wrap">
+
+                {#                <div class="widget-header block-header clearfix">#}
+                {#                    <div class="col-md-6">#}
+                {#                        <h3 style="color: #00008B ">Просмотр заявок</h3>#}
+                {#                        <p4 style="font-style:italic;text-decoration:underline">Время : <span#}
+                {#                                style="font-weight: bold">{{ timeobr }}</span></p4>#}
+                {#                    </div>#}
+                {##}
+                {#                    <div class="col-md-6">#}
+                {#                        <div class="data-align-right">#}
+                {#                            <a href="{% url 'bidsedit' %}" class="btn add-row btn-primary">Добавить заявку</a>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                </div>#}
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="widget-header block-header clearfix">
+                            <h3 style="color: #00008B ">Просмотр заявок дубль</h3>
+                            <p4 style="font-style:italic;text-decoration:underline">{{ timeobr }}</p4>
+                        </div>
+                    </div>
+{#                    <div class="col-md-6">#}
+{#                        <div class="data-align-right">#}
+{#                            <a href="{% url 'bidsadd' %}" class="btn add-row btn-primary">Добавить заявку</a>#}
+{#                        </div>#}
+{#                    </div>#}
+                </div>
+                {#            </div>#}
+                <div class="widget-container">
+                    <div class="widget-content">
+                        <table class="table data-tbl-bids">
+                            <thead>
+                            <tr>
+                                <th><h4>Фамилия</h4></th>
+                                <th><h4>Имя</h4></th>
+                                <th><h4>Телефон</h4></th>
+                                <th><h4>Статус</h4></th>
+                                <th><h4>Дата создания</h4></th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th><h4>Фамилия</h4></th>
+                                <th><h4>Имя</h4></th>
+                                <th><h4>Телефон</h4></th>
+                                <th><h4>Статус</h4></th>
+                                <th><h4>Дата создания</h4></th>
+                            </tr>
+
+                            </tfoot>
+                            <tbody id="bidsview">
+                            {% for post in p_bids %}
+                                <tr role="row" class="even">
+                                    <td>{{ post.last_name }}</td>
+                                    <td>{{ post.first_name }}</td>
+                                    <td>{{ post.contact_phone }}</td>
+                                    <td>{{ post.status }}</td>
+                                    <td>{{ post.created_dt }}</td>
+                                    <td>
+                                        <a title="Редактировать" class="row-edit" id="edit_{{ post.id }}"
+                                           onclick="showbidsedit(id,'double')"
+                                           data-edit_id="{{ post.id }}"
+{#                                           data-name_query_alert="{{ post.name_query_alert }}"#}
+{#                                           data-query_alert="{{ post.query_alert }}"#}
+{#                                           data-email="{{ post.email }}"#}
+                                        ><span class="zmdi zmdi-edit"></span></a>
+                                        <a title="Удалить" class="row-delete" id="del_{{ post.id }}"
+                                           onclick="bids_del(id,'double')"><span class="zmdi zmdi-close"></span></a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+

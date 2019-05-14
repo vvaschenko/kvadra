@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static %}
+{#{% block title %}{% trans 'MKC Sales Hub' %}{% endblock %}#}
+{% block content %}
+
+
+    {#{% endblock %}#}
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Выбор полей импорта</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="graph">
+                        <div class="widget-content" id="importview">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="import_bt">Импорт</button>
+                    <button type="button" class="btn btn-default" id="close_import" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget-wrap">
+                {#    <div class="colM">#}
+                {#        <div class="col-md-9">#}
+                <form action="" method="POST" id="fileinfo" class="j-forms form-horizontal"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-2" id="groupview">
+                            <select name="groupitem" class="form-control" id="groupitem" data-regim="groupview">
+                                <option value="0" selected>Выберите группу</option>
+                                {% for post in grouplist %}
+                                    <option value="{{ post.id }}">"{{ post.name }}"</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-7">
+                            <label class="required" for="id_report_file">Файл импорта:</label>
+                            <input class="button-form" id="import_file" type="file"
+                                   accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                   name="import_bids"
+                                   data-user={{ request.user }}
+                                   onchange="inputchange()">
+
+                            <p class="help">Выбирете файл для импорта заявок, файл должен соответствовать структуре
+                                импорта.</p>
+                        </div>
+                        <div class="submit-row">
+                            <button id="nextimport"
+                                    type="button" disabled
+                                    class="btn btn-primary btn-sm"
+                                    onclick="viewfilds(id)">Продолжить
+                            </button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {#    #}
+    {#    <div class="row">#}
+    {#        <form action="" method="POST" id="fileinfo" enctype="multipart/form-data">#}
+    {#            {% csrf_token %}#}
+    {##}
+    {#            <fieldset class="module aligned  module_0 initialized">#}
+    {#                <div >#}
+    {#                <div class="form-row field-report_file">#}
+    {#                    <div class="col-md-2" id="groupview">#}
+    {#                        <select name="groupitem" class="form-control" id="groupitem" data-regim="groupview">#}
+    {#                            <option value="0" selected>Выберите группу</option>#}
+    {#                            {% for post in grouplist %}#}
+    {#                                <option value="{{ post.id }}">"{{ post.name }}"</option>#}
+    {#                            {% endfor %}#}
+    {#                        </select>#}
+    {#                    </div>#}
+    {##}
+    {#                    <div class="col-md-4">#}
+    {#                        <label class="required" for="id_report_file">Файл импорта:</label>#}
+    {#                        <input class="button-form" id="import_file" type="file"#}
+    {#                               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"#}
+    {#                               name="import_bids"#}
+    {#                               onchange="inputchange()">#}
+    {##}
+    {#                        <p class="help">Выбирете файл для импорта заявок, файл должен соответствовать структуре#}
+    {#                            импорта.</p>#}
+    {#                    </div>#}
+    {##}
+    {#                    <div class="submit-row">#}
+    {#                        <button id="nextimport"#}
+    {#                                type="button" disabled#}
+    {#                                class="btn btn-primary btn-sm"#}
+    {#                                onclick="viewfilds(id)">Продолжить#}
+    {#                        </button>#}
+    {##}
+    {#                    </div>#}
+    {##}
+    {#                </div>#}
+    {#            </fieldset>#}
+    {##}
+    {#        </form>#}
+    {##}
+    {#    </div>#}
+
+{% endblock %}
+
+
+
+<button id="clearcach"
+        type="button"
+        class="btn btn-primary btn-sm"
+        data-cach="1"
+        onclick="clear_cach(id)">
+    Clear Cache
+</button>

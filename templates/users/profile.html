@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget-wrap">
+                <div class="widget-header block-header clearfix">
+                    <div class="row">
+                        <h3 style="color: #00008B " >Личный профиль</h3>
+                        <p4 style="font-style:italic;text-decoration:underline">{{user.username  }}</p4>
+                    </div>
+
+                    <p4 style="font-style:italic;text-decoration:underline">{{ timeobr }}</p4>
+                </div>
+                <div class="widget-container">
+                    <div class="widget-content">
+                    <!--форма редактирования профиля -->
+                      <div class="row">
+                        <div class="col-md-3">
+                            {% if request.user.profileuser.avatar.name == "" %}
+                              <img src="{% static 'admmen.jpg' %}" width="50%" id="img_profileuser" >
+                            {% else %}
+                              <img src="{{ request.user.profileuser.avatar.url }}" width="50%" id="img_profileuser">
+                            {% endif %}
+
+                        </div>
+                        <div class="col-md-9">
+                            <form action="" method="POST" class="j-forms form-horizontal" enctype="multipart/form-data">
+                            {% csrf_token %}
+{#                            <div class="form-content">#}
+                                <div class="form-group">
+                                    <label class=" col-md-2 control-label">Личные данные</label>
+                                    <div class=" col-md-10">
+                                        <div class="form-group-input">
+                                             <input type="text" class="form-control" name="first_name" placeholder="First Name"
+{#                                                    {% if request.method == 'POST' %}value="{{ user_form.instance.first_name }}" {% endif %}#}
+                                                    value="{{ user_form.instance.first_name }}"
+                                             >
+                                             <input type="text" class="form-control" name ="last_name" placeholder="Last Name"
+{#                                                    {% if request.method == 'POST' %}value="{{ user_form.instance.last_name }}" {% endif %}#}
+                                                    value="{{ user_form.instance.last_name }}"
+                                             >
+
+                                                 {% if profile_form.errors %}
+                                                     {% for error in  profile_form.errors %}
+                                                         <div class="input-group date addon-datepicker">
+{#                                                         addon-datepicker#}
+                                                              <input type="text" class="form-control" name="birthday" placeholder="Date of Birth"
+     {#                                                        {% if request.method == 'POST' %}value="{{ profile_form.instance.birthday }}" {% endif %}#}
+{#                                                              value="{{ profile_form.instance.birthday }}"#}
+                                                              >
+
+                                                         <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+
+                                                         </div>
+                                                         <span class="error-view"><p>{{ error|escape}}</p></span>
+
+                                                     {% endfor %}
+                                                 {% else %}
+                                                  <div class="input-group date addon-datepicker">
+{#                                                  addon-datepicker#}
+                                                     <input type="text" class="form-control" name="birthday"  placeholder="Date of Birth"
+{#                                                        {% if request.method == 'POST' %}value="{{ profile_form.instance.birthday }}" {% endif %}#}
+                                                        value="{{ profile_form.instance.birthday|date:"Y-m-d" }}"
+                                                     >
+                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                                  </div>
+                                                 {% endif %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" col-md-2 control-label">Email</label>
+                                    <div class=" col-md-10">
+                                         <div class="form-group-input">
+                                              <input type="text" class="form-control" name="email" placeholder="Ваш Email"
+{#                                                     {% if request.method == 'POST' %}value="{{ user_form.instance.email }}" {% endif %}#}
+                                                     value="{{ user_form.instance.email }}"
+                                              >
+                                         </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" col-md-2 control-label">ID Telegramm</label>
+                                    <div class=" col-md-10">
+                                        <div class="form-group-input">
+                                            <input type="text" class="form-control" name="id_telegramm"
+                                                   placeholder="Ваш ID в телеграмм"
+                                                    {#                                                     {% if request.method == 'POST' %}value="{{ user_form.instance.email }}" {% endif %}#}
+                                                   value="{{ profile_form.instance.id_telegramm }}"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                     <label class=" col-md-2 control-label">Фото профиля</label>
+                                     <div class="col-md-10 unit">
+                                          <div class="input append-small-btn">
+                                               <div class="file-button">Browse
+                                                        <input class="btn btn-success" id="avatar_file" type="file" accept="image/jpeg,image/png" name="avatar" >
+                                               </div>
+                                               <input type="text" class="form-control"  id="append-small-btn" readonly placeholder="no file selected"
+{#                                                      {% if request.method == 'POST' %}value="{{ profile_form.instance.avatar }}" {% endif %}#}
+                                                      value="{{ profile_form.instance.avatar }}"
+                                               >
+                                          </div>
+                                     </div>
+                                </div>
+{#                            </div>#}
+                            <div class="form-footer">
+                                 <button type="submit" class="btn btn-success primary-btn">Сохранить</button>
+                                 <button type="reset" class="btn btn-danger secondary-btn">Очистить</button>
+                            </div>
+                            </form>
+
+                        </div>
+
+                       </div>
+                        <!--end form edit profile -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

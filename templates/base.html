@@ -1,0 +1,384 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>Kvadra CRM</title>
+    <!-- Bootstrap -->
+
+    <link type="text/css" rel="stylesheet" href={% static 'bootstrap/css/bootstrap.min.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'bootstrap/css/bootstrap.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'bootstrap/css/bootstrap-theme.min.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'bootstrap/css/bootstrap-datetimepicker.min.css' %}>
+
+    <!-- Custom styles -->
+    {#    <link rel="manifest" href={% static '/manifest.json' %}>#}
+    <link type="text/css" rel="stylesheet" href={% static 'static/style.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'css/font-awesome.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'css/material-design-iconic-font.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'css/pages.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'css/animate.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'css/layout.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'css/components.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'css/widgets.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'css/plugins.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'css/bootstrap-extend.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'css/common.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'css/responsive.css' %}>
+
+
+</head>
+
+
+<body class="leftbar-view">
+<!--Topbar Start Here-->
+<header class="topbar clearfix">
+    <!--Top Search Bar Start Here-->
+    <div class="top-search-bar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="search-input-addon">
+                        <span class="addon-icon"><i class="zmdi zmdi-search"></i></span>
+                        <input type="text" class="form-control top-search-input" placeholder="Search">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Top Search Bar End Here-->
+
+    <!--Topbar Left Branding With Logo Start-->
+    <div class="topbar-left pull-left">
+        <div class="clearfix">
+            <ul class="left-branding pull-left clickablemenu ttmenu dark-style menu-color-gradient">
+                <li><span class="left-toggle-switch"><i class="zmdi zmdi-menu"></i></span></li>
+                <li>
+                    <div class="logo">
+                        {#                        <a href="index.html" title="Admin Template"></a>#}
+
+                    </div>
+                </li>
+            </ul>
+            <!--Mobile Search and Rightbar Toggle-->
+            <ul class="branding-right pull-right">
+                <li><a href="#" class="btn-mobile-search btn-top-search"><i class="zmdi zmdi-search"></i></a></li>
+                <li><a href="#" class="btn-mobile-bar"><i class="zmdi zmdi-menu"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1" id= "logoimages" >
+                <img src="{% static 'images/photologo.jpg' %}" height="90%" width="90%"  >
+            </div>
+            <div class="col-md-8">
+
+                <h1 class="title"> Kvadra CRM </h1>
+            </div>
+        </div>
+        <div class="row">
+            <main class="mdl-layout__content mdl-color--grey-100">
+                <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
+
+                    <!-- Container for the Table of content -->
+                    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+                        <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                            <!-- div to display the generated Instance ID token -->
+                            <div id="token_div" style="display: none;">
+                                <h4>Instance ID Token</h4>
+                                <p id="token" style="word-break: break-all;"></p>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                        onclick="deleteToken()">Delete Token
+                                </button>
+                            </div>
+                            <!-- div to display the UI to allow the request for permission to
+                                 notify the user. This is shown if the app has not yet been
+                                 granted permission to notify. -->
+                            <div id="permission_div" style="display: none;">
+                                <h4>Needs Permission</h4>
+                                <p id="token"></p>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                        onclick="requestPermission()">Request Permission
+                                </button>
+                            </div>
+                            <!-- div to display messages received by this app. -->
+                            <div id="messages"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+
+
+        </div>
+
+
+    </div>
+
+</header>
+
+<!--Leftbar Start Here-->
+<aside class="leftbar">
+    <div class="left-aside-container">
+        <div class="user-profile-container">
+            <div class="user-profile clearfix">
+                <div class="admin-user-thumb">
+                     {% if request.user.profileuser.avatar.name == "" %}
+                          <img src="{% static 'admmen.jpg' %}" width="50%" >
+                     {% else %}
+                          <img src="{{ request.user.profileuser.avatar.url }}" width="50%" >
+                     {% endif %}
+
+                </div>
+                <div class="admin-user-info">
+                    <ul>
+
+                        {% if user.is_authenticated %}
+                            <li><a href="#">{{ user.username }}</a></li>
+                            <li><a href="#">{{ user.email }}</a></li>
+                        {% else %}
+                            <li><a href="#">username</a></li>
+                            <li><a href="#">email</a></li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+            <div class="admin-bar">
+                <ul>
+                    <li><a href="{% url 'log_out' %}" title="Выход"><i class="zmdi zmdi-power"></i>
+                    </a>
+                    </li>
+                    <li><a href="{% url 'profile' %}" title="Профиль"><i class="zmdi zmdi-account"></i>
+                    </a>
+                    </li>
+                    {#                    <li><a href="{% url 'change_password' %}" title="Смена пароля"><i class="zmdi zmdi-key"></i>#}
+                    </a>
+                        {% if user.is_superuser %}
+                            </li>
+{#                            <li><a href="{% url 'settings' %}" title="Настройки"><i class="zmdi zmdi-settings"></i>#}
+                            </a>
+                            </li>
+                        {% endif %}
+                </ul>
+            </div>
+        </div>
+        <ul class="list-accordion tree-style">
+            <li class="list-title">Kvadra CRM</li>
+            <li>
+                <a href="#"><i class="zmdi zmdi-view-dashboard"></i><span class="list-label">Заявки</span></a>
+                <ul>
+                    <li class="menunumber"><a href={% url 'bids' %}>Заявки просмотр</a></li>
+                    <li class="menunumber"><a href={% url 'bidsdouble' %}>Заявки дубль</a></li>
+                    <li class="menunumber"><a href={% url 'bidsimport' %}>Импорт заявок</a></li>
+{#                    <li class="menunumber"><a href={% url 'mon_partitions' %}>Partitions viewer</a></li>#}
+{#                    <li class="menunumber"><a href={% url 'last' %}>Replication Delays</a></li>#}
+                </ul>
+            </li>
+{#            <li>#}
+{#                <a href="#"><i class="zmdi zmdi-view-dashboard"></i><span class="list-label">Графики</span></a>#}
+{#                <ul>#}
+{#                    <li class="menunumber"><a href={% url 'graph_query' %}>Queue</a></li>#}
+{#                    <li><a href={% url 'graph_space' %}>Databases Space</a></li>#}
+{#                    <li class="menunumber"><a href={% url 'graph_partitions' %}>Partitions</a></li>#}
+{#                    <li class="menunumber"><a href={% url 'graph_repagent' %}>DSI/RepAgent Statistics</a></li>#}
+{#                    <li class="menunumber"><a href={% url 'graph_repserver' %}>RepServer Statistics</a></li>#}
+{#                </ul>#}
+{##}
+{#            </li>#}
+{##}
+{#            <li>#}
+{#                <a href="#"><i class="zmdi zmdi-view-dashboard"></i><span class="list-label">Логирование</span></a>#}
+{#                <ul>#}
+{#                    <li class="menunumber"><a href={% url 'logrsall' %}>RS сервер лог</a></li>#}
+{#                    <li class="menunumber"><a href={% url 'detail' %}>Подробности delay</a></li>#}
+{#                    <li><a href={% url 'graph_space' %}>Databases Space</a></li>#}
+                    {#                    <li class="menunumber"><a href="#">Пусто</a></li>#}
+{#                </ul>#}
+{##}
+{#            </li>#}
+{#            <li>#}
+{#                <a href="#"><i class="zmdi zmdi-view-dashboard"></i><span class="list-label">Справочники</span></a>#}
+{#                <ul>#}
+{#                    <li class="menunumber"><a href={% url 'catalog_rs' %}>Список репсерверов</a></li>#}
+{#                    <li class="menunumber"><a href={% url 'catalog_pubsub' %}>Подписки и Публикации</a></li>#}
+{#                    <li class="menunumber"><a href={% url 'warm_standby' %}>Warm Standby</a></li>#}
+                    {#                    <li class="menunumber"><a href="#">Пусто</a></li>#}
+{#                </ul>#}
+{##}
+{#            </li>#}
+{#            <li>#}
+{#                <a href="#"><i class="zmdi zmdi-view-dashboard"></i><span class="list-label">Инциденты</span></a>#}
+{#                <ul>#}
+{#                    <li class="menunumber"><a href={% url 'delay' %}>Задержки репликации</a></li>#}
+{#                    <li class="menunumber"><a href={% url 'query' %}>Очередь репликации</a></li>#}
+                    {#                    <li class="menunumber"><a href="#">Warm Standby</a></li>#}
+                    {#                    <li class="menunumber"><a href="#">Пусто</a></li>#}
+{#                </ul>#}
+{##}
+{#            </li>#}
+            {#                        <li class="list-title">Инциденты</li>#}
+            {#                        <li>#}
+            {#                            <a href="#"><i class="zmdi zmdi-view-web"></i><span class="list-label">Пусто</span></a>#}
+            {#                            <ul>#}
+            {#                                <li class="menunumber"><a href="#">пусто1</a></li>#}
+            {#                                <li class="menunumber"><a href="#">пусто2</a></li>#}
+            {#                                <li class="menunumber"><a href="#">пусто3</a></li>#}
+            {#                            </ul>#}
+            {#                        </li>#}
+{#            <li class="list-label">#}
+{#                <a href={% url 'archive' %}><span class="list-label">Что нового!!!</span></a>#}
+{#            </li>#}
+        </ul>
+    </div>
+</aside>
+<!--Leftbar End Here-->
+
+<!--основное тело старт-->
+
+
+
+<section class="main-container">
+    {#    <div class="container">#}
+    {#        <div class="row">#}
+    {#            <div >#}
+
+<script>
+    const static_url = '{% get_static_prefix %}';
+    const media_url = '{% get_media_prefix %}';
+</script>
+
+    {% block content %}
+
+    {% endblock %}
+
+
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+    <!--основное тело конец -->
+
+
+    <!--Footer Start Here -->
+    <footer class="footer-container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="footer-left">
+{#                        <span>© 2017 <a href="mailto:vadim.vaschenko@privatbank.ua">Vadim Vashchenko</a></span>#}
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="footer-right">
+                        <span class="footer-meta">Crafted with&nbsp;<i class="fa fa-heart"></i>&nbsp;by&nbsp;<a
+                                href="/admin/">Kvadra CRM</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Footer End Here -->
+
+</section>
+
+
+<script src={% static 'bootstrap/js/moment-with-locales.js' %}></script>
+{#<script src={% static 'js/lib/jquery.js' %}></script>#}
+<script src={% static 'js/lib/jquery.min.js' %}></script>
+<script src={% static 'js/lib/jquery-migrate.js' %}></script>
+<script src={% static 'js/lib/jquery.ui.js' %}></script>
+
+
+<script src={% static 'bootstrap/js/bootstrap.min.js' %}></script>
+
+{#<script src={% static 'bootstrap/js/moment.min.js' %}></script>#}
+{#<script src={% static 'js/lib/moment.js' %}></script>#}
+<script src={% static 'bootstrap/js/bootstrap-datetimepicker.min.js' %}></script>
+
+
+<script src={% static 'js/lib/jquery.fitvids.js' %}></script>
+<script src={% static 'js/lib/jquery.slimscroll.js' %}></script>
+<script src={% static 'js/lib/jquery.syntaxhighlighter.js' %}></script>
+<script src={% static 'js/lib/jquery-jvectormap.js' %}></script>
+<script src={% static 'js/lib/jquery-jvectormap-world-mill.js' %}></script>
+<script src={% static 'js/lib/jquery-jvectormap-us-aea.js' %}></script>
+<script src={% static 'js/lib/jquery.switch.button.js' %}></script>
+<script src={% static 'js/lib/jquery.searcher.js' %}></script>
+<script src={% static 'js/lib/jquery.scrollTo-min.js' %}></script>
+<script src={% static 'js/lib/jquery.highlight.js' %}></script>
+
+
+<script src={% static 'js/lib/jRespond.js' %}></script>
+<script src={% static 'js/lib/nav.accordion.js' %}></script>
+<script src={% static 'js/lib/hover.intent.js' %}></script>
+<script src={% static 'js/lib/hammerjs.js' %}></script>
+<script src={% static 'js/lib/jquery.hammer.js' %}></script>
+<script src={% static 'js/lib/scrollup.js' %}></script>
+<script src={% static 'js/lib/smoothscroll.js' %}></script>
+<script src={% static 'js/lib/velocity.js' %}></script>
+<script src={% static 'js/lib/smart-resize.js' %}></script>
+<script src={% static 'js/lib/highlight.js' %}></script>
+
+
+<!--start my script -->
+<script src={% static 'js/vvg/my_function.js' %}></script>
+<script src={% static 'js/vvg/jquery-resume.js' %}></script>
+<script src={% static 'js/vvg/graph_data.js' %}></script>
+<script src={% static 'js/vvg/sendfile.js' %}></script>
+<script src={% static 'js/vvg/menuact.js' %}></script>
+<script src={% static 'js/vvg/poisktext.js' %}></script>
+<script src={% static 'js/bidsimport.js' %}></script>
+{#<script src={% static 'js/vvg/datepicker.js' %}></script>#}
+
+
+<!--end my script -->
+
+
+
+
+
+<!--Data Tables-->
+<script src={% static 'js/lib/jquery.dataTables.js' %}></script>
+<script src={% static 'js/lib/dataTables.responsive.js' %}></script>
+<script src={% static 'js/lib/dataTables.tableTools.js' %}></script>
+<script src={% static 'js/lib/dataTables.bootstrap.js' %}></script>
+<script src={% static 'js/lib/footable.all.js' %}></script>
+
+<!--Forms-->
+<script src={% static 'js/lib/jquery.maskedinput.js' %}></script>
+<script src={% static 'js/lib/jquery.validate.js' %}></script>
+<script src={% static 'js/lib/jquery.form.js' %}></script>
+<script src={% static 'js/lib/j-forms.js' %}></script>
+<script src={% static 'js/lib/jquery.loadmask.js' %}></script>
+<script src={% static 'js/apps.js' %}></script>
+
+
+<script src={% static 'js/lib/bootstrap-filestyle.js' %}></script>
+
+<script src={% static 'js/lib/jquery.tagsinput.js' %}></script>
+<script src={% static 'js/lib/jquery.mask.js' %}></script>
+<script src={% static 'js/lib/jquery.tagsinput.js' %}></script>
+<script src={% static 'js/lib/jquery.bootstrap-touchspin.js' %}></script>
+
+<script src={% static 'js/lib/selectize.js' %}></script>
+
+
+<!--start graph -->
+
+{#<script src={% static 'highcharts/highstock.js' %}></script>#}
+{#<script src={% static 'highcharts/modules/exporting.js' %}></script>#}
+{#<script src={% static 'highcharts/highcharts-more.js' %}></script>#}
+
+
+
+<!--end graph -->
+
+
+</body>
+</html>

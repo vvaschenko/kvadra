@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- Modal dialog del alert -->
+    <div id="bids_del" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Заявка</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Удалить данную заявку</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="delbidsyes" class="btn btn-success primary-btn" data-dismiss="modal">Да
+                    </button>
+                    <button type="button" id="delbidsno" class="btn btn-danger secondary-btn" data-dismiss="modal">Нет
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {#<div class="page-header filled full-block light">#}
+    {#    <div class="row">#}
+    {#        <div class="col-md-6">#}
+    {#            <h2>Мой заголовок</h2>#}
+    {#            <p>мой текст</p>#}
+    {#        </div>#}
+    {#        <div class="col-md-6">#}
+    {#            <ul class="list-page-breadcrumb">#}
+    {#                <li><a href="#">Home <i class="zmdi zmdi-chevron-right"></i></a></li>#}
+    {#                <li><a href="#">Layout <i class="zmdi zmdi-chevron-right"></i></a></li>#}
+    {#                <li class="active-page"> Data Tables</li>#}
+    {#            </ul>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#</div>#}
+
+    <!-- Modal -->
+    {#    <div id="myModal" class="modal fade" role="dialog" tabindex="-1">#}
+    {#        <div class="modal-dialog modal-lg">#}
+    {##}
+    {##}
+    {#            <!-- Modal content-->#}
+    {#            <div class="modal-content">#}
+    {#                <div class="modal-header">#}
+    {#                    <button type="button" class="close" data-dismiss="modal">&times;</button>#}
+    {#                    <h4 class="modal-title">Graph</h4>#}
+    {#                </div>#}
+    {#                <div class="modal-body">#}
+    {#                    <div class="row" id="graph">#}
+    {#                        <div class="widget-content" id="logview">#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <div class="modal-footer">#}
+    {#                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
+    {#                </div>#}
+    {#            </div>#}
+    {##}
+    {#        </div>#}
+    {#    </div>#}
+    {##}
+    {#    <div id="myModalViewTran" class="modal fade" role="dialog" tabindex="-1">#}
+    {#        <div class="modal-dialog modal-lg">#}
+    {##}
+    {##}
+    {#            <!-- Modal content-->#}
+    {#            <div class="modal-content">#}
+    {#                <div class="modal-header">#}
+    {#                    <button type="button" class="close" data-dismiss="modal">&times;</button>#}
+    {#                    <h4 class="modal-title">View transaction</h4>#}
+    {#                </div>#}
+    {#                <div class="modal-body">#}
+    {#                    <div class="row" id="viewtran">#}
+    {#                        <div class="widget-content" id="logview_tran">#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <div class="modal-footer">#}
+    {#                    <button type="button" class="btn btn-primary" id='nexttran' onclick="showviewtrannext(id)">Next#}
+    {#                    </button>#}
+    {#                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
+    {#                </div>#}
+    {#            </div>#}
+    {##}
+    {#        </div>#}
+    {#    </div>#}
+    {##}
+    {##}
+    {#    <div id="myModalgraph" class="modal fade" role="dialog" tabindex="-1">#}
+    {#        <div class="modal-dialog modal-lg">#}
+    {##}
+    {##}
+    {#            <!-- Modal content-->#}
+    {#            <div class="modal-content">#}
+    {#                <div class="modal-header">#}
+    {#                    <button type="button" class="close" data-dismiss="modal">&times;</button>#}
+    {#                    <h4 class="modal-title">Graph</h4>#}
+    {#                </div>#}
+    {#                <div class="modal-body">#}
+    {#                    <div class="row" id="graph_graph">#}
+    {#                        <div class="widget-content" id="logview_graph">#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <div class="modal-footer">#}
+    {#                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
+    {#                </div>#}
+    {#            </div>#}
+    {##}
+    {#        </div>#}
+    {#    </div>#}
+
+    {#    <script>#}
+    {##}
+    {#    </script>#}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget-wrap">
+
+                {#                <div class="widget-header block-header clearfix">#}
+                {#                    <div class="col-md-6">#}
+                {#                        <h3 style="color: #00008B ">Просмотр заявок</h3>#}
+                {#                        <p4 style="font-style:italic;text-decoration:underline">Время : <span#}
+                {#                                style="font-weight: bold">{{ timeobr }}</span></p4>#}
+                {#                    </div>#}
+                {##}
+                {#                    <div class="col-md-6">#}
+                {#                        <div class="data-align-right">#}
+                {#                            <a href="{% url 'bidsedit' %}" class="btn add-row btn-primary">Добавить заявку</a>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                </div>#}
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="widget-header block-header clearfix">
+                            <h3 style="color: #00008B ">Просмотр заявок</h3>
+                            <p4 style="font-style:italic;text-decoration:underline">{{ timeobr }}</p4>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="data-align-right">
+                            <a href="{% url 'bidsadd' %}" class="btn add-row btn-primary">Добавить заявку</a>
+                        </div>
+                    </div>
+                </div>
+                {#            </div>#}
+                <div class="widget-container">
+                    <div class="widget-content">
+                        <table class="table data-tbl-bids">
+                            <thead>
+                            <tr>
+                                <th><h4>Фамилия</h4></th>
+                                <th><h4>Имя</h4></th>
+                                <th><h4>Телефон</h4></th>
+                                <th><h4>Статус</h4></th>
+                                <th><h4>Дата создания</h4></th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th><h4>Фамилия</h4></th>
+                                <th><h4>Имя</h4></th>
+                                <th><h4>Телефон</h4></th>
+                                <th><h4>Статус</h4></th>
+                                <th><h4>Дата создания</h4></th>
+                            </tr>
+
+                            </tfoot>
+                            <tbody id="bidsview">
+                            {% for post in p_bids %}
+                                <tr role="row" class="even">
+                                    <td>{{ post.last_name }}</td>
+                                    <td>{{ post.first_name }}</td>
+                                    <td>{{ post.contact_phone }}</td>
+                                    <td>{{ post.status }}</td>
+                                    <td>{{ post.created_dt }}</td>
+                                    <td>
+                                        <a title="Редактировать" class="row-edit" id="edit_{{ post.id }}"
+{#                                           href={% url 'bidsedit' %}"#}
+                                           href="/bids/bidsedit/?edit_id={{ post.id }}"
+{#                                           onclick="showbidsedit(id,'add')"#}
+                                           data-edit_id="{{ post.id }}"
+{#                                           data-name_query_alert="{{ post.name_query_alert }}"#}
+{#                                           data-query_alert="{{ post.query_alert }}"#}
+{#                                           data-email="{{ post.email }}"#}
+                                        ><span class="zmdi zmdi-edit"></span></a>
+                                        <a title="Удалить" class="row-delete" id="del_{{ post.id }}"
+                                           onclick="bids_del(id,'add')"><span class="zmdi zmdi-close"></span></a>
+                                    </td>
+                                    {#                            {% for post in p_query %}#}
+                                    {##}
+                                    {#                                    {% if post.user is None %}#}
+                                    {#                                        <tr role="row" class="even">#}
+                                    {#                                        <td></td>#}
+                                    {#                                    {% else %}#}
+                                    {#                                        <tr role="row" class="info">#}
+                                    {#                                        <td>{{ post.user }}</td>#}
+                                    {#                                    {% endif %}#}
+                                    {#                                    <td id="servername_{{ post.id }}" title="Двойное нажатие откроет график партиций сервера" class="servername" ondblclick="graphpartition('{{post.server_name}}')">{{ post.server_name }}</td>#}
+                                    {#                            <td id="servername_{{ post.id }}" title="Двойное нажатие откроет график партиций сервера"#}
+                                    {#                                class="servername"#}
+                                    {#                                ondblclick="showgraph(id)"#}
+                                    {#                                style='cursor: pointer;'>{{ post.server_name }}</td>#}
+                                    {#                            <td class="statemon" style="width: 150px">{{ post.state }}</td>#}
+                                    {#   <td id="queryname_{{ post.id }}" title="Двойное нажатие откроет график очереди" class="queryname" ondblclick="graphquery('{{post.server_name}}','{{ post.info }}')">{{ post.info }}</td>#}
+                                    {#                            <td id="queryname_{{ post.id }}" title="Двойное нажатие откроет график очереди"#}
+                                    {#                                class="queryname" ondblclick="showgraph(id)"#}
+                                    {#                                style='cursor: pointer;'>{{ post.info }}</td>#}
+                                    {#                                    <td>{{ post.size }}</td>#}
+                                    {#                            <td>#}
+                                    {#                                {% if guest == 1 %}#}
+                                    {#                                {% else %}#}
+                                    {#                                <button id="viewtr_{{ post.id }}"#}
+                                    {#                                        type="button"#}
+                                    {#                                        title="Просмотр транзакции из очереди"#}
+                                    {#                                        class="btn btn-primary btn-sm"#}
+                                    {#                                                data-toggle="modal" data-target="#myModalViewTran"#}
+                                    {#                                        data-servname="{{ post.server_name }}"#}
+                                    {#                                        data-info="{{ post.info }}"#}
+                                    {#                                        onclick="showviewtran(id)"#}
+                                    {#                                >View#}
+                                    {#                                </button>#}
+                                    {#                                {% endif %}#}
+                                    {#                            </td>#}
+                                    {#                                    <td>{{ post.reads }}</td>#}
+                                    {#                                    <td>{{ post.writes }}</td>#}
+                                    {#                                    <td>{{ post.difread }}</td>#}
+                                    {#                                    <td>{{ post.difwrite }}</td>#}
+                                    {#                                    <td>{{ post.dread }}</td>#}
+                                    {#                                    <td>{{ post.dwrite }}</td>#}
+                                    {#                                    <td>#}
+                                    {#                                        {% if guest == 1 %}#}
+                                    {#                                        {% else %}#}
+                                    {##}
+                                    {#                                        {% if post.user is None %}#}
+                                    {#                                            <input id="my_checkbox_{{ post.id }}" type="checkbox" class="my_checkbox"#}
+                                    {#                                                   data-check_username="{{ user.username }}"#}
+                                    {#                                                   data-check_servname="{{ post.server_name }}"#}
+                                    {#                                                   data-check_name=""#}
+                                    {#                                                   data-check_info="{{ post.info }}"#}
+                                    {#                                                   data-check_regim="query"#}
+                                    {#                                                   data-check_workid="{{ post.id }}"#}
+                                    {#                                                   value="0">#}
+                                    {#                                        {% else %}#}
+                                    {#                                            <input id="my_checkbox_{{ post.id }}" type="checkbox" class="my_checkbox"#}
+                                    {#                                                   data-check_username="{{ user.username }}"#}
+                                    {#                                                   data-check_servname="{{ post.server_name }}"#}
+                                    {#                                                   data-check_name=""#}
+                                    {#                                                   data-check_info="{{ post.info }}"#}
+                                    {#                                                   data-check_regim="query"#}
+                                    {#                                                   data-check_workid="{{ post.id }}"#}
+                                    {#                                                    {% if post.user != user.username %}#}
+                                    {#                                                   style="display: none"#}
+                                    {#                                                    {% endif %}#}
+                                    {#                                                   value="0" checked>#}
+                                    {##}
+                                    {#                                        {% endif %}#}
+                                    {#                                        {% endif %}#}
+                                    {#                                    </td>#}
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+

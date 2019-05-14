@@ -1,0 +1,94 @@
+.title{
+    color: darkblue;
+    /*text-align: center;*/
+
+}
+
+.leftlink, .rightlink {
+    float: left;
+    width: 50%;
+}
+.rightlink {
+    text-align: right;
+}
+
+ol {
+    list-style-type: none; /* Убираем маркеры */
+}
+
+.highlight {
+    background-color: #fff34d;
+    -moz-border-radius: 5px; /* FF1+ */
+    -webkit-border-radius: 5px; /* Saf3-4 */
+    border-radius: 5px; /* Opera 10.5, IE 9, Saf5, Chrome */
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* FF3.5+ */
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Saf3.0+, Chrome */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Opera 10.5+, IE 9.0 */
+    padding: 1px 4px;
+    margin: 0 -4px;
+}
+
+/*.highlight {*/
+/*background-color: rgb(255,255,153);*/
+/*}*/
+.selectHighlight {
+    background-color: yellow;
+    -moz-border-radius: 5px; /* FF1+ */
+    -webkit-border-radius: 5px; /* Saf3-4 */
+    border-radius: 5px; /* Opera 10.5, IE 9, Saf5, Chrome */
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* FF3.5+ */
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Saf3.0+, Chrome */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Opera 10.5+, IE 9.0 */
+    padding: 1px 4px;
+    margin: 0 -4px;
+    color: #ff0000;
+}
+
+.finded {
+    color: white;
+    background: #8A8A7B;
+}
+
+/*#logoimages {*/
+    /*background-image: url('/static/images/photologo.jpg')*/
+/*}*/
+
+#search_block {
+    position: fixed;
+    right: 20px; /* Расстояние от правого края окна браузера */
+    /*top: 12%; !* Расстояние сверху *!*/
+    top: 85px; /* Расстояние сверху */
+    padding: 10px; /* Поля вокруг текста */
+    z-index: 2147483648;
+    display: block;
+    background-color: rgba(138, 138, 123, 0.55);
+    /*background-color: #757575;*/
+
+}
+
+#count {
+    /*color: #985f0d;*/
+    /*color: #17bab8;*/
+    color: #2C1FFF;
+    /*color: #39B8B7;*/
+}
+
+#myModal, #myModallog, #myModalViewTran, #myModalgraph, #ModalViewPubSub, #ModalViewDSIREPParams {
+    overflow: auto;
+}
+
+/*#myModallog {*/
+/*overflow: auto;*/
+/*}*/
+
+/*#myModalViewTran {*/
+/*overflow: auto;*/
+/*}*/
+
+/*#myModalgraph {*/
+/*overflow: auto;*/
+/*}*/
+
+/*#ModalViewPubSub {*/
+/*overflow: auto;*/
+/*}*/

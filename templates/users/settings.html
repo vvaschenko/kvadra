@@ -1,0 +1,325 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget-wrap">
+                <div class="widget-header block-header clearfix">
+                    <div class="row">
+                        <h3 style="color: #00008B ">Настройка системы</h3>
+                        {#                        <p4 style="font-style:italic;text-decoration:underline">{{user.username  }}</p4>#}
+                    </div>
+
+                    {#                    <p4 style="font-style:italic;text-decoration:underline">{{ timeobr }}</p4>#}
+                </div>
+                <div class="widget-container">
+                    <div class="widget-content">
+                        <!--форма редактирования настроек -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form action="" method="POST" class="j-forms" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {#                                {% for form in form %}#}
+                                    <div class="form-content">
+                                        <div class="row">
+                                            <div class="col-md-3 unit">
+                                                <label class="label">Логин сервера ASE</label>
+                                                <div class="input">
+                                                    <label class="icon-left" for="text">
+                                                        <i class="fa fa-edit"></i>
+                                                    </label>
+                                                    <input class="form-control" type="text" name="ase_login"
+                                                           id="id_ase_login" maxlength="150"
+                                                           value='{{ form.ase_login.value }}'
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.ase_login }}'
+                                                            {% endif %}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 unit">
+                                                <label class="label">Пароль сервера ASE</label>
+                                                <div class="input">
+                                                    <label class="icon-left" for="password">
+                                                        <i class="fa fa-lock"></i>
+                                                    </label>
+                                                    <input class="form-control" type="password" name="ase_psw"
+                                                           id="id_ase_psw" maxlength="128"
+                                                           value='{{ form.ase_psw.value }}'
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.ase_psw }}'
+
+                                                            {% endif %}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 unit">
+                                                <label class="label">Логин сервера RS</label>
+                                                <div class="input">
+                                                    <label class="icon-left" for="text">
+                                                        <i class="fa fa-edit"></i>
+                                                    </label>
+                                                    <input class="form-control" type="text" name="rs_login"
+                                                           value='{{ form.rs_login.value }}' required=""
+                                                           id="id_rs_login" maxlength="128"
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.rs_login }}' {% endif %}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 unit">
+                                                <label class="label">Пароль сервера RS</label>
+                                                <div class="input">
+                                                    <label class="icon-left" for="password">
+                                                        <i class="fa fa-lock"></i>
+                                                    </label>
+                                                    <input class="form-control" type="password" name="rs_psw"
+                                                           value='{{ form.rs_psw.value }}' required="" id="id_rs_psw"
+                                                           maxlength="128"
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.rs_psw }}' {% endif %}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 unit">
+                                                <label class="label">Путь к ключам</label>
+                                                <div class="input">
+                                                    <label class="icon-left" for="text">
+                                                        <i class="fa fa-edit"></i>
+                                                    </label>
+                                                    <input class="form-control" type="text" name="path_key"
+                                                           id="id_path_key" maxlength="300"
+
+                                                           value='{{ form.path_key.value }}'
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.path_key }}' {% endif %}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 unit">
+                                                <label class="label">Файл ключей</label>
+                                                <div class="input">
+                                                    <label class="icon-left" for="text">
+                                                        <i class="fa fa-edit"></i>
+                                                    </label>
+                                                    <input class="form-control" type="text" name="file_key"
+                                                           id="id_file_key" maxlength="150"
+
+                                                           value='{{ form.file_key.value }}'
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.file_key }}' {% endif %}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 unit">
+                                                <label class="label">Адрес сервера delay</label>
+                                                <div class="input">
+                                                    <label class="icon-left" for="url">
+                                                        <i class="fa fa-globe"></i>
+                                                    </label>
+                                                    <input class="form-control" type="text" name="delay_ip"
+                                                           id="id_delay_ip" maxlength="150"
+
+                                                           value='{{ form.delay_ip.value }}'
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.delay_ip }}' {% endif %}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 unit">
+                                                <label class="label">Логин user_delay</label>
+                                                <div class="input">
+                                                    <label class="icon-left" for="text">
+                                                        <i class="fa fa-edit"></i>
+                                                    </label>
+                                                    <input class="form-control" type="text" name="delay_user_delay"
+                                                           id="id_delay_user_delay" maxlength="150"
+
+                                                           value='{{ form.delay_user_delay.value }}'
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.delay_user_delay }}' {% endif %}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 unit">
+                                                <label class="label">Пароль user_delay</label>
+                                                <div class="input">
+                                                    <label class="icon-left" for="password">
+                                                        <i class="fa fa-lock"></i>
+                                                    </label>
+                                                    <input class="form-control" type="password"
+                                                           name="delay_psw_user_delay" id="id_delay_psw_user_delay"
+                                                           maxlength="150"
+
+                                                           value='{{ form.delay_psw_user_delay.value }}'
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.delay_psw_user_delay }}' {% endif %}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 unit">
+                                                <label class="label">Получить связи репсерверов</label>
+                                                <button id="rs_link"
+                                                        type="button"
+                                                        class="btn btn-primary btn-sm"
+                                                        data-linkrs="1"
+                                                        onclick="link_rs(id)"
+                                                >Link RS
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 unit">
+                                                <label class="label">Путь к файлу отчета</label>
+                                                <div class="input">
+                                                    <label class="icon-left" for="text">
+                                                        <i class="fa fa-edit"></i>
+                                                    </label>
+                                                    <input class="form-control" type="text" name="delay_path_result"
+                                                           id="id_delay_path_result" maxlength="300"
+
+                                                           value='{{ form.delay_path_result.value }}'
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.delay_path_result }}' {% endif %}
+                                                    />
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 unit">
+                                                <label class="label">Путь к файлу warm стуктура</label>
+                                                <div class="input">
+                                                    <label class="icon-left" for="text">
+                                                        <i class="fa fa-edit"></i>
+                                                    </label>
+                                                    <input class="form-control" type="text" name="warm_path_result"
+                                                           id="id_warm_path_result" maxlength="300"
+
+                                                           value='{{ form.warm_path_result.value }}'
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.warm_path_result }}' {% endif %}
+                                                    />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 unit">
+                                                <label class="label">Размер очереди для рестарта в Mb</label>
+                                                <div class="input">
+                                                    <label class="icon-left" for="text">
+                                                        <i class="fa fa-edit"></i>
+                                                    </label>
+                                                    <input class="form-control" type="text" name="dsi_porog"
+                                                           id="id_dsi_porog" maxlength="4"
+
+                                                           value='{{ form.dsi_porog.value }}'
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.dsi_porog }}' {% endif %}
+                                                    />
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 unit">
+                                                <label class="label">Задержка по DSI в секундах</label>
+                                                <div class="input">
+                                                    <label class="icon-left" for="text">
+                                                        <i class="fa fa-edit"></i>
+                                                    </label>
+                                                    <input class="form-control" type="text" name="dsi_delay"
+                                                           id="id_dsi_delay" maxlength="4"
+
+                                                           value='{{ form.dsi_delay.value }}'
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.dsi_delay }}' {% endif %}
+                                                    />
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 unit">
+                                                <label class="label">Включает/Выключает контроль залипших DSI</label>
+                                                <label class="checkbox-toggle"
+                                                       title='Включает/Выключает контроль залипших DSI'>
+
+                                                    <input type="checkbox" name="dsirestart"
+                                                            {% if form.dsirestart.value %}
+                                                           value="True" checked
+                                                            {% endif %}
+                                                    {% if request.method == 'POST' %}
+                                                        {% if form.dsirestart %}
+                                                            value="True" checked
+                                                        {% endif %}
+                                                        {% endif %}
+                                                    >
+
+                                                    <i></i>
+                                                    Рестарт DSI
+                                                </label>
+                                            </div>
+                                            <div class="col-md-2 unit">
+                                                <label class="label">Очистить кэш формирования PubSub</label>
+                                                <button id="clearcach"
+                                                        type="button"
+                                                        class="btn btn-primary btn-sm"
+                                                        data-cach="1"
+                                                        onclick="clear_cach(id)">
+                                                    Clear Cache
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2 unit">
+                                                <label class="label">Имя из ssh config</label>
+                                                    <div class="input">
+                                                        <label class="icon-left" for="text">
+                                                            <i class="fa fa-edit"></i>
+                                                        </label>
+                                                        <input class="form-control" type="text" name="balabit_prefix"
+                                                           id="id_balabit_prefix" maxlength="300"
+                                                           value='{{ form.balabit_prefix.value}}'
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.balabit_prefix}}' {% endif %}
+                                                    />
+                                                    </div>
+                                            </div>
+                                            <div class="col-md-2 unit">
+                                                <label class="label">Taймаут для доступа через ssh</label>
+                                                    <div class="input">
+                                                        <label class="icon-left" for="text">
+                                                            <i class="fa fa-edit"></i>
+                                                        </label>
+                                                        <input class="form-control" type="number" name="balabit_timeout"
+                                                           id="id_balabit_timeout" step="1" min="5" max="50" maxlength="10"
+                                                           value='{{ form.balabit_timeout.value }}'
+                                                            {% if request.method == 'POST' %}
+                                                           value='{{ form.balabit_timeout }}' {% endif %}
+                                                    />
+                                                    </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    {#                                {% endfor %}#}
+                                    {#                                    {{ form }}#}
+                                    <div class="form-footer">
+                                        <button type="submit" class="btn btn-success primary-btn">Сохранить</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!--end form edit profile -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
