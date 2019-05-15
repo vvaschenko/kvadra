@@ -113,14 +113,17 @@ def doubleedit(request):
     if edit_id is None:
         return HttpResponseRedirect('/bids/bidsdouble/')
     else:
-        qs_bids = BidDouble.objects.get(id=edit_id)
-        bids_form = DoubleEdit(instance=qs_bids)
-
+        # qs_bids = BidDouble.objects.get(id=edit_id)
+        bids_form = DoubleEdit(instance=BidDouble.objects.get(id=edit_id))
         if request.POST:
-            bids_form = DoubleEdit(request.POST)
-            if bids_form.is_valid():
-                bids_form.save()
-            return HttpResponseRedirect('/bids/bidsdouble/')
+            bids_form = DoubleEdit(request.POST, instance=BidDouble.objects.get(id=edit_id))
+            # bids_form = DoubleEdit(request.POST)
+            try:
+                if bids_form.is_valid():
+                    bids_form.save()
+                    return HttpResponseRedirect('/bids/bidsdouble/')
+            except Exception as err:
+                print(err)
 
         return render(request, 'bids/doubleedit.html', {'bids_form': bids_form})
 
@@ -134,38 +137,22 @@ def bidsedit(request, edit_id=None):
     if edit_id is None:
         return HttpResponseRedirect('/bids/bids/')
     else:
-
+        bids_form = BidsEdit(instance=Bid.objects.get(id=edit_id))
         if request.POST:
-            bids_form = BidsEdit(request.POST)
-            if bids_form.is_valid():
-                bids_form.save()
-            return HttpResponseRedirect('/bids/bids/')
-        else:
-            qs_bids = Bid.objects.get(id=edit_id)
-            bids_form = BidsEdit(instance=qs_bids)
+            bids_form = BidsEdit(request.POST, instance=Bid.objects.get(id=edit_id))
+            # bids_form = BidsEdit(temp_arg= obj, data= request.POST)
+            try:
+                if bids_form.is_valid():
+                    groupid = bids_form.cleaned_data['groupid']
+                    bids_form.save()
+                    return HttpResponseRedirect('/bids/bids/')
+            except Exception as err:
+                print(err)
+        # else:
+            # qs_bids = Bid.objects.get(id=edit_id)
+            # bids_form = BidsEdit(instance=Bid.objects.get(id=edit_id))
 
         return render(request, 'bids/bids_edit.html', {'bids_form': bids_form})
-    # if request.method == 'POST':
-    #     regim = request.POST.get('regim', None)
-    #     edit_id = request.POST.get('edit_id', None)
-    #     bids_form = BidsEdit(request.POST)
-    #     if bids_form.is_valid():
-    #         bids_form.save()
-    #         return HttpResponseRedirect('/bids/bids/')
-    #     else:
-    #         pass
-    #     # if regim == 'double':
-    #     #     qs_bids = BidDouble.objects.select_related().get(id=edit_id)
-    #     #     bids_form = DoubleEdit(request.POST, instance=qs_bids)
-    #     context['success'] = False
-    #     # context = {'bids_form': bids_form}
-    #     # context['timeobr'] = datetime.strftime(datetime.astimezone(max_datetime['datatime__max'], tzlocal),
-    #     #                                        "%Y-%m-%d %H:%M:%S")
-    #     return render(request, 'bids/bids_edit.html',
-    #                   {'timeobr': datetime.strftime(datetime.now(), "%A, %d. %B %Y %I:%M%p"), 'bids_form': bids_form})
-
-# else:
-#     return HttpResponseRedirect('/bids/bids/')
 
 
 @login_required
