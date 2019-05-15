@@ -108,7 +108,22 @@ def bidsadd(request):
 
 @login_required
 def doubleedit(request):
-    pass
+    edit_id = request.GET.get('edit_id', None)
+    edit_id = request.GET.get('edit_id', None)
+    if edit_id is None:
+        return HttpResponseRedirect('/bids/bidsdouble/')
+    else:
+        qs_bids = BidDouble.objects.get(id=edit_id)
+        bids_form = DoubleEdit(instance=qs_bids)
+
+        if request.POST:
+            bids_form = DoubleEdit(request.POST)
+            if bids_form.is_valid():
+                bids_form.save()
+            return HttpResponseRedirect('/bids/bidsdouble/')
+
+        return render(request, 'bids/doubleedit.html', {'bids_form': bids_form})
+
 
 
 @login_required
@@ -119,12 +134,15 @@ def bidsedit(request, edit_id=None):
     if edit_id is None:
         return HttpResponseRedirect('/bids/bids/')
     else:
-        qs_bids = Bid.objects.get(id=edit_id)
-        bids_form = BidsEdit(instance=qs_bids)
 
-        if request.POST and bids_form.is_valid():
-            bids_form.save()
+        if request.POST:
+            bids_form = BidsEdit(request.POST)
+            if bids_form.is_valid():
+                bids_form.save()
             return HttpResponseRedirect('/bids/bids/')
+        else:
+            qs_bids = Bid.objects.get(id=edit_id)
+            bids_form = BidsEdit(instance=qs_bids)
 
         return render(request, 'bids/bids_edit.html', {'bids_form': bids_form})
     # if request.method == 'POST':
@@ -151,7 +169,7 @@ def bidsedit(request, edit_id=None):
 
 
 @login_required
-def bidsdouble(request):
+def bidsdouble(request, edit_id=None):
     results = dict()
     results['success'] = False
     max_datetime = {'datatime__max': datetime.now(tzlocal)}

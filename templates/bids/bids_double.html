@@ -91,7 +91,8 @@
                                     <td>{{ post.created_dt }}</td>
                                     <td>
                                         <a title="Редактировать" class="row-edit" id="edit_{{ post.id }}"
-                                           onclick="showbidsedit(id,'double')"
+                                            href="/bids/doubleedit/?edit_id={{ post.id }}"
+{#                                           onclick="showbidsedit(id,'double')"#}
                                            data-edit_id="{{ post.id }}"
 {#                                           data-name_query_alert="{{ post.name_query_alert }}"#}
 {#                                           data-query_alert="{{ post.query_alert }}"#}

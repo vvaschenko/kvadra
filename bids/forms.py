@@ -1,6 +1,8 @@
 # coding=utf-8
 from django import forms
-from .models import Bid, BidStatus
+from django.contrib.auth.models import Group
+
+from .models import Bid, BidStatus, BidDouble
 
 
 class BidsAdd(forms.ModelForm):
@@ -119,9 +121,9 @@ class BidsAdd(forms.ModelForm):
         return curentuser
 
 
-class BidDouble(forms.ModelForm):
+class BidsDouble(forms.ModelForm):
     class Meta:
-        model = Bid
+        model = BidDouble
         exclude = ("partner_name", "lead_id", "webmaster_id", "crm_status", "site_bid_id", "for_skybank", "city")
 
     fieldsets = [
@@ -240,12 +242,10 @@ class BidsEdit(forms.ModelForm):
         model = Bid
         exclude = ("partner_name", "lead_id", "webmaster_id", "crm_status", "site_bid_id", "for_skybank", "city")
 
-
-    # status = forms.ModelChoiceField(queryset=BidStatus.objects.values_list('name', flat=True),
-    #                                 to_field_name='code',
-    #                                 empty_label="Выберите статус")
-    # widget=forms.Select(
-    #     attrs={'class': "form-control", 'onchange': 'showqueryalert(id)', }))
+    status = forms.ModelChoiceField(queryset=BidStatus.objects.all(), empty_label="Выберите статус",
+                                    widget=forms.Select(attrs={'class': "form-control"},))
+    groupid = forms.ModelChoiceField(queryset=Group.objects.all(),
+                                     empty_label="Выберите статус", widget=forms.Select(attrs={'class': "form-control"},))
 
     fieldsets = [
         ("Клиент", {
@@ -357,37 +357,47 @@ class BidsEdit(forms.ModelForm):
         curentuser = self.user
         return curentuser
 
-    def __init__(self, *args, **kwargs):
-        # status = kwargs.pop(status['code'], None)
-        status = kwargs['instance'].status
-        super(BidsEdit, self).__init__(*args, **kwargs)
-        if status:
-            self.fields['status'] = forms.ModelChoiceField(
-                queryset=BidStatus.objects.values_list('name', flat=True),
-                # to_field_name='name',
-                initial={'status': int(status.code)},
-                empty_label="Выберите статус",
-                widget=forms.Select(
-                    attrs={'class': "form-control", })
-            )
-            self.fields['status'].required = False
-        else:
-            self.fields['status'] = forms.ModelChoiceField(
-                queryset=BidStatus.objects.values_list('name', flat=True),
-                to_field_name='code',
-                # initial={'status': 0},
-                empty_label="Выберите статус",
-                widget=forms.Select(
-                    attrs={'class': "form-control", })
-            )
+    def clean_status(self):
+        curentstatus = self.status
+        return curentstatus
 
-            self.fields['status'].required = False
+    # def __init__(self, *args, **kwargs):
+    #     # status = kwargs.pop(status['code'], None)
+    #     status = kwargs['instance'].status
+    #     super(BidsEdit, self).__init__(*args, **kwargs)
+    #     if status:
+    #         self.fields['status'] = forms.ModelChoiceField(
+    #             queryset=BidStatus.objects.values_list('name', flat=True),
+    #             to_field_name='code',
+    #             initial={'status': status.name},
+    #             # empty_label="Выберите статус",
+    #             widget=forms.Select(
+    #                 attrs={'class': "form-control", })
+    #         )
+    #         self.fields['status'].required = False
+    #     else:
+    #         self.fields['status'] = forms.ModelChoiceField(
+    #             queryset=BidStatus.objects.values_list('name', flat=True),
+    #             to_field_name='code',
+    #             # initial={'status': 0},
+    #             empty_label="Выберите статус",
+    #             widget=forms.Select(
+    #                 attrs={'class': "form-control", })
+    #         )
+    #
+    #         self.fields['status'].required = False
 
 
 class DoubleEdit(forms.ModelForm):
     class Meta:
-        model = Bid
+        model = BidDouble
         exclude = ("partner_name", "lead_id", "webmaster_id", "crm_status", "site_bid_id", "for_skybank", "city")
+
+    status = forms.ModelChoiceField(queryset=BidStatus.objects.all(), empty_label="Выберите статус",
+                                    widget=forms.Select(attrs={'class': "form-control"}, ))
+    groupid = forms.ModelChoiceField(queryset=Group.objects.all(),
+                                     empty_label="Выберите статус",
+                                     widget=forms.Select(attrs={'class': "form-control"}, ))
 
     fieldsets = [
         ("Клиент", {

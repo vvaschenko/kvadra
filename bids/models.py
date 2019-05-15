@@ -269,7 +269,6 @@ class Bid(models.Model):
         return "{} {}".format(self.partner_name, self.city)
 
 
-
 class BidDouble(models.Model):
     PARTNER_CHOICES = (
         ('easysoft', 'EasySoft(EasyPay)'),
@@ -491,7 +490,6 @@ class BidDouble(models.Model):
     #         self.groupid = str(self.user.groups.values_list('id', flat=True).first())
     #
     #     super(BidDouble, self).save(*args, **kwargs)
-
 
     @staticmethod
     def get_queryset(request):
