@@ -133,7 +133,7 @@ def bidsadd(request):
     else:
         bids_form = BidsAdd()
     return render(request, 'bids/bids_add.html',
-                  {'timeobr': datetime.strftime(datetime.now(), "%A, %d. %B %Y %I:%M%p"), 'bids_form': bids_form})
+                  {'timeobr': datetime.datetime.strftime(datetime.datetime.now(), "%A, %d. %B %Y %I:%M%p"), 'bids_form': bids_form})
 
 
 @login_required
