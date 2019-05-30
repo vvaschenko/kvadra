@@ -60,8 +60,10 @@
                 <li><span class="left-toggle-switch"><i class="zmdi zmdi-menu"></i></span></li>
                 <li>
                     <div class="logo">
-                        {#                        <a href="index.html" title="Admin Template"></a>#}
 
+                        <img src="{% static 'images/photologo.jpg' %}" height="90%" width="90%"  >
+                        <li><h3 class="title"> Kvadra CRM </h3></li>
+                        {#                        <a href="index.html" title="Admin Template"></a>#}
                     </div>
                 </li>
             </ul>
@@ -72,53 +74,71 @@
             </ul>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-1" id= "logoimages" >
-                <img src="{% static 'images/photologo.jpg' %}" height="90%" width="90%"  >
-            </div>
-            <div class="col-md-8">
-
-                <h1 class="title"> Kvadra CRM </h1>
-            </div>
-        </div>
-        <div class="row">
-            <main class="mdl-layout__content mdl-color--grey-100">
-                <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
-
-                    <!-- Container for the Table of content -->
-                    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-                        <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                            <!-- div to display the generated Instance ID token -->
-                            <div id="token_div" style="display: none;">
-                                <h4>Instance ID Token</h4>
-                                <p id="token" style="word-break: break-all;"></p>
-                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                                        onclick="deleteToken()">Delete Token
-                                </button>
-                            </div>
-                            <!-- div to display the UI to allow the request for permission to
-                                 notify the user. This is shown if the app has not yet been
-                                 granted permission to notify. -->
-                            <div id="permission_div" style="display: none;">
-                                <h4>Needs Permission</h4>
-                                <p id="token"></p>
-                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                                        onclick="requestPermission()">Request Permission
-                                </button>
-                            </div>
-                            <!-- div to display messages received by this app. -->
-                            <div id="messages"></div>
-                        </div>
-                    </div>
-
+    <div class="container-fluid">
+{#        <div class="page-header filled full-block light">#}
+            {#            <div class="row">#}
+            {#                <div class="col-md-6 col-sm-6">#}
+            {#                </div>#}
+            {#                <div class="col-md-6 col-sm-6">#}
+            {#                    <ul class="list-page-breadcrumb">#}
+            {#                        <li><a href="#">Home <i class="zmdi zmdi-chevron-right"></i></a></li>#}
+            {#                        <li class="active-page"> Calendar</li>#}
+            {#                    </ul>#}
+            {#                </div>#}
+            {#            </div>#}
+            <div class="row">
+{#                <div class="col-md-8 col-sm-8">#}
+{##}
+{#                </div>#}
+                <div class="col-md-10 col-sm-10">
+                    <ul class="list-page-breadcrumb">
+                        <li>
+                            <a href="{% url 'bids' %}">Заявки<i class="zmdi zmdi-chevron-right"></i></a>
+                            <a href="{% url 'bidsdouble' %}">Дубли<i class="zmdi zmdi-chevron-right"></i></a>
+                        </li>
+{#                        <li><a href="{% url 'bidsdouble' %}">Дубли<i class="zmdi zmdi-chevron-right"></i></a>#}
+{#                        </li>#}
+                    </ul>
                 </div>
-            </main>
+            </div>
 
+{#            <div class="row">#}
+{#                <main class="mdl-layout__content mdl-color--grey-100">#}
+{#                    <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">#}
+{##}
+{#                        <!-- Container for the Table of content -->#}
+{#                        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">#}
+{#                            <div class="mdl-card__supporting-text mdl-color-text--grey-600">#}
+{#                                <!-- div to display the generated Instance ID token -->#}
+{#                                <div id="token_div" style="display: none;">#}
+{#                                    <h4>Instance ID Token</h4>#}
+{#                                    <p id="token" style="word-break: break-all;"></p>#}
+{#                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"#}
+{#                                            onclick="deleteToken()">Delete Token#}
+{#                                    </button>#}
+{#                                </div>#}
+{#                                <!-- div to display the UI to allow the request for permission to#}
+{#                                     notify the user. This is shown if the app has not yet been#}
+{#                                     granted permission to notify. -->#}
+{#                                <div id="permission_div" style="display: none;">#}
+{#                                    <h4>Needs Permission</h4>#}
+{#                                    <p id="token"></p>#}
+{#                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"#}
+{#                                            onclick="requestPermission()">Request Permission#}
+{#                                    </button>#}
+{#                                </div>#}
+{#                                <!-- div to display messages received by this app. -->#}
+{#                                <div id="messages"></div>#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{#                </main>#}
+{##}
+{##}
+{#            </div>#}
 
-        </div>
-
-
+{#        </div>#}
     </div>
 
 </header>

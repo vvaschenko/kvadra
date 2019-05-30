@@ -5,7 +5,8 @@ import xlrd
 import json
 import logging
 
-from datetime import datetime, time
+import datetime
+    # from datetime, time
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.utils.datastructures import MultiValueDictKeyError
@@ -32,10 +33,40 @@ def bids(request):
     context = {}
     results = dict()
     results['success'] = False
-    max_datetime = {'datatime__max': datetime.now(tzlocal)}
+    max_datetime = {'datatime__max': datetime.datetime.now(tzlocal)}
     if request.method == 'POST':
         del_id = request.POST.get('id', None)
         del_delite = request.POST.get('delite', None)
+        zp_id = request.POST.get('zp_id', None)
+        regim = request.POST.get('regim', None)
+        workbids = request.POST.get('workbids', None)
+        stime = request.POST.get('starttime', None)
+        etime = request.POST.get('endtime', None)
+        filterbids = request.POST.get('filterbids', None)
+        if filterbids is not None:
+            if filterbids == '1':
+                starttime = datetime.datetime.strptime(stime, "%d.%m.%Y")
+                endtime = datetime.datetime.strptime(etime, "%d.%m.%Y")
+                if request.user.is_superuser:
+                    qs_bids = Bid.objects.select_related().filter(created_dt__range=[starttime, endtime]).all()
+                else:
+                    qs_bids = Bid.objects.filter(created_dt__range=[starttime, endtime],
+                                                 groupid=str(request.user.groups.values_list('id',
+                                                                                             flat=True).first())).select_related().all()
+                # m = Membership.objects.filter(person__name='x').values('person', 'person__phonenumber')
+                results['p_bids'] = qs_bids
+                results['success'] = True
+                return JsonResponse(results)
+        if regim == 'bids_check':
+            bids_zp = Bid.objects.get(id=zp_id)
+            bids_zp.vybor = workbids
+            try:
+                bids_zp.save()
+                results['success'] = True
+            except:
+                log.error(u'Ошибка записи в базу')
+            return JsonResponse(results)
+
         if del_delite == '1':
             delstr = del_id.find('_')
             idfordel = int(del_id[delstr + 1:])
@@ -44,8 +75,7 @@ def bids(request):
                 results['success'] = True
             except Bid.DoesNotExist:
                 log.error(u'Запись не найдена')
-        return JsonResponse(results)
-
+            return JsonResponse(results)
     if request.user.is_superuser:
         qs_bids = Bid.objects.select_related().all()
     else:
@@ -53,7 +83,7 @@ def bids(request):
             groupid=str(request.user.groups.values_list('id', flat=True).first())).select_related().all()
     # m = Membership.objects.filter(person__name='x').values('person', 'person__phonenumber')
     context = {'p_bids': qs_bids}
-    context['timeobr'] = datetime.strftime(datetime.astimezone(max_datetime['datatime__max'], tzlocal),
+    context['timeobr'] = datetime.datetime.strftime(datetime.datetime.astimezone(max_datetime['datatime__max'], tzlocal),
                                            "%Y-%m-%d %H:%M:%S")
     return render(request, 'bids/bids.html', context)
 
@@ -69,7 +99,7 @@ def bids(request):
 @login_required
 def bidsadd(request):
     if request.method == 'POST':
-    # if request.is_ajax() and request.method == 'POST':
+        # if request.is_ajax() and request.method == 'POST':
         dict_str = {}
         bids_form = BidsAdd(request.POST)
         bids_form.user = request.user
@@ -128,11 +158,10 @@ def doubleedit(request):
         return render(request, 'bids/doubleedit.html', {'bids_form': bids_form})
 
 
-
 @login_required
 def bidsedit(request, edit_id=None):
     context = {}
-    max_datetime = {'datatime__max': datetime.now(tzlocal)}
+    max_datetime = {'datatime__max': datetime.datetime.now(tzlocal)}
     edit_id = request.GET.get('edit_id', None)
     if edit_id is None:
         return HttpResponseRedirect('/bids/bids/')
@@ -146,11 +175,13 @@ def bidsedit(request, edit_id=None):
                     groupid = bids_form.cleaned_data['groupid']
                     bids_form.save()
                     return HttpResponseRedirect('/bids/bids/')
+                else:
+                    messages.error(request, _('Please correct the error below.'))
             except Exception as err:
                 print(err)
         # else:
-            # qs_bids = Bid.objects.get(id=edit_id)
-            # bids_form = BidsEdit(instance=Bid.objects.get(id=edit_id))
+        # qs_bids = Bid.objects.get(id=edit_id)
+        # bids_form = BidsEdit(instance=Bid.objects.get(id=edit_id))
 
         return render(request, 'bids/bids_edit.html', {'bids_form': bids_form})
 
@@ -159,7 +190,7 @@ def bidsedit(request, edit_id=None):
 def bidsdouble(request, edit_id=None):
     results = dict()
     results['success'] = False
-    max_datetime = {'datatime__max': datetime.now(tzlocal)}
+    max_datetime = {'datatime__max': datetime.datetime.now(tzlocal)}
     if request.method == 'POST':
         del_id = request.POST.get('id', None)
         del_delite = request.POST.get('delite', None)
@@ -179,7 +210,7 @@ def bidsdouble(request, edit_id=None):
         qs_bids = BidDouble.objects.filter(
             groupid=str(request.user.groups.values_list('id', flat=True).first())).select_related().all()
     context = {'p_bids': qs_bids}
-    context['timeobr'] = datetime.strftime(datetime.astimezone(max_datetime['datatime__max'], tzlocal),
+    context['timeobr'] = datetime.datetime.strftime(datetime.datetime.astimezone(max_datetime['datatime__max'], tzlocal),
                                            "%Y-%m-%d %H:%M:%S")
     return render(request, 'bids/bids_double.html', context)
 

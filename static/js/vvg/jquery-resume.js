@@ -168,6 +168,32 @@ jQuery(document).ready(function () {
     });
 
 
+    $(".checkbox_bids").on("click",function (e) {
+        e = e || window.event;
+        data.csrfmiddlewaretoken = getCookie('csrftoken');
+        usercheckbox = document.getElementById(e.target.id);
+        data.zp_id = usercheckbox.dataset.zp_id;
+        data.regim = "bids_check";
+        if (usercheckbox.checked) {
+            data.workbids = 1;
+        }
+        else {
+            data.workbids = 0;
+        }
+
+        $.ajax({
+            url: '/bids/bids/',
+            type: 'POST',
+            data: data,
+            success: function (data) {
+            },
+            error: function (xhr, status, error) {
+                alert('Возникла ошибка: ' + +xhr.responseText);
+            }
+        })
+
+    });
+
     $(".my_checkbox").on("click", function (e) {
         e = e || window.event;
         // e.preventDefault();

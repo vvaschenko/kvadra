@@ -1465,10 +1465,37 @@ jQuery(document).ready(function($) {
 
     //мои добавки
         if ($.fn.dataTable) {
-        $('.data-tbl-bids').DataTable({
+        $('.data-tbl-bidsdouble').DataTable({
             "aaSorting": [[ 3,4, "desc" ]],
             responsive: true,
                         "columnDefs": [ { "targets": [0,1,2,5], "orderable": false }],
+            "oLanguage": {
+                "decimal": ",",
+                "sLengthMenu": '<select class="tbl-data-select">' +
+                    '<option value="10">10</option>' +
+                    '<option value="20">20</option>' +
+                    '<option value="30">30</option>' +
+                    '<option value="40">40</option>' +
+                    '<option value="50">50</option>' +
+                    '<option value="-1">All</option>' +
+                    '</select>' + '<span class="r-label">Строк</span>'
+            },
+            "dom": '<"row" <"col-md-6"l><"col-md-6"f>><"row" <"col-md-12"<"td-content"rt>>><"row" <"col-md-6"i><"col-md-6"p>>'
+        });
+
+
+        if ($.fn.select2) {
+            $('.tbl-data-select').select2({
+                minimumResultsForSearch: -1
+            });
+        }
+    }
+
+        if ($.fn.dataTable) {
+        $('.data-tbl-bids').DataTable({
+            "aaSorting": [[ 4,5, "desc" ]],
+            responsive: true,
+                        "columnDefs": [ { "targets": [0,1,2,3,6,7], "orderable": false }],
             "oLanguage": {
                 "decimal": ",",
                 "sLengthMenu": '<select class="tbl-data-select">' +

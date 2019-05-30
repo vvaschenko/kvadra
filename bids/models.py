@@ -50,6 +50,8 @@ class Bid(models.Model):
         ('city24', 'City24')
     )
 
+    vybor = models.IntegerField( blank=True )
+
     partner_name = models.CharField("Партнер",
                                     choices=PARTNER_CHOICES,
                                     max_length=32)
