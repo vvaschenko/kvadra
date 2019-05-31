@@ -34,6 +34,8 @@ def bids(request):
     results = dict()
     results['success'] = False
     max_datetime = {'datatime__max': datetime.datetime.now(tzlocal)}
+    posts = Group.objects.all()
+    context["grouplist"] = posts
     if request.method == 'POST':
         del_id = request.POST.get('id', None)
         del_delite = request.POST.get('delite', None)
@@ -82,7 +84,7 @@ def bids(request):
         qs_bids = Bid.objects.filter(
             groupid=str(request.user.groups.values_list('id', flat=True).first())).select_related().all()
     # m = Membership.objects.filter(person__name='x').values('person', 'person__phonenumber')
-    context = {'p_bids': qs_bids}
+    context['p_bids'] = qs_bids
     context['timeobr'] = datetime.datetime.strftime(datetime.datetime.astimezone(max_datetime['datatime__max'], tzlocal),
                                            "%Y-%m-%d %H:%M:%S")
     return render(request, 'bids/bids.html', context)

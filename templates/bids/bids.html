@@ -26,102 +26,6 @@
         </div>
     </div>
 
-    {#<div class="page-header filled full-block light">#}
-    {#    <div class="row">#}
-    {#        <div class="col-md-6">#}
-    {#            <h2>Мой заголовок</h2>#}
-    {#            <p>мой текст</p>#}
-    {#        </div>#}
-    {#        <div class="col-md-6">#}
-    {#            <ul class="list-page-breadcrumb">#}
-    {#                <li><a href="#">Home <i class="zmdi zmdi-chevron-right"></i></a></li>#}
-    {#                <li><a href="#">Layout <i class="zmdi zmdi-chevron-right"></i></a></li>#}
-    {#                <li class="active-page"> Data Tables</li>#}
-    {#            </ul>#}
-    {#        </div>#}
-    {#    </div>#}
-    {#</div>#}
-
-    <!-- Modal -->
-    {#    <div id="myModal" class="modal fade" role="dialog" tabindex="-1">#}
-    {#        <div class="modal-dialog modal-lg">#}
-    {##}
-    {##}
-    {#            <!-- Modal content-->#}
-    {#            <div class="modal-content">#}
-    {#                <div class="modal-header">#}
-    {#                    <button type="button" class="close" data-dismiss="modal">&times;</button>#}
-    {#                    <h4 class="modal-title">Graph</h4>#}
-    {#                </div>#}
-    {#                <div class="modal-body">#}
-    {#                    <div class="row" id="graph">#}
-    {#                        <div class="widget-content" id="logview">#}
-    {#                        </div>#}
-    {#                    </div>#}
-    {#                </div>#}
-    {#                <div class="modal-footer">#}
-    {#                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
-    {#                </div>#}
-    {#            </div>#}
-    {##}
-    {#        </div>#}
-    {#    </div>#}
-    {##}
-    {#    <div id="myModalViewTran" class="modal fade" role="dialog" tabindex="-1">#}
-    {#        <div class="modal-dialog modal-lg">#}
-    {##}
-    {##}
-    {#            <!-- Modal content-->#}
-    {#            <div class="modal-content">#}
-    {#                <div class="modal-header">#}
-    {#                    <button type="button" class="close" data-dismiss="modal">&times;</button>#}
-    {#                    <h4 class="modal-title">View transaction</h4>#}
-    {#                </div>#}
-    {#                <div class="modal-body">#}
-    {#                    <div class="row" id="viewtran">#}
-    {#                        <div class="widget-content" id="logview_tran">#}
-    {#                        </div>#}
-    {#                    </div>#}
-    {#                </div>#}
-    {#                <div class="modal-footer">#}
-    {#                    <button type="button" class="btn btn-primary" id='nexttran' onclick="showviewtrannext(id)">Next#}
-    {#                    </button>#}
-    {#                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
-    {#                </div>#}
-    {#            </div>#}
-    {##}
-    {#        </div>#}
-    {#    </div>#}
-    {##}
-    {##}
-    {#    <div id="myModalgraph" class="modal fade" role="dialog" tabindex="-1">#}
-    {#        <div class="modal-dialog modal-lg">#}
-    {##}
-    {##}
-    {#            <!-- Modal content-->#}
-    {#            <div class="modal-content">#}
-    {#                <div class="modal-header">#}
-    {#                    <button type="button" class="close" data-dismiss="modal">&times;</button>#}
-    {#                    <h4 class="modal-title">Graph</h4>#}
-    {#                </div>#}
-    {#                <div class="modal-body">#}
-    {#                    <div class="row" id="graph_graph">#}
-    {#                        <div class="widget-content" id="logview_graph">#}
-    {#                        </div>#}
-    {#                    </div>#}
-    {#                </div>#}
-    {#                <div class="modal-footer">#}
-    {#                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
-    {#                </div>#}
-    {#            </div>#}
-    {##}
-    {#        </div>#}
-    {#    </div>#}
-
-    {#    <script>#}
-    {##}
-    {#    </script>#}
-
     <div class="row">
         <div class="col-md-12">
             <div class="widget-wrap">
@@ -175,11 +79,34 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-2" id="groupview">
+                    <label class="tfh-label"></label>
+                        <select name="groupitem" class="form-control" id="groupbids" data-regim="groupview">
+                            <option value="0" selected>Выберите проект</option>
+                            {% for post_gr in grouplist %}
+                                <option value="{{ post_gr.id }}">"{{ post_gr.name }}"</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-2 unit">
+                        <label class="tfh-label"></label>
+                        <div class="data-align-left">
+                            <button id="migration_bids" type="button" class="btn btn-primary "
+                                    onclick="migration_bids()"
+                                    disabled="disabled">Перебросить</button>
+{#                            <a href="#" id="migration_bids" disabled="disable" class="btn add-row btn-primary">Перебросить</a>#}
+                        </div>
+                    </div>
+
+                </div>
+
                 {#            </div>#}
                 <div class="widget-container">
                     <div class="widget-content">
                         <table class="table data-tbl-bids">
                             <thead>
+
                             <tr>
                                 <th><h4>Выбор</h4></th>
                                 <th><h4>Фамилия</h4></th>
@@ -191,7 +118,7 @@
                             </tr>
                             </thead>
                             <tfoot>
-                            <tr>
+                                <tr>
                                 <th><h4>Выбор</h4></th>
                                 <th><h4>Фамилия</h4></th>
                                 <th><h4>Имя</h4></th>
@@ -200,7 +127,6 @@
                                 <th><h4>Дата создания</h4></th>
                                 <th><h4>Дата обновления</h4></th>
                             </tr>
-
                             </tfoot>
                             <tbody id="bidsview">
                             {% for post in p_bids %}

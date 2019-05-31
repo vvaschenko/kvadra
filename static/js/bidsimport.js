@@ -6,6 +6,11 @@ jQuery(document).ready(function () {
     //     // document.location.reload
     //     document.location.href;
     // });
+    $("#groupbids").on('change',function () {
+        let migration_bids = document.getElementById('migration_bids');
+        migration_bids.disabled = false;
+    });
+
     $('#import_bt').click(function () {
         $('#myModal').modal('hide');
         // document.getElementById(id).disabled = false;

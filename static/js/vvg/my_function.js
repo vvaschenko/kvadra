@@ -1378,17 +1378,8 @@ function filterbids() {
 
     let starttime = Date.parse(new Date(stime[2], stime[1]-1, stime[0]));
     let endtime = Date.parse(new Date(etime[2], etime[1]-1, etime[0]));
-    // for (var i = 0; i < rows.length; i += 1) {
-    //         var cur_data = Date.parse(rows[i].find('#cr_data')[0].innerHTML);
-    //         if(cur_data <= endtime && cur_data >= starttime) {
-    //             $rows[i].css(display,"");
-    //         }
-    //         else {
-    //             rows[i].css(display,"none");
-    //         }
-    //     }
     $("#bidsview tr").each(function () {
-        console.log(this);
+
         var pr_data = new Date($(this).find('#cr_data')[0].innerHTML).toLocaleDateString();
         var cur_data = Date.parse(new Date(pr_data.split('.')[2],pr_data.split('.')[1]-1,pr_data.split('.')[0]));
         // var cur_data = Date.parse($(this).find('#cr_data')[0].innerHTML);
@@ -1401,17 +1392,6 @@ function filterbids() {
             $(this).hide();
         }
     });
-    // $('#tablebids tr').each(function () {
-    //     var cur_data = Date.parse($(this).find('#cr_data')[0].innerHTML);
-    //     if(cur_data <= endtime && cur_data >= starttime) {
-    //         $(this).css(display,"");
-    //     }
-    //     else {
-    //         $(this).css(display,"none");
-    //     }
-    //
-    // });
-
 }
 
 function detaildelay() {

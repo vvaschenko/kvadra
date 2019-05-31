@@ -108,7 +108,6 @@ jQuery(document).ready(function () {
     })
 
 
-
     $("#name_rs_log").on('change', function (e) {
         submit_btn = document.getElementById(e.target.id);
         data.name_rs = submit_btn.value;
