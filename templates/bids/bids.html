@@ -54,13 +54,15 @@
                     <div class="col-md-2 unit">
                         <label class="tfh-label">Начало периода</label>
                         <div class="input">
-                            <input type='text' class="form-control" id='datetimepickerbids1'/>
+                            <input type='text' class="form-control" id='datetimepickerbids1'
+                            />
                         </div>
                     </div>
                     <div class="col-md-2 unit">
                         <label class="tfh-label">Конец периода</label>
                         <div class="input">
-                            <input type='text' class="form-control" id='datetimepickerbids2'/>
+                            <input type='text' class="form-control" id='datetimepickerbids2'
+                            />
                         </div>
                     </div>
                     <div class="col-md-2 unit">
@@ -115,6 +117,7 @@
                                 <th><h4>Статус</h4></th>
                                 <th><h4>Дата создания</h4></th>
                                 <th><h4>Дата обновления</h4></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -126,6 +129,7 @@
                                 <th><h4>Статус</h4></th>
                                 <th><h4>Дата создания</h4></th>
                                 <th><h4>Дата обновления</h4></th>
+                                <th></th>
                             </tr>
                             </tfoot>
                             <tbody id="bidsview">
@@ -134,7 +138,8 @@
                                     <td>
                                         <input id="my_checkbox_{{ post.pk }}" type="checkbox" class="checkbox_bids"
                                                data-zp_id="{{ post.id }}"
-                                               value={{ post.vybor }}>
+                                               value={{ post.vybor }} {% if post.vybor == 1%} checked {% endif %}
+                                        >
                                     </td>
                                     <td title="Двойное нажатие откроет редактор заявки"
                                         ondblclick="window.location.href='/bids/bidsedit/?edit_id={{ post.id }}'"

@@ -45,6 +45,7 @@ def bids(request):
         stime = request.POST.get('starttime', None)
         etime = request.POST.get('endtime', None)
         filterbids = request.POST.get('filterbids', None)
+        proekt = request.POST.get('proekt', None)
         if filterbids is not None:
             if filterbids == '1':
                 starttime = datetime.datetime.strptime(stime, "%d.%m.%Y")
@@ -68,6 +69,15 @@ def bids(request):
             except:
                 log.error(u'Ошибка записи в базу')
             return JsonResponse(results)
+        if regim == 'migration_bids':
+            try:
+                Bid.objects.filter(vybor=1).update(groupid=proekt, vybor=0)
+                results['success'] = True
+            except Exception as err:
+                log.error(u'Ошибка миграции проекта')
+                results['success'] = False
+            return JsonResponse(results)
+
 
         if del_delite == '1':
             delstr = del_id.find('_')

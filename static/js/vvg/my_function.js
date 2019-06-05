@@ -1370,6 +1370,37 @@ $(function () {
 
 });
 
+function migration_bids() {
+    let data_d = {};
+    data_d.proekt = document.getElementById('groupbids').value;
+    data_d.csrfmiddlewaretoken = getCookie('csrftoken');
+    data_d.regim = 'migration_bids';
+    $('input:checked').prop('checked', false);
+    $.ajax(
+        {
+            url: 'bids/',
+            type: 'POST',
+            data: data_d,
+            success: function (data, textStatus, XHR) {
+                if (data.success) {
+                    alert('Переброска завершена');
+                    // $('#groupbids')[0].selected = true;
+                    location.reload();
+                }
+                else {
+                    alert('Возникла проблема при переносе в выбранные проект');
+                }
+                // console.log("запрос DELETE отработал")
+
+            },
+            error: function (xhr, status, error) {
+                alert('Возникла ошибка: Ошибка получения данных -' + xhr.responseText);
+            }
+        }
+    );
+
+}
+
 function filterbids() {
     let stime = document.getElementById('datetimepickerbids1').value.split('.');
     let etime = document.getElementById('datetimepickerbids2').value.split('.');
