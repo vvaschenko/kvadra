@@ -1299,6 +1299,10 @@ function showqueryalertedit(id) {
 }
 
 $(function () {
+    $("#tabs").tabs();
+});
+
+$(function () {
     // $('#datetimepicker1').datetimepicker();
     // $('#datetimepicker2').datetimepicker();
     my_startdt = "";
@@ -2062,3 +2066,4 @@ function textpars(stroka) {
     // otvet = stroka;
     return stroka
 }
+

@@ -110,7 +110,6 @@ jQuery(document).ready(function () {
     //     });
     // });
 
-
     $(".btn.btn-danger.btn-sm").on('click', function (e) {
         e = e || window.event;
         e.preventDefault();
@@ -168,7 +167,7 @@ jQuery(document).ready(function () {
     });
 
 
-    $(".checkbox_bids").on("click",function (e) {
+    $(".checkbox_bids").on("click", function (e) {
         e = e || window.event;
         data.csrfmiddlewaretoken = getCookie('csrftoken');
         usercheckbox = document.getElementById(e.target.id);
@@ -176,8 +175,7 @@ jQuery(document).ready(function () {
         data.regim = "bids_check";
         if (usercheckbox.checked) {
             data.workbids = 1;
-        }
-        else {
+        } else {
             data.workbids = 0;
         }
 
@@ -229,8 +227,7 @@ jQuery(document).ready(function () {
             data.workdsi = 1;
             rowtable.className = 'info';
             rowtable.cells[0].innerText = data.userdsi;
-        }
-        else {
+        } else {
             data.workdsi = 0;
             rowtable.className = cur_class;
             rowtable.cells[0].innerText = "";
