@@ -25,7 +25,14 @@
 
         </div>
     </div>
-
+     <div class="row">
+                    <ul class="list-page-breadcrumb">
+                        <li>
+                            <a href="{% url 'bids' %}">Заявки<i class="zmdi zmdi-chevron-right"></i></a>
+                            <a href="{% url 'bidsdouble' %}">Дубли<i class="zmdi zmdi-chevron-right"></i></a>
+                        </li>
+                    </ul>
+            </div>
     <div class="row">
         <div class="col-md-12">
             <div class="widget-wrap">
@@ -43,46 +50,44 @@
                 {#                        </div>#}
                 {#                    </div>#}
                 {#                </div>#}
+                <div>
+                    <div class="widget-header block-header clearfix">
+                        <h3 style="color: #00008B ">Просмотр заявок</h3>
+                    </div>
+                </div>
 
                 <div class="row">
-                    <div class="col-md-2">
-                        <div class="widget-header block-header clearfix">
-                            <h3 style="color: #00008B ">Просмотр заявок</h3>
-                            <p4 style="font-style:italic;text-decoration:underline">{{ timeobr }}</p4>
-                        </div>
-                    </div>
-                    <div class="col-md-2 unit">
+
+                    <div class="col-md-3 unit">
                         <label class="tfh-label">Начало периода</label>
                         <div class="input">
                             <input type='text' class="form-control" id='datetimepickerbids1'
                             />
                         </div>
                     </div>
-                    <div class="col-md-2 unit">
+                    <div class="col-md-3 unit">
                         <label class="tfh-label">Конец периода</label>
                         <div class="input">
                             <input type='text' class="form-control" id='datetimepickerbids2'
                             />
                         </div>
                     </div>
-                    <div class="col-md-2 unit">
-                        <label class="tfh-label"></label>
-                        <div class="data-align-left">
-                            <button id="filterbids" type="button" class="btn btn-primary "
+                    <div class="col-md-3 unit">
+                        <div class="data-align-left green_button-container">
+                            <button id="filterbids" type="button" class="btn btn-primary green_button"
                                     onclick="filterbids()"
                                     disabled="disabled">Применить</button>
                         </div>
                     </div>
 
-                    <div class="col-md-3 unit">
-                        <label class="tfh-label"></label>
+                    <div class="col-md-3 unit green_button-container">
                         <div class="data-align-right">
-                            <a href="{% url 'bidsadd' %}" class="btn add-row btn-primary">Добавить заявку</a>
+                            <a href="{% url 'bidsadd' %}" class="btn add-row btn-primary green_button">Добавить заявку</a>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2" id="groupview">
+                    <div class="col-md-3" id="groupview">
                     <label class="tfh-label"></label>
                         <select name="groupitem" class="form-control" id="groupbids" data-regim="groupview">
                             <option value="0" selected>Выберите проект</option>
@@ -91,10 +96,10 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="col-md-2 unit">
+                    <div class="col-md-3 unit">
                         <label class="tfh-label"></label>
                         <div class="data-align-left">
-                            <button id="migration_bids" type="button" class="btn btn-primary "
+                            <button id="migration_bids" type="button" class="btn btn-primary green_button"
                                     onclick="migration_bids()"
                                     disabled="disabled">Перебросить</button>
 {#                            <a href="#" id="migration_bids" disabled="disable" class="btn add-row btn-primary">Перебросить</a>#}
