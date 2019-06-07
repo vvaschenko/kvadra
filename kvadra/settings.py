@@ -82,10 +82,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kvadra',
-        #'USER': 'kvadra',
-        #'PASSWORD': 'kvadra',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'USER': 'kvadra',
+        'PASSWORD': 'kvadra',
+        #'USER': 'root',
+        #'PASSWORD': 'root',
         # 'HOST': '/run/mysqld/mysqld.sock',
         'HOST': 'localhost'
     },
