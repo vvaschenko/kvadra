@@ -2302,7 +2302,7 @@ jQuery(document).ready(function ($) {
                         '<div class="form-group"> ' +
                         '<label class="col-md-4 control-label" for="name">Select Color</label> ' +
                         '<div class="col-md-6"> ' +
-                        '<div class="input-group event-color-picker"><input id="event_color" type="text" value="#0097a7" class="form-control"/><span class="input-group-addon"><i></i></span></div>' +
+                        '<div class="input-group event-color-picker"><input id="event_color" type="text"  value="#0097a7" class="form-control"/><span class="input-group-addon"><i></i></span></div>' +
                         '</div> ' +
                         '</div> ' +
                         '</form> </div>  </div>',
