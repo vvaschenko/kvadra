@@ -9312,3 +9312,16 @@ table.dataTable > tbody > tr.child span.dtr-title {
   transform: scale(1);
   -webkit-transform: scale(1);
 }
+
+.green_button{
+  width: 100%;
+}
+
+.main-container{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.green_button-container{
+  margin-top: 26px;
+}

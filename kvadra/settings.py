@@ -84,6 +84,8 @@ DATABASES = {
         'NAME': 'kvadra',
         'USER': 'kvadra',
         'PASSWORD': 'kvadra',
+        #'USER': 'root',
+        #'PASSWORD': 'root',
         # 'HOST': '/run/mysqld/mysqld.sock',
         'HOST': 'localhost'
     },

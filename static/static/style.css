@@ -99,9 +99,19 @@ Theme Name: jqueryui-com
 Template: jquery
 */
 
-a,
-.title {
+a{
 	color: #b24926;
+}
+
+.title {
+	color: white;
+	font-weight: bold;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.logo_img{
+	margin-left: 5px;
 }
 
 #content a:hover {

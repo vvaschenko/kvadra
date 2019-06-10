@@ -195,7 +195,7 @@ class Bid(models.Model):
     status = models.ForeignKey(BidStatus,
                                verbose_name="Статус заявки",
                                blank=True,
-                               null=True)
+                               null=True, on_delete=models.CASCADE)
     # crm_status = models.CharField("CRM status",
     #                               max_length=32,
     #                               blank=True)
@@ -203,7 +203,7 @@ class Bid(models.Model):
                              verbose_name="Пользователь изменивший эту заявку",
                              related_name="user_bids",
                              blank=True,
-                             null=True)
+                             null=True, on_delete=models.CASCADE)
     created_dt = models.DateTimeField("Дата создания",
                                       auto_now_add=True)
     updated_dt = models.DateTimeField("Дата изменения",
@@ -430,14 +430,14 @@ class BidDouble(models.Model):
     status = models.ForeignKey(BidStatus,
                                verbose_name="Статус заявки",
                                blank=True,
-                               null=True)
+                               null=True, on_delete=models.CASCADE)
     # crm_status = models.CharField("CRM status",
     #                               max_length=32,
     #                               blank=True)
     user = models.ForeignKey(User,
                              verbose_name="Пользователь изменивший эту заявку",
                              blank=True,
-                             null=True)
+                             null=True, on_delete=models.CASCADE)
     created_dt = models.DateTimeField("Дата создания",
                                       auto_now_add=True)
     updated_dt = models.DateTimeField("Дата изменения",

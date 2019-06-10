@@ -60,19 +60,19 @@
             <ul class="left-branding pull-left clickablemenu ttmenu dark-style menu-color-gradient">
                 <li><span class="left-toggle-switch"><i class="zmdi zmdi-menu"></i></span></li>
                 <li>
-                    <div class="logo">
-                        <img src="{% static 'images/photologo.jpg' %}" height="50px" width="50px"  >
                         <li><h3 class="title"> Kvadra CRM </h3></li>
-                        {#                        <a href="index.html" title="Admin Template"></a>#}
-                    </div>
                 </li>
             </ul>
+             </div>
             <!--Mobile Search and Rightbar Toggle-->
             <ul class="branding-right pull-right">
                 <li><a href="#" class="btn-mobile-search btn-top-search"><i class="zmdi zmdi-search"></i></a></li>
                 <li><a href="#" class="btn-mobile-bar"><i class="zmdi zmdi-menu"></i></a></li>
             </ul>
-        </div>
+    </div>
+    <div class="logo">
+        <img src="{% static 'images/photologo.jpg' %}" height="50px" width="50px" class="logo_img">
+    </div>
     </div>
     <div class="container-fluid">
 {#        <div class="page-header filled full-block light">#}
@@ -86,21 +86,7 @@
             {#                    </ul>#}
             {#                </div>#}
             {#            </div>#}
-            <div class="row">
-{#                <div class="col-md-8 col-sm-8">#}
-{##}
-{#                </div>#}
-                <div class="col-md-10 col-sm-10">
-                    <ul class="list-page-breadcrumb">
-                        <li>
-                            <a href="{% url 'bids' %}">Заявки<i class="zmdi zmdi-chevron-right"></i></a>
-                            <a href="{% url 'bidsdouble' %}">Дубли<i class="zmdi zmdi-chevron-right"></i></a>
-                        </li>
-{#                        <li><a href="{% url 'bidsdouble' %}">Дубли<i class="zmdi zmdi-chevron-right"></i></a>#}
-{#                        </li>#}
-                    </ul>
-                </div>
-            </div>
+
 
 {#            <div class="row">#}
 {#                <main class="mdl-layout__content mdl-color--grey-100">#}

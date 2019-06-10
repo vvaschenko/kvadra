@@ -9,7 +9,7 @@ from kvadra.settings import MEDIA_URL
 
 
 class ProfileUser(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.FileField(_(u'avatar'), upload_to='avatar', blank=True, max_length=1000)
     # Добавляем поле дня рождения.
     birthday = models.DateField(_(u'birthday'), blank=True, null=True)
