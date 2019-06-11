@@ -11,25 +11,15 @@ class BidStatusAdmin(admin.ModelAdmin):
 @admin.register(Bid)
 class BidAdmin(admin.ModelAdmin):
     tabs = True
-    list_display = ('last_name',
-                    'first_name',
-                    'contact_phone',
-                    'status',
-                    'created_dt')
+    #list_display = ('last_name',
+    #                'first_name',
+    #                'contact_phone',
+    #                'status',
+    #                'created_dt')
     fieldsets = [
         ("Клиент", {
             "fields": [
-                "contact_phone",
-                "last_name",
-                "first_name",
-                "middle_name",
-                "itn",
-                # ("passport_series", "passport_number"),
-                "birthday",
-                # "city",
-                # "credit_sum",
-                "email",
-                "status"
+                ("user",)
             ]
         }),
         ("Телефоны", {
@@ -65,59 +55,19 @@ class BidAdmin(admin.ModelAdmin):
                 "total_income"
             )
         }),
-        ("Юр. адрес", {
-            "fields": (
-                "registration_area_ur",
-                "registration_raion_ur",
-                "registration_city_ur",
-                "registration_street_ur",
-                "House_number_ur",
-                "apartment_number_ur"
-            )
-        }),
-        ("Фактический адрес", {
-            "fields": (
-                "registration_area_fiz",
-                "registration_raion_fiz",
-                "registration_city_fiz",
-                "registration_street_fiz",
-                "House_number_fiz",
-                "apartment_number_fiz"
-            )
-        }),
-        ("Паспорт / ID карта", {
-            "fields": (
-                ("passport_series", "passport_number"),
-                "issued_by",
-                "date_of_issue"
-            )
-        }),
         ("Дополнительные данные", {
             "fields": (
                 "name_base",
-                "mailing_list",
                 "remark",
                 "base_id",
                 "name_project",
                 "project_id"
             )
         }),
-        # ("Отделение", {
-        #     "fields": (
-        #         "department",
-        #         "appointment_dt",
-        #         "appointment"
-        #     )
-        # }),
         ("Информация о заявке", {
             "fields": (
                 "partner_name",
-                "lead_id",
-                "webmaster_id",
-                # "",
-                "user"
-                # "site_bid_id",
-                # "for_skybank"
+                "user_who_edit"
             )
         })
     ]
@@ -126,25 +76,15 @@ class BidAdmin(admin.ModelAdmin):
 @admin.register(BidImport)
 class BidImportAdmin(admin.ModelAdmin):
     tabs = True
-    list_display = ('last_name',
-                    'first_name',
-                    'contact_phone',
-                    # 'status',
-                    'created_dt')
+#    list_display = ('last_name',
+#                    'first_name',
+#                    'contact_phone',
+#                    # 'status',
+#                    'created_dt')
     fieldsets = [
         ("Клиент", {
             "fields": [
-                "contact_phone",
-                "last_name",
-                "first_name",
-                "middle_name",
-                "itn",
-                # ("passport_series", "passport_number"),
-                "birthday",
-                # "city",
-                # "credit_sum",
-                "email"
-                # "status"
+                ("user",)
             ]
         }),
         ("Телефоны", {
@@ -180,59 +120,13 @@ class BidImportAdmin(admin.ModelAdmin):
                 "total_income"
             )
         }),
-        ("Юр. адрес", {
-            "fields": (
-                "registration_area_ur",
-                "registration_raion_ur",
-                "registration_city_ur",
-                "registration_street_ur",
-                "House_number_ur",
-                "apartment_number_ur"
-            )
-        }),
-        ("Фактический адрес", {
-            "fields": (
-                "registration_area_fiz",
-                "registration_raion_fiz",
-                "registration_city_fiz",
-                "registration_street_fiz",
-                "House_number_fiz",
-                "apartment_number_fiz"
-            )
-        }),
-        ("Паспорт / ID карта", {
-            "fields": (
-                ("passport_series", "passport_number"),
-                "issued_by",
-                "date_of_issue"
-            )
-        }),
         ("Дополнительные данные", {
             "fields": (
                 "name_base",
-                "mailing_list",
                 "remark",
                 "base_id",
                 "name_project",
                 "project_id"
-            )
-        }),
-        # ("Отделение", {
-        #     "fields": (
-        #         "department",
-        #         "appointment_dt",
-        #         "appointment"
-        #     )
-        # }),
-        ("Информация о заявке", {
-            "fields": (
-                "partner_name",
-                "lead_id",
-                "webmaster_id",
-                # "",
-                "user"
-                # "site_bid_id",
-                # "for_skybank"
             )
         })
     ]
@@ -241,25 +135,14 @@ class BidImportAdmin(admin.ModelAdmin):
 @admin.register(BidDouble)
 class BidDoubleAdmin(admin.ModelAdmin):
     tabs = True
-    list_display = ('last_name',
-                    'first_name',
-                    'contact_phone',
-                    # 'status',
-                    'created_dt')
+#    list_display = ('last_name',
+#                    'first_name',
+#                    'contact_phone',
+#                   'created_dt')
     fieldsets = [
         ("Клиент", {
             "fields": [
-                "contact_phone",
-                "last_name",
-                "first_name",
-                "middle_name",
-                "itn",
-                # ("passport_series", "passport_number"),
-                "birthday",
-                # "city",
-                # "credit_sum",
-                "email",
-                "status"
+                ("user",)
             ]
         }),
         ("Телефоны", {
@@ -295,62 +178,20 @@ class BidDoubleAdmin(admin.ModelAdmin):
                 "total_income"
             )
         }),
-        ("Юр. адрес", {
-            "fields": (
-                "registration_area_ur",
-                "registration_raion_ur",
-                "registration_city_ur",
-                "registration_street_ur",
-                "House_number_ur",
-                "apartment_number_ur"
-            )
-        }),
-        ("Фактический адрес", {
-            "fields": (
-                "registration_area_fiz",
-                "registration_raion_fiz",
-                "registration_city_fiz",
-                "registration_street_fiz",
-                "House_number_fiz",
-                "apartment_number_fiz"
-            )
-        }),
-        ("Паспорт / ID карта", {
-            "fields": (
-                ("passport_series", "passport_number"),
-                "issued_by",
-                "date_of_issue"
-            )
-        }),
         ("Дополнительные данные", {
             "fields": (
                 "name_base",
-                "mailing_list",
                 "remark",
                 "base_id",
                 "name_project",
                 "project_id"
             )
         }),
-        # ("Отделение", {
-        #     "fields": (
-        #         "department",
-        #         "appointment_dt",
-        #         "appointment"
-        #     )
-        # }),
         ("Информация о заявке", {
             "fields": (
                 "partner_name",
-                "lead_id",
-                "webmaster_id",
-                # "",
-                "user"
-                # "site_bid_id",
-                # "for_skybank"
+                "user_who_edit"
             )
         })
     ]
 
-# admin.site.register(BidStatus, BidStatusAdmin)
-# admin.site.register(Bid, BidAdmin)
