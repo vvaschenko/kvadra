@@ -1434,6 +1434,7 @@ jQuery(document).ready(function ($) {
             "columnDefs": [{"targets": [0, 1, 2, 3, 5, 6, 7, 8, 9, 10], "orderable": false}],
 
             "oLanguage": {
+                "sSearch": "Поиск:",
                 "decimal": ",",
                 "sLengthMenu": '<select class="tbl-data-select">' +
                     '<option value="10">10</option>' +
@@ -1463,6 +1464,7 @@ jQuery(document).ready(function ($) {
             responsive: true,
             "columnDefs": [{"targets": [0, 1, 2, 5], "orderable": false}],
             "oLanguage": {
+                "sSearch": "Поиск:",
                 "decimal": ",",
                 "sLengthMenu": '<select class="tbl-data-select">' +
                     '<option value="10">10</option>' +
@@ -1490,6 +1492,7 @@ jQuery(document).ready(function ($) {
             responsive: true,
             "columnDefs": [{"targets": [0, 1, 2, 3, 6, 7], "orderable": false}],
             "oLanguage": {
+                "sSearch": "Поиск:",
                 "decimal": ",",
                 "sLengthMenu": '<select class="tbl-data-select">' +
                     '<option value="10">10</option>' +
@@ -1517,6 +1520,7 @@ jQuery(document).ready(function ($) {
             responsive: true,
             "columnDefs": [{"targets": [0, 1, 2, 3, 5, 6], "orderable": false}],
             "oLanguage": {
+                "sSearch": "Поиск:",
                 "decimal": ",",
                 "sLengthMenu": '<select class="tbl-data-select">' +
                     '<option value="10">10</option>' +
@@ -1543,6 +1547,7 @@ jQuery(document).ready(function ($) {
             responsive: true,
             "columnDefs": [{"targets": [0, 1], "orderable": false}],
             "oLanguage": {
+                "sSearch": "Поиск:",
                 "decimal": ",",
                 "sLengthMenu": '<select class="tbl-data-select">' +
                     '<option value="10">10</option>' +
@@ -1569,6 +1574,7 @@ jQuery(document).ready(function ($) {
             responsive: true,
             "columnDefs": [{"targets": [0, 1, 2, 4], "orderable": false}],
             "oLanguage": {
+                "sSearch": "Поиск:",
                 "decimal": ",",
                 "sLengthMenu": '<select class="tbl-data-select">' +
                     '<option value="10">10</option>' +
@@ -1595,6 +1601,7 @@ jQuery(document).ready(function ($) {
             responsive: true,
             "columnDefs": [{"targets": [1, 2, 3, 4], "orderable": false}],
             "oLanguage": {
+                "sSearch": "Поиск:",
                 "decimal": ",",
                 "sLengthMenu": '<select class="tbl-data-select">' +
                     '<option value="10">10</option>' +
