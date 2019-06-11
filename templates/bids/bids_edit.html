@@ -57,9 +57,9 @@
                                                                        name="contact_phone"
                                                                        placeholder="Номер телефона"
                                                                        class="form-control " maxlength="12"
-                                                                       value='{{ bids_form.contact_phone.value }}'
+                                                                       value='{{ bids_user_form.contact_phone.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.contact_phone }}'
+                                                                       value='{{ bids_user_form.contact_phone }}'
                                                                         {% endif %}
                                                                 >
                                                             </div>
@@ -77,9 +77,9 @@
                                                                 <input type="text" id="itn"
                                                                        name="itn" placeholder="ИНН"
                                                                        class="form-control" maxlength="10"
-                                                                       value='{{ bids_form.itn.value }}'
+                                                                       value='{{ bids_user_form.itn.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.itn }}'
+                                                                       value='{{ bids_user_form.itn }}'
                                                                         {% endif %}
                                                                 >
                                                             </div>
@@ -95,9 +95,9 @@
                                                             </label>
                                                             <input type="text" id="birthday" name="birthday"
                                                                    class="form-control"
-                                                                   value='{{ bids_form.birthday.value }}'
+                                                                   value='{{ bids_user_form.birthday.value }}'
                                                                     {% if request.method == 'POST' %}
-                                                                   value='{{ bids_form.birthday }}'
+                                                                   value='{{ bids_user_form.birthday }}'
                                                                     {% endif %}
 
                                                             >
@@ -137,9 +137,9 @@
                                                         <input type="text" id="last_name" name="last_name"
                                                                placeholder="Фамилия"
                                                                class="form-control"
-                                                               value='{{ bids_form.last_name.value }}'
+                                                               value='{{ bids_user_form.last_name.value }}'
                                                                 {% if request.method == 'POST' %}
-                                                               value='{{ bids_form.last_name }}'
+                                                               value='{{ bids_user_form.last_name }}'
                                                                 {% endif %}
 
                                                         >
@@ -156,9 +156,9 @@
                                                         <input type="text" id="first_name" name="first_name"
                                                                placeholder="Имя"
                                                                class="form-control"
-                                                               value='{{ bids_form.first_name.value }}'
+                                                               value='{{ bids_user_form.first_name.value }}'
                                                                 {% if request.method == 'POST' %}
-                                                               value='{{ bids_form.first_name }}'
+                                                               value='{{ bids_user_form.first_name }}'
                                                                 {% endif %}
 
                                                         >
@@ -175,9 +175,9 @@
                                                         <input type="text" id="middle_name" name="middle_name"
                                                                placeholder="Отчество"
                                                                class="form-control"
-                                                               value='{{ bids_form.middle_name.value }}'
+                                                               value='{{ bids_user_form.middle_name.value }}'
                                                                 {% if request.method == 'POST' %}
-                                                               value='{{ bids_form.middle_name }}'
+                                                               value='{{ bids_user_form.middle_name }}'
                                                                 {% endif %}
 
                                                         >
@@ -699,9 +699,9 @@
                                                                        name="registration_area_ur"
                                                                        placeholder="Область Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_area_ur.value }}'
+                                                                       value='{{ bids_user_form.registration_area_ur.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_area_ur }}'
+                                                                       value='{{ bids_user_form.registration_area_ur }}'
                                                                         {% endif %}
 
                                                                 >
@@ -720,9 +720,9 @@
                                                                        name="registration_raion_ur"
                                                                        placeholder="Район Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_raion_ur.value }}'
+                                                                       value='{{ bids_user_form.registration_raion_ur.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_raion_ur }}'
+                                                                       value='{{ bids_user_form.registration_raion_ur }}'
                                                                         {% endif %}
 
                                                                 >
@@ -743,9 +743,9 @@
                                                                        name="registration_city_ur"
                                                                        placeholder="Місто Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_city_ur.value }}'
+                                                                       value='{{ bids_user_form.registration_city_ur.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_city_ur }}'
+                                                                       value='{{ bids_user_form.registration_city_ur }}'
                                                                         {% endif %}
 
                                                                 >
@@ -764,9 +764,9 @@
                                                                        name="registration_street_ur"
                                                                        placeholder="Вулиця Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_street_ur.value }}'
+                                                                       value='{{ bids_user_form.registration_street_ur.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_street_ur }}'
+                                                                       value='{{ bids_user_form.registration_street_ur }}'
                                                                         {% endif %}
 
                                                                 >
@@ -786,9 +786,9 @@
                                                                        name="House_number_ur"
                                                                        placeholder="Номер Будинку Реєстрації"
                                                                        class="form-control " maxlength="3"
-                                                                       value='{{ bids_form.House_number_ur.value }}'
+                                                                       value='{{ bids_user_form.House_number_ur.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.House_number_ur }}'
+                                                                       value='{{ bids_user_form.House_number_ur }}'
                                                                         {% endif %}
 
                                                                 >
@@ -807,9 +807,9 @@
                                                                        name="apartment_number_ur"
                                                                        placeholder="Номер Квартири Реєстрації"
                                                                        class="form-control " maxlength="3"
-                                                                       value='{{ bids_form.apartment_number_ur.value }}'
+                                                                       value='{{ bids_user_form.apartment_number_ur.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.apartment_number_ur }}'
+                                                                       value='{{ bids_user_form.apartment_number_ur }}'
                                                                         {% endif %}
 
                                                                 >
@@ -837,9 +837,9 @@
                                                                        name="registration_area_fiz"
                                                                        placeholder="Область Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_area_fiz.value }}'
+                                                                       value='{{ bids_user_form.registration_area_fiz.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_area_fiz }}'
+                                                                       value='{{ bids_user_form.registration_area_fiz }}'
                                                                         {% endif %}
 
                                                                 >
@@ -857,9 +857,9 @@
                                                                        name="registration_raion_fiz"
                                                                        placeholder="Район Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_raion_fiz.value }}'
+                                                                       value='{{ bids_user_form.registration_raion_fiz.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_raion_fiz }}'
+                                                                       value='{{ bids_user_form.registration_raion_fiz }}'
                                                                         {% endif %}
 
                                                                 >
@@ -879,9 +879,9 @@
                                                                        name="registration_city_fiz"
                                                                        placeholder="Місто Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_city_fiz.value }}'
+                                                                       value='{{ bids_user_form.registration_city_fiz.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_city_fiz }}'
+                                                                       value='{{ bids_user_form.registration_city_fiz }}'
                                                                         {% endif %}
 
                                                                 >
@@ -899,9 +899,9 @@
                                                                        name="registration_street_fiz"
                                                                        placeholder="Вулиця Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_street_fiz.value }}'
+                                                                       value='{{ bids_user_form.registration_street_fiz.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_street_fiz }}'
+                                                                       value='{{ bids_user_form.registration_street_fiz }}'
                                                                         {% endif %}
 
                                                                 >
@@ -921,9 +921,9 @@
                                                                        name="House_number_fiz"
                                                                        placeholder="Номер Будинку Реєстрації"
                                                                        class="form-control " maxlength="3"
-                                                                       value='{{ bids_form.House_number_fiz.value }}'
+                                                                       value='{{ bids_user_form.House_number_fiz.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.House_number_fiz }}'
+                                                                       value='{{ bids_user_form.House_number_fiz }}'
                                                                         {% endif %}
 
                                                                 >
@@ -941,9 +941,9 @@
                                                                        name="apartment_number_fiz"
                                                                        placeholder="Номер Квартири Реєстрації"
                                                                        class="form-control " maxlength="3"
-                                                                       value='{{ bids_form.apartment_number_fiz.value }}'
+                                                                       value='{{ bids_user_form.apartment_number_fiz.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.apartment_number_fiz }}'
+                                                                       value='{{ bids_user_form.apartment_number_fiz }}'
                                                                         {% endif %}
 
                                                                 >
@@ -971,9 +971,9 @@
                                                                        name="passport_series"
                                                                        placeholder="Серия паспорта"
                                                                        class="form-control " maxlength="2"
-                                                                       value='{{ bids_form.passport_series.value }}'
+                                                                       value='{{ bids_user_form.passport_series.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.passport_series }}'
+                                                                       value='{{ bids_user_form.passport_series }}'
                                                                         {% endif %}
 
                                                                 >
@@ -991,9 +991,9 @@
                                                                        name="passport_number"
                                                                        placeholder="Номер паспорта"
                                                                        class="form-control " maxlength="6"
-                                                                       value='{{ bids_form.passport_number.value }}'
+                                                                       value='{{ bids_user_form.passport_number.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.passport_number }}'
+                                                                       value='{{ bids_user_form.passport_number }}'
                                                                         {% endif %}
 
                                                                 >
@@ -1010,9 +1010,9 @@
                                                             <input type="text" id="date_of_issue"
                                                                    name="date_of_issue"
                                                                    class="form-control"
-                                                                   value='{{ bids_form.date_of_issue.value }}'
+                                                                   value='{{ bids_user_form.date_of_issue.value }}'
                                                                     {% if request.method == 'POST' %}
-                                                                   value='{{ bids_form.date_of_issue }}'
+                                                                   value='{{ bids_user_form.date_of_issue }}'
                                                                     {% endif %}
 
                                                             >
@@ -1033,9 +1033,9 @@
                                                                        placeholder="Паспорт Ким Видано"
                                                                        class="form-control " maxlength="200"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.issued_by.value }}'
+                                                                       value='{{ bids_user_form.issued_by.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.issued_by }}'
+                                                                       value='{{ bids_user_form.issued_by }}'
                                                                         {% endif %}
 
                                                                 >
@@ -1081,9 +1081,9 @@
                                                                        name="mailing_list"
                                                                        placeholder="Участь в розсилках"
                                                                        class="form-control " maxlength="150"
-                                                                       value='{{ bids_form.mailing_list.value }}'
+                                                                       value='{{ bids_user_form.mailing_list.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.mailing_list }}'
+                                                                       value='{{ bids_user_form.mailing_list }}'
                                                                         {% endif %}
 
                                                                 >

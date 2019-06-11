@@ -2,7 +2,7 @@ from django.conf.urls import url
 from bids import views
 
 urlpatterns = [
-    url(r'^bidsimport/', views.bidsimport, name= 'bidsimport'),
+    url(r'^bidsimport/', views.bidsimport, name='bidsimport'),
     url(r'^bids/', views.bids, name='bids'),
     url(r'^bids/(?P<bids_filter>\d+)/$', views.bids, name='bids'),
     url(r'^bidsedit/(?P<edit_id>\d+)/$', views.bidsedit, name='bidsedit'),

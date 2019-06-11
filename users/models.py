@@ -94,9 +94,6 @@ class ProfileUser(models.Model):
 
     date_of_issue = models.DateField("Паспорт Дата Видачі", null=True, blank=True)
 
-    # "Дополнительные данные"
-    name_base = models.CharField("Назва Бази", max_length=255, null=True, blank=True)
-
     mailing_list = models.CharField("Участь в розсилках", max_length=255, null=True, blank=True)
 
 

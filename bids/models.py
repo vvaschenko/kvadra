@@ -42,6 +42,8 @@ class Bid(models.Model):
         ('lifecell', 'Lifecell'),
         ('city24', 'City24')
     )
+    vybor = models.IntegerField(null=True, blank=True)
+
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Клиент")
 
     # Дополнительные  телефоны
@@ -209,6 +211,8 @@ class BidDouble(models.Model):
 
     city = models.CharField("Город", blank=True,
                             max_length=128)
+
+    # "Дополнительные данные"
 
     partner_name = models.CharField("Партнер",
                                     choices=PARTNER_CHOICES,

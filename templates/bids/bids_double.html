@@ -84,9 +84,9 @@
                             <tbody id="bidsview">
                             {% for post in p_bids %}
                                 <tr role="row" class="even">
-                                    <td>{{ post.last_name }}</td>
-                                    <td>{{ post.first_name }}</td>
-                                    <td>{{ post.contact_phone }}</td>
+                                    <td>{{ post.user.profileuser.last_name }}</td>
+                                    <td>{{ post.user.profileuser.first_name }}</td>
+                                    <td>{{ post.user.profileuser.contact_phone }}</td>
                                     <td>{{ post.status }}</td>
                                     <td>{{ post.created_dt }}</td>
                                     <td>

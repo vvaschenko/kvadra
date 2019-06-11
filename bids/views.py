@@ -6,22 +6,19 @@ import json
 import logging
 
 import datetime
-    # from datetime, time
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.utils.datastructures import MultiValueDictKeyError
 
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404, redirect
-from dateutil.tz import tzutc, tzlocal, struct
-from django.views.generic import View, TemplateView
-from django.http import Http404, JsonResponse, HttpResponseRedirect
-from everbug.utils.serilalize import _
+from django.shortcuts import render
+from dateutil.tz import tzutc, tzlocal
+from django.http import JsonResponse, HttpResponseRedirect
 
-from bids.forms import BidsAdd, BidDouble, BidsEdit, DoubleEdit
+from bids.forms import BidsAdd, DoubleEdit, BidsEdit, UserEdit
 from bids.utils import list_name_tuple, get_key, get_value_excel
-# from questionnaires.models import ShortQuestionnaire, Verification
-from .models import Bid, BidImport, BidDouble, BidStatus
+from users.models import ProfileUser
+from .models import Bid, BidImport, BidDouble
 
 log = logging.getLogger(__name__)
 tzutc = tzutc()
@@ -78,7 +75,6 @@ def bids(request):
                 results['success'] = False
             return JsonResponse(results)
 
-
         if del_delite == '1':
             delstr = del_id.find('_')
             idfordel = int(del_id[delstr + 1:])
@@ -95,8 +91,9 @@ def bids(request):
             groupid=str(request.user.groups.values_list('id', flat=True).first())).select_related().all()
     # m = Membership.objects.filter(person__name='x').values('person', 'person__phonenumber')
     context['p_bids'] = qs_bids
-    context['timeobr'] = datetime.datetime.strftime(datetime.datetime.astimezone(max_datetime['datatime__max'], tzlocal),
-                                           "%Y-%m-%d %H:%M:%S")
+    context['timeobr'] = datetime.datetime.strftime(
+        datetime.datetime.astimezone(max_datetime['datatime__max'], tzlocal),
+        "%Y-%m-%d %H:%M:%S")
     return render(request, 'bids/bids.html', context)
 
     # @staticmethod
@@ -138,19 +135,19 @@ def bidsadd(request):
                     except Exception as err:
                         print(err)
                 else:
-                    messages.error(request, _('Please correct the error below.'))
+                    messages.error(request, 'Please correct the error below.')
             except Exception as wwww:
                 print(wwww)
             print(qwe)
     else:
         bids_form = BidsAdd()
     return render(request, 'bids/bids_add.html',
-                  {'timeobr': datetime.datetime.strftime(datetime.datetime.now(), "%A, %d. %B %Y %I:%M%p"), 'bids_form': bids_form})
+                  {'timeobr': datetime.datetime.strftime(datetime.datetime.now(), "%A, %d. %B %Y %I:%M%p"),
+                   'bids_form': bids_form})
 
 
 @login_required
 def doubleedit(request):
-    edit_id = request.GET.get('edit_id', None)
     edit_id = request.GET.get('edit_id', None)
     if edit_id is None:
         return HttpResponseRedirect('/bids/bidsdouble/')
@@ -170,36 +167,39 @@ def doubleedit(request):
         return render(request, 'bids/doubleedit.html', {'bids_form': bids_form})
 
 
+# done
 @login_required
-def bidsedit(request, edit_id=None):
-    context = {}
-    max_datetime = {'datatime__max': datetime.datetime.now(tzlocal)}
+def bidsedit(request):
     edit_id = request.GET.get('edit_id', None)
     if edit_id is None:
         return HttpResponseRedirect('/bids/bids/')
     else:
-        bids_form = BidsEdit(instance=Bid.objects.get(id=edit_id))
         if request.POST:
-            bids_form = BidsEdit(request.POST, instance=Bid.objects.get(id=edit_id))
-            # bids_form = BidsEdit(temp_arg= obj, data= request.POST)
+            bid_obj = Bid.objects.get(id=edit_id)
+            user = bid_obj.user.id
+
+            bids_form = BidsEdit(request.POST, instance=bid_obj)
+            bids_user_form = UserEdit(request.POST, instance=ProfileUser.objects.get(user=user))
             try:
-                if bids_form.is_valid():
-                    groupid = bids_form.cleaned_data['groupid']
+                if bids_form.is_valid() and bids_user_form.is_valid():
+                    # groupid = bids_form.cleaned_data['groupid']
                     bids_form.save()
+                    bids_user_form.save()
                     return HttpResponseRedirect('/bids/bids/')
                 else:
-                    messages.error(request, _('Please correct the error below.'))
+                    messages.error(request, 'Please correct the error below.')
             except Exception as err:
                 print(err)
-        # else:
-        # qs_bids = Bid.objects.get(id=edit_id)
-        # bids_form = BidsEdit(instance=Bid.objects.get(id=edit_id))
-
-        return render(request, 'bids/bids_edit.html', {'bids_form': bids_form})
+        else:
+            bid_obj = Bid.objects.get(id=edit_id)
+            user = bid_obj.user.id
+            bids_form = BidsEdit(instance=bid_obj)
+            bids_user_form = UserEdit(instance=ProfileUser.objects.get(user=user))
+        return render(request, 'bids/bids_edit.html', {'bids_form': bids_form, 'bids_user_form': bids_user_form})
 
 
 @login_required
-def bidsdouble(request, edit_id=None):
+def bidsdouble(request):
     results = dict()
     results['success'] = False
     max_datetime = {'datatime__max': datetime.datetime.now(tzlocal)}
@@ -222,8 +222,9 @@ def bidsdouble(request, edit_id=None):
         qs_bids = BidDouble.objects.filter(
             groupid=str(request.user.groups.values_list('id', flat=True).first())).select_related().all()
     context = {'p_bids': qs_bids}
-    context['timeobr'] = datetime.datetime.strftime(datetime.datetime.astimezone(max_datetime['datatime__max'], tzlocal),
-                                           "%Y-%m-%d %H:%M:%S")
+    context['timeobr'] = datetime.datetime.strftime(
+        datetime.datetime.astimezone(max_datetime['datatime__max'], tzlocal),
+        "%Y-%m-%d %H:%M:%S")
     return render(request, 'bids/bids_double.html', context)
 
 

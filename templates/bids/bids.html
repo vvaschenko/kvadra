@@ -148,11 +148,11 @@
                                     </td>
                                     <td title="Двойное нажатие откроет редактор заявки"
                                         ondblclick="window.location.href='/bids/bidsedit/?edit_id={{ post.id }}'"
-                                        style="width: 50px;cursor: pointer;">{{ post.last_name }}</td>
+                                        style="width: 50px;cursor: pointer;">{{ post.user.profileuser.last_name}}</td>
                                     <td  title="Двойное нажатие откроет редактор заявки"
                                         ondblclick="window.location.href='/bids/bidsedit/?edit_id={{ post.id }}'"
-                                        style="width: 50px;cursor: pointer;">{{ post.first_name }}</td>
-                                    <td>{{ post.contact_phone }}</td>
+                                        style="width: 50px;cursor: pointer;">{{ post.user.profileuser.first_name }}</td>
+                                    <td>{{ post.user.profileuser.contact_phone }}</td>
                                     <td>{{ post.status }}</td>
                                     <td id="cr_data">{{ post.created_dt|date:"Y-m-d" }} {{ post.created_dt|time:"H:i" }}</td>
                                     <td>{{ post.updated_dt|date:"Y-m-d" }} {{ post.updated_dt|time:"H:i" }}</td>
