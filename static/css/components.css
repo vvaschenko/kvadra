@@ -8336,7 +8336,14 @@ div.dataTables_length label {
 div.dataTables_length select {
   width: 75px;
   display: inline-block;
+  height: 39px;
+  width: 194px;
 }
+
+.tbl-data-select{
+  border-radius: 3px;
+}
+
 div.dataTables_filter {
   text-align: right;
 }
