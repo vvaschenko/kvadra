@@ -111,10 +111,11 @@ def bidsadd(request):
         # if request.is_ajax() and request.method == 'POST':
         dict_str = {}
         bids_form = BidsAdd(request.POST)
+        bids_user_form = UserEdit(request.POST)
         bids_form.user = request.user
-        dict_str['itn'] = bids_form.data['itn']
-        dict_str['passport_series'] = bids_form.data['passport_series']
-        dict_str['passport_number'] = bids_form.data['passport_number']
+        dict_str['itn'] = bids_user_form.data['itn']
+        dict_str['passport_series'] = bids_user_form.data['passport_series']
+        dict_str['passport_number'] = bids_user_form.data['passport_number']
 
         try:
             Bid.objects.get(itn=dict_str['itn'], passport_series=dict_str['passport_series'],
@@ -122,6 +123,7 @@ def bidsadd(request):
             try:
                 # BidDouble.objects.create(**bids_form.cleaned_data)
                 obj = BidDouble.objects.create(**bids_form.cleaned_data)
+
                 obj.save()
                 return HttpResponseRedirect('/bids/bidsdouble')
             except Exception as qqq:
@@ -141,9 +143,11 @@ def bidsadd(request):
             print(qwe)
     else:
         bids_form = BidsAdd()
+        bids_user_form = UserEdit()
+
     return render(request, 'bids/bids_add.html',
                   {'timeobr': datetime.datetime.strftime(datetime.datetime.now(), "%A, %d. %B %Y %I:%M%p"),
-                   'bids_form': bids_form})
+                   'bids_form': bids_form, 'bids_user_form': bids_user_form})
 
 
 @login_required
@@ -167,7 +171,7 @@ def doubleedit(request):
         return render(request, 'bids/doubleedit.html', {'bids_form': bids_form})
 
 
-# done
+# don't save
 @login_required
 def bidsedit(request):
     edit_id = request.GET.get('edit_id', None)
@@ -177,25 +181,26 @@ def bidsedit(request):
         if request.POST:
             bid_obj = Bid.objects.get(id=edit_id)
             user = bid_obj.user.id
-
+            user_obj = ProfileUser.objects.get(user=user)
+            groups = user_obj.user.groups.values_list('name', flat=True)
             bids_form = BidsEdit(request.POST, instance=bid_obj)
             bids_user_form = UserEdit(request.POST, instance=ProfileUser.objects.get(user=user))
-            try:
-                if bids_form.is_valid() and bids_user_form.is_valid():
-                    # groupid = bids_form.cleaned_data['groupid']
-                    bids_form.save()
-                    bids_user_form.save()
-                    return HttpResponseRedirect('/bids/bids/')
-                else:
-                    messages.error(request, 'Please correct the error below.')
-            except Exception as err:
-                print(err)
+            if bids_form.is_valid() and bids_user_form.is_valid():
+                # groupid = bids_form.cleaned_data['groupid']
+                bids_form.save()
+                bids_user_form.save()
+                return HttpResponseRedirect('/bids/bids/')
+            else:
+                messages.error(request, 'Please correct the error below.')
         else:
             bid_obj = Bid.objects.get(id=edit_id)
             user = bid_obj.user.id
+            user_obj = ProfileUser.objects.get(user=user)
+            groups = user_obj.user.groups.values_list('name', flat=True)
             bids_form = BidsEdit(instance=bid_obj)
             bids_user_form = UserEdit(instance=ProfileUser.objects.get(user=user))
-        return render(request, 'bids/bids_edit.html', {'bids_form': bids_form, 'bids_user_form': bids_user_form})
+        return render(request, 'bids/bids_edit.html', {'bids_form': bids_form, 'bids_user_form': bids_user_form,
+                                                       'groups': groups})
 
 
 @login_required

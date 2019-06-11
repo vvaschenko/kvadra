@@ -193,9 +193,16 @@
                                                         {{ bids_form.status }}
                                                     </div>
                                                     <div class="col-md-2 unit">
-                                                        <label class="label">Проект</label>
-                                                        {{ bids_form.groupid }}
-
+                                                        {% if groups.count == 1 %}
+                                                            <label class="label">Проект</label>
+                                                        {% elif  groups.count > 1 %}
+                                                            <label class="label">Проекти</label>
+                                                        {% endif %}
+                                                        <div>
+                                                        {% for group in groups %}
+                                                            <span>   {{ group }}  </span>
+                                                        {% endfor %}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

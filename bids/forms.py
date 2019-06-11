@@ -247,6 +247,5 @@ class DoubleEdit(forms.ModelForm):
         super(DoubleEdit, self).__init__(*args, **kwargs)
         self.fields['status'] = forms.ModelChoiceField(queryset=BidStatus.objects.all(), empty_label="Выберите статус",
                                                        widget=forms.Select(attrs={'class': "form-control"}, ))
-        self.fields['groupid'] = forms.ModelChoiceField(queryset=Group.objects.all(),
-                                                        empty_label="Выберите статус",
-                                                        widget=forms.Select(attrs={'class': "form-control"}, ))
+        self.fields['groupid'] = forms.ModelMultipleChoiceField(queryset=Group.objects.all(), required=False,
+                                                                widget=forms.Select(attrs={'class': "form-control"}, ))

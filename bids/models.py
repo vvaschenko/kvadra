@@ -243,7 +243,7 @@ class BidDouble(models.Model):
         return query
 
     def __str__(self):
-        return user.id
+        return self.user.username + self.user.last_name+self.user.first_name
 
 
 class BidImport(models.Model):

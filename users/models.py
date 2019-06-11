@@ -97,6 +97,9 @@ class ProfileUser(models.Model):
     mailing_list = models.CharField("Участь в розсилках", max_length=255, null=True, blank=True)
 
 
+    def __str__(self):
+        return self.last_name+" "+self.first_name+" "+self .middle_name+" "+str(self.user.groups.values_list('name', flat=True))
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
