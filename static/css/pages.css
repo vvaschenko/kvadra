@@ -1,6 +1,19 @@
 .card-shadow {
   box-shadow: 0 0.1em 0.25em rgba(0, 0, 0, 0.1), 0 0.1em 0.2em rgba(0, 0, 0, 0.1);
 }
+
+.login_logo{
+  text-align: center;
+  margin-top: 55px;
+}
+
+.login_title{
+  margin-top: 15px;
+  font-size: 22px;
+  color: #226c5b;
+  font-weight: bold;
+}
+
 .login-page {
   padding-top: 0px;
   background-image: url("../images/whitey.png");
@@ -8,7 +21,7 @@
   background-attachment: fixed;
 }
 .login-container {
-  margin-top: 60px;
+  margin-top: 30px;
 }
 .login-form-header {
   padding: 15px 30px;
