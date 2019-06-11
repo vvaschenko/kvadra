@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="f516f07f-18a2-42cf-88b1-c2cc728aa469" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bids/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bids/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kvadra/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/kvadra/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/apps.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/apps.js" afterDir="false" />
     </list>
+=======
+    <list default="true" id="f516f07f-18a2-42cf-88b1-c2cc728aa469" name="Default Changelist" comment="" />
+>>>>>>> c7d4e6679561c98477da5b9420dd2613231313e5
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +28,30 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand />
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="kvadra" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="kvadra" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="kvadra" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="kvadra: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="kvadra" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="kvadra: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="bids_bid: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+    </expand>
     <select />
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
@@ -33,6 +60,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/bids/forms.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="5180">
@@ -48,16 +76,33 @@
               <caret line="718" lean-forward="true" selection-start-line="718" selection-end-line="718" />
               <folding>
                 <element signature="e#57#85#0" expanded="true" />
+=======
+        <entry file="file://$PROJECT_DIR$/bids/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3546">
+              <caret line="197" column="4" selection-start-line="197" selection-start-column="4" selection-end-line="197" selection-end-column="4" />
+              <folding>
+                <element signature="e#15#37#0" expanded="true" />
+>>>>>>> c7d4e6679561c98477da5b9420dd2613231313e5
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/kvadra/settings.py">
+        <entry file="file://$PROJECT_DIR$/templates/bids/bids_edit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="87" column="9" selection-start-line="87" selection-start-column="9" selection-end-line="87" selection-end-column="9" />
+            <state relative-caret-position="471">
+              <caret line="1200" column="22" selection-start-line="1200" selection-start-column="22" selection-end-line="1200" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/bids/bids_add.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="17" column="22" selection-end-line="886" />
             </state>
           </provider>
         </entry>
@@ -65,8 +110,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/apps.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="5193">
               <caret line="1603" column="36" selection-start-line="1603" selection-start-column="36" selection-end-line="1603" selection-end-column="36" />
+=======
+            <state relative-caret-position="1548">
+              <caret line="86" column="26" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
+>>>>>>> c7d4e6679561c98477da5b9420dd2613231313e5
               <folding>
                 <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
@@ -78,27 +128,44 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/bids/admin.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="420">
               <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+=======
+        <entry file="file://$PROJECT_DIR$/static/js/vvg/my_function.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23598">
+              <caret line="1311" column="24" selection-start-line="1311" selection-start-column="24" selection-end-line="1311" selection-end-column="24" />
+>>>>>>> c7d4e6679561c98477da5b9420dd2613231313e5
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/bids/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3300">
               <caret line="187" column="36" selection-start-line="187" selection-start-column="36" selection-end-line="187" selection-end-column="36" />
               <folding>
                 <element signature="e#15#37#0" expanded="true" />
+=======
+        <entry file="file://$PROJECT_DIR$/bids/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="7" column="50" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+>>>>>>> c7d4e6679561c98477da5b9420dd2613231313e5
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/templates/bids/bids_edit.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3980">
@@ -115,11 +182,25 @@
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
+=======
+        <entry file="file://$PROJECT_DIR$/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5382">
+              <caret line="299" selection-start-line="299" selection-end-line="299" />
+>>>>>>> c7d4e6679561c98477da5b9420dd2613231313e5
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -166,6 +247,7 @@
     <option name="width" value="1148" />
     <option name="height" value="1454" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -187,12 +269,30 @@
               <item name="kvadra" type="b2602c69:ProjectViewProjectNode" />
               <item name="kvadra" type="462c0819:PsiDirectoryNode" />
               <item name="bids" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="migrations" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="templatetags" type="462c0819:PsiDirectoryNode" />
+>>>>>>> c7d4e6679561c98477da5b9420dd2613231313e5
             </path>
             <path>
               <item name="kvadra" type="b2602c69:ProjectViewProjectNode" />
               <item name="kvadra" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="kvadra" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="kvadra" type="b2602c69:ProjectViewProjectNode" />
+=======
+>>>>>>> c7d4e6679561c98477da5b9420dd2613231313e5
+              <item name="kvadra" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="kvadra" type="b2602c69:ProjectViewProjectNode" />
+              <item name="kvadra" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="kvadra" type="b2602c69:ProjectViewProjectNode" />
@@ -204,6 +304,19 @@
               <item name="kvadra" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="kvadra" type="b2602c69:ProjectViewProjectNode" />
+              <item name="kvadra" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="vvg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="kvadra" type="b2602c69:ProjectViewProjectNode" />
+              <item name="kvadra" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="kvadra" type="b2602c69:ProjectViewProjectNode" />
@@ -300,13 +413,30 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="16649000" />
+=======
+    <option name="totallyTimeSpent" value="10218000" />
+  </component>
+  <component name="TodoView" selected-index="4">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+>>>>>>> c7d4e6679561c98477da5b9420dd2613231313e5
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1519" height="977" extended-state="6" />
+    <frame x="45" y="-4" width="1875" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24742974" />
+=======
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.261345" />
+>>>>>>> c7d4e6679561c98477da5b9420dd2613231313e5
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -332,14 +462,65 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="start" />
+    <MESSAGE value="edit bids and bidsdouble" />
+    <MESSAGE value="add filter view bids" />
+    <MESSAGE value="переброска из проекта в проект (старт)" />
+    <MESSAGE value="переброска из проекта в проект" />
+    <MESSAGE value="переделка tabs при добавлении - редактировании заявки" />
+    <option name="LAST_COMMIT_MESSAGE" value="переделка tabs при добавлении - редактировании заявки" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Python.DjangoServer">
+        <watch expression="BidStatus.objects.values_list('code', flat=True)" language="Python" />
+        <watch expression="request.GET.get(json.dumps('bids_filer'), None)" language="Python" />
+        <watch expression="json.loads(filter_bids)" language="Python" />
+        <watch expression="datetime.datetime.strftime(datetime.datetime(json.loads(filter_bids)['starttime']), &quot;%Y-%m-%d %H:%M:%S&quot;)" language="Python" />
+        <watch expression="request.GET.get('bids_filer', None)" language="Python" />
+        <watch expression="json.dumps(filterbids)" language="Python" />
+        <watch expression="datetime.datetime.strptime(json.loads(filter_bids)['starttime'], &quot;%d.%m.%Y&quot;)" language="Python" />
+        <watch expression="Bid.objects.select_related().filter(created_dt__range=[starttime, endtime]).all()" language="Python" />
+        <watch expression="post.created_dt" language="HTML" />
+        <watch expression="post.vybor" language="HTML" />
+      </configuration>
+    </watches-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/django/db/backends/mysql/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2400">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/django/db/backends/mysql/base.py" />
     <entry file="file://$PROJECT_DIR$/users/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
@@ -408,6 +589,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/static/style.css">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="2260">
           <caret line="113" column="20" selection-start-line="113" selection-start-column="20" selection-end-line="113" selection-end-column="20" />
         </state>
@@ -470,6 +652,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5193">
           <caret line="1603" column="36" selection-start-line="1603" selection-start-column="36" selection-end-line="1603" selection-end-column="36" />
+=======
+        <state relative-caret-position="1548">
+          <caret line="86" column="26" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
+>>>>>>> c7d4e6679561c98477da5b9420dd2613231313e5
           <folding>
             <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
@@ -513,6 +699,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/bidsimport.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="20">
           <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
         </state>
@@ -525,6 +712,10 @@
           <folding>
             <element signature="e#57#85#0" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="5382">
+          <caret line="299" selection-start-line="299" selection-end-line="299" />
+>>>>>>> c7d4e6679561c98477da5b9420dd2613231313e5
         </state>
       </provider>
     </entry>
