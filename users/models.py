@@ -5,7 +5,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
-from kvadra.settings import MEDIA_URL
 
 from users.validators import (validate_birthday, validate_contact_phone_numeric, validate_contact_phone_length,
                               validate_passport_series)
@@ -15,8 +14,7 @@ class ProfileUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.FileField(_(u'avatar'), upload_to='avatar', blank=True, max_length=1000)
     # Добавляем поле дня рождения.
-    birthday = models.DateField(_(u'birthday'), blank=True, null=True)
-    id_telegramm = models.BigIntegerField(null=True, blank=True, default=0)
+    id_telegram = models.BigIntegerField(null=True, blank=True, default=0)
 
     # Персональные данные клиента
     first_name = models.CharField("Имя",
@@ -98,7 +96,7 @@ class ProfileUser(models.Model):
 
 
     def __str__(self):
-        return self.last_name+" "+self.first_name+" "+self .middle_name+" "+str(self.user.groups.values_list('name', flat=True))
+        return str(self.last_name)+" "+str(self.first_name)+" "+str(self.middle_name)+" "+str(self.user.groups.values_list('name', flat=True))
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

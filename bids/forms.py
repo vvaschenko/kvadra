@@ -185,26 +185,10 @@ class BidsDouble(forms.ModelForm):
         return curentuser
 
 
-class UserEdit(forms.ModelForm):
-    class Meta:
-        model = ProfileUser
-        exclude = ()
-
-    def __init__(self, *args, **kwargs):
-        # status = kwargs.pop(status['code'], None)
-        # status = kwargs['instance'].status
-        super(UserEdit, self).__init__(*args, **kwargs)
-
-
 class BidsEdit(forms.ModelForm):
     class Meta:
         model = Bid
-        exclude = ("partner_name", "lead_id", "webmaster_id", "crm_status", "site_bid_id", "for_skybank", "city")
-
-    # def clean_user(self):
-    #     curentuser = self.user
-    #     return curentuser
-    #
+        exclude = ("vybor", "user_who_edit", "created_dt", "updated_dt", "site_bid_id", "for_skybank", "city", )
 
     def clean_status(self):
         curentstatus = BidStatus.objects.get(id=self.cleaned_data['status'].id)
@@ -220,8 +204,14 @@ class BidsEdit(forms.ModelForm):
         super(BidsEdit, self).__init__(*args, **kwargs)
         self.fields['status'] = forms.ModelMultipleChoiceField(queryset=BidStatus.objects.all(), required=False,
                                                                widget=forms.Select(attrs={'class': "form-control"}, ))
-        self.fields['groupid'] = forms.ModelMultipleChoiceField(queryset=Group.objects.all(), required=False,
-                                                                widget=forms.Select(attrs={'class': "form-control"}, ))
+        fields_required = []
+        for key in self.fields:
+            if key not in fields_required:
+                self.fields[key].required = False
+                print(key)
+        # self.fields['groupid'] = forms.ModelMultipleChoiceField(queryset=Group.objects.all(), required=False,
+        #                                                        widget=forms.Select(attrs={'class': "form-control"}, ))
+
 
 
 class DoubleEdit(forms.ModelForm):
@@ -246,6 +236,7 @@ class DoubleEdit(forms.ModelForm):
         # status = kwargs['instance'].status
         super(DoubleEdit, self).__init__(*args, **kwargs)
         self.fields['status'] = forms.ModelChoiceField(queryset=BidStatus.objects.all(), empty_label="Выберите статус",
+                                                       required=False,
                                                        widget=forms.Select(attrs={'class': "form-control"}, ))
         self.fields['groupid'] = forms.ModelMultipleChoiceField(queryset=Group.objects.all(), required=False,
                                                                 widget=forms.Select(attrs={'class': "form-control"}, ))

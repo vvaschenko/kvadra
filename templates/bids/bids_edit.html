@@ -25,7 +25,7 @@
                 <div class="widget-wrap">
                     <div class="widget-container margin-top-0">
                         <div class="widget-content">
-                            <form action="" method="POST" class="j-forms " id="j-forms"
+                            <form action="" method="post" class="j-forms " id="j-forms"
                                   novalidate="novalidate" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="form-content">
@@ -113,9 +113,9 @@
                                                             </label>
                                                             <input type="email" id="email" name="email"
                                                                    class="form-control"
-                                                                   value='{{ bids_form.email.value }}'
+                                                                   value='{{ bids_user_form.email.value }}'
                                                                     {% if request.method == 'POST' %}
-                                                                   value='{{ bids_form.email }}'
+                                                                   value='{{ bids_user_form.email }}'
                                                                     {% endif %}
 
                                                             >
@@ -188,19 +188,19 @@
                                             <div class="row"></div>
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-md-2 unit">
+                                                    <div class="col-md-3 unit">
                                                         <label class="label">Статус</label>
                                                         {{ bids_form.status }}
                                                     </div>
-                                                    <div class="col-md-2 unit">
+                                                    <div class="col-md-5 unit">
                                                         {% if groups.count == 1 %}
                                                             <label class="label">Проект</label>
                                                         {% elif  groups.count > 1 %}
                                                             <label class="label">Проекти</label>
                                                         {% endif %}
-                                                        <div>
+                                                        <div class="project_names">
                                                         {% for group in groups %}
-                                                            <span>   {{ group }}  </span>
+                                                            <span>   {{ group }}  {% if not forloop.last %},{% endif %}</span>
                                                         {% endfor %}
                                                         </div>
                                                     </div>
@@ -608,7 +608,7 @@
                                                                     <i class="fa fa-file-text-o"></i>
                                                                 </label>
                                                                 <input type="number" id="income"
-                                                                       name="income" value="0"
+                                                                       name="income"
                                                                        placeholder="Дохід"
                                                                        class="form-control " maxlength="200"
                                                                        value='{{ bids_form.income.value }}'
@@ -630,7 +630,7 @@
                                                                     <i class="fa fa-file-text-o"></i>
                                                                 </label>
                                                                 <input type="number" id="other_income"
-                                                                       name="other_income" value="0"
+                                                                       name="other_income"
                                                                        placeholder="Інший Дохід"
                                                                        class="form-control " maxlength="30"
                                                                        value='{{ bids_form.other_income.value }}'
@@ -652,7 +652,7 @@
                                                                     <i class="fa fa-file-text-o"></i>
                                                                 </label>
                                                                 <input type="number" id="family_income"
-                                                                       name="family_income" value="0"
+                                                                       name="family_income"
                                                                        placeholder="Сімейний Дохід"
                                                                        class="form-control " maxlength="30"
                                                                        value='{{ bids_form.family_income.value }}'
@@ -674,7 +674,7 @@
                                                                     <i class="fa fa-file-text-o"></i>
                                                                 </label>
                                                                 <input type="number" id="total_income"
-                                                                       name="total_income" value="0"
+                                                                       name="total_income"
                                                                        placeholder="Загальний Дохід"
                                                                        class="form-control " maxlength="30"
                                                                        value='{{ bids_form.total_income.value }}'
@@ -1158,7 +1158,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-9 unit">
-                                                        <label class="label">ID проектуу</label>
+                                                        <label class="label">ID проекту</label>
                                                         <div class="form-group-input">
                                                             <div class="input">
                                                                 <label class="icon-right" for="project_id">

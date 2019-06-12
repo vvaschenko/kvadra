@@ -66,8 +66,8 @@ class BidAdmin(admin.ModelAdmin):
         }),
         ("Информация о заявке", {
             "fields": (
-                "partner_name",
-                "user_who_edit"
+                # "partner_name",
+                "user_who_edit",
             )
         })
     ]
@@ -189,8 +189,8 @@ class BidDoubleAdmin(admin.ModelAdmin):
         }),
         ("Информация о заявке", {
             "fields": (
-                "partner_name",
-                "user_who_edit"
+                # "partner_name",
+                "user_who_edit",
             )
         })
     ]

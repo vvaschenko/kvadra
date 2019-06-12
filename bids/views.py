@@ -14,9 +14,11 @@ from django.contrib import messages
 from django.shortcuts import render
 from dateutil.tz import tzutc, tzlocal
 from django.http import JsonResponse, HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 
-from bids.forms import BidsAdd, DoubleEdit, BidsEdit, UserEdit
+from bids.forms import BidsAdd, DoubleEdit, BidsEdit
 from bids.utils import list_name_tuple, get_key, get_value_excel
+from users.forms import UserEdit
 from users.models import ProfileUser
 from .models import Bid, BidImport, BidDouble
 
@@ -157,7 +159,11 @@ def doubleedit(request):
         return HttpResponseRedirect('/bids/bidsdouble/')
     else:
         # qs_bids = BidDouble.objects.get(id=edit_id)
-        bids_form = DoubleEdit(instance=BidDouble.objects.get(id=edit_id))
+        bid_double_obj = BidDouble.objects.get(id=edit_id)
+        user = bid_double_obj.user.id
+        user_obj = ProfileUser.objects.get(user=user)
+        groups = user_obj.user.groups.values_list('name', flat=True)
+        bids_form = DoubleEdit(instance=bid_double_obj)
         if request.POST:
             bids_form = DoubleEdit(request.POST, instance=BidDouble.objects.get(id=edit_id))
             # bids_form = DoubleEdit(request.POST)
@@ -168,25 +174,27 @@ def doubleedit(request):
             except Exception as err:
                 print(err)
 
-        return render(request, 'bids/doubleedit.html', {'bids_form': bids_form})
+        return render(request, 'bids/doubleedit.html', {'bids_form': bids_form, 'groups': groups})
 
 
 # don't save
 @login_required
+@csrf_exempt
 def bidsedit(request):
     edit_id = request.GET.get('edit_id', None)
     if edit_id is None:
         return HttpResponseRedirect('/bids/bids/')
     else:
-        if request.POST:
+        if request.method == 'POST':
             bid_obj = Bid.objects.get(id=edit_id)
             user = bid_obj.user.id
             user_obj = ProfileUser.objects.get(user=user)
             groups = user_obj.user.groups.values_list('name', flat=True)
             bids_form = BidsEdit(request.POST, instance=bid_obj)
             bids_user_form = UserEdit(request.POST, instance=ProfileUser.objects.get(user=user))
+            print(bids_form.is_valid())
+            print(bids_user_form.is_valid())
             if bids_form.is_valid() and bids_user_form.is_valid():
-                # groupid = bids_form.cleaned_data['groupid']
                 bids_form.save()
                 bids_user_form.save()
                 return HttpResponseRedirect('/bids/bids/')
@@ -226,10 +234,9 @@ def bidsdouble(request):
     else:
         qs_bids = BidDouble.objects.filter(
             groupid=str(request.user.groups.values_list('id', flat=True).first())).select_related().all()
-    context = {'p_bids': qs_bids}
-    context['timeobr'] = datetime.datetime.strftime(
+    context = {'p_bids': qs_bids, 'timeobr': datetime.datetime.strftime(
         datetime.datetime.astimezone(max_datetime['datatime__max'], tzlocal),
-        "%Y-%m-%d %H:%M:%S")
+        "%Y-%m-%d %H:%M:%S")}
     return render(request, 'bids/bids_double.html', context)
 
 

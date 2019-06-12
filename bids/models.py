@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 
 class BidStatus(models.Model):
@@ -18,6 +18,7 @@ class BidStatus(models.Model):
     level = models.CharField("Уровень вложения", choices=LEVEL_CHOICES, max_length=1)
     parent_level_status = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,
                                             verbose_name="Родительский уровень статуса")
+    group = models.ManyToManyField(Group, verbose_name="Группа")
 
     class Meta:
         verbose_name = "Статус заявки"
@@ -28,20 +29,6 @@ class BidStatus(models.Model):
 
 
 class Bid(models.Model):
-    PARTNER_CHOICES = (
-        ('easysoft', 'EasySoft(EasyPay)'),
-        ('admitad', 'Admitad'),
-        ('salesdoubler', 'Salesdoubler'),
-        ('website', 'Website'),
-        ('doaffiliate', 'Doaffiliate'),
-        ('linkprofit', 'Linkprofit'),
-        ('hotline', 'HotLine'),
-        ('treeum', 'Treeum'),
-        ('turnes', 'Turnes'),
-        ('recommendation', 'Рекомендация'),
-        ('lifecell', 'Lifecell'),
-        ('city24', 'City24')
-    )
     vybor = models.IntegerField(null=True, blank=True)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Клиент")
@@ -92,8 +79,6 @@ class Bid(models.Model):
 
     name_base = models.CharField("Назва Бази", max_length=255, blank=True)
 
-    mailing_list = models.CharField("Участь в розсилках", null=True, max_length=255, blank=True)
-
     remark = models.CharField("Примітка", max_length=255, null=True, blank=True)
 
     base_id = models.CharField("ID бази", max_length=255, null=True, blank=True)
@@ -102,12 +87,6 @@ class Bid(models.Model):
 
     project_id = models.CharField("ID проекту", max_length=255, null=True, blank=True)
 
-    city = models.CharField("Город", blank=True,
-                            max_length=128)
-
-    partner_name = models.CharField("Партнер",
-                                    choices=PARTNER_CHOICES,
-                                    max_length=32)
     status = models.ForeignKey(BidStatus,
                                verbose_name="Статус заявки",
                                blank=True,
@@ -135,7 +114,7 @@ class Bid(models.Model):
         return query
 
     def __str__(self):
-        return "{} {}".format(self.partner_name, self.city)
+        return "заявка " + str(self.id)
 
 
 class BidDouble(models.Model):
@@ -199,7 +178,6 @@ class BidDouble(models.Model):
 
     # "Дополнительные данные"
     name_base = models.CharField("Назва Бази", max_length=255, blank=True)
-    mailing_list = models.CharField("Участь в розсилках", null=True, max_length=255, blank=True)
 
     remark = models.CharField("Примітка", max_length=255, null=True, blank=True)
 
@@ -243,7 +221,7 @@ class BidDouble(models.Model):
         return query
 
     def __str__(self):
-        return self.user.username + self.user.last_name+self.user.first_name
+        return self.user.username + self.user.last_name + self.user.first_name
 
 
 class BidImport(models.Model):
@@ -294,8 +272,6 @@ class BidImport(models.Model):
     # "Дополнительные данные"
     name_base = models.CharField("Назва Бази", max_length=255, null=True, blank=True)
 
-    mailing_list = models.CharField("Участь в розсилках", null=True, max_length=255, blank=True)
-
     remark = models.CharField("Примітка", max_length=255, null=True, blank=True)
 
     base_id = models.CharField("ID бази", max_length=255, null=True, blank=True)
@@ -320,4 +296,3 @@ class BidImport(models.Model):
 
     def __str__(self):
         return self.id
-

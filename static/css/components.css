@@ -9,6 +9,12 @@
  * Released under the MIT license
  * https://github.com/fians/Waves/blob/master/LICENSE
  */
+
+.project_names{
+
+  font-size: 16px;
+}
+
 .waves-effect {
   position: relative;
   cursor: pointer;

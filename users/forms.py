@@ -136,7 +136,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = ProfileUser
-        fields = ['birthday', 'avatar', 'id_telegramm']
+        fields = ['birthday', 'avatar', 'id_telegram']
         localized_fields = ('birthday',)
         widgets = {
             'birthday': forms.DateInput(format=['%Y-%m-%d']), }
@@ -176,3 +176,18 @@ class RestPassword(forms.Form):
 #     class Meta:
 #         model = PreferenceMon
 #         fields = '__all__'
+
+class UserEdit(forms.ModelForm):
+    class Meta:
+        model = ProfileUser
+        exclude = ("user", "avatar", "id_telegram", "")
+
+    def __init__(self, *args, **kwargs):
+        # status = kwargs.pop(status['code'], None)
+        # status = kwargs['instance'].status
+        super(UserEdit, self).__init__(*args, **kwargs)
+        fields_required = ['first_name', 'last_name']
+        for key in self.fields:
+            if key not in fields_required:
+                self.fields[key].required = False
+                print(key)
