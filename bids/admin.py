@@ -68,9 +68,13 @@ class BidAdmin(admin.ModelAdmin):
             "fields": (
                 # "partner_name",
                 "user_who_edit",
+                "status",
+                "created_dt",
+                "updated_dt"
             )
         })
     ]
+    readonly_fields = ("created_dt", "updated_dt")
 
 
 @admin.register(BidImport)

@@ -286,9 +286,7 @@ class BidImport(models.Model):
                                       auto_now_add=True)
     updated_dt = models.DateTimeField("Дата изменения",
                                       auto_now=True)
-    groupid = models.IntegerField("ID группы",
-                                  blank=True,
-                                  null=True)
+
 
     class Meta:
         verbose_name = "Импорт завки"

@@ -67,61 +67,10 @@ class BidsAdd(forms.ModelForm):
         return curentuser
 
 
-class BidsUserAdd(forms.ModelForm):
-    class Meta:
-        model = ProfileUser
-        exclude = ()
-
-    fieldsets = [
-        ("Клиент", {
-            "fields": [
-                "contact_phone",
-                "last_name",
-                "first_name",
-                "middle_name",
-                "itn",
-                # ("passport_series", "passport_number"),
-                "birthday",
-                # "city",
-                # "credit_sum",
-                "email"
-                # "status"
-            ]
-        }),
-        ("Юр. адрес", {
-            "fields": (
-                "registration_area_ur",
-                "registration_raion_ur",
-                "registration_city_ur",
-                "registration_street_ur",
-                "House_number_ur",
-                "apartment_number_ur"
-            )
-        }),
-        ("Фактический адрес", {
-            "fields": (
-                "registration_area_fiz",
-                "registration_raion_fiz",
-                "registration_city_fiz",
-                "registration_street_fiz",
-                "House_number_fiz",
-                "apartment_number_fiz"
-            )
-        }),
-        ("Паспорт / ID карта", {
-            "fields": (
-                ("passport_series", "passport_number"),
-                "issued_by",
-                "date_of_issue"
-            )
-        })
-    ]
-
-
 class BidsDouble(forms.ModelForm):
     class Meta:
         model = BidDouble
-        exclude = ("partner_name", "lead_id", "webmaster_id", "crm_status", "site_bid_id", "for_skybank", "city")
+        exclude = ("partner_name", "lead_id", "webmaster_id", "crm_status", "site_bid_id", "for_skybank", "city", "created_dt", "updated_dt",)
 
     fieldsets = [
         ("Телефоны", {
@@ -169,13 +118,7 @@ class BidsDouble(forms.ModelForm):
         }),
         ("Информация о заявке", {
             "fields": (
-                # "partner_name",
-                # "lead_id",
-                # "webmaster_id",
-                # "crm_status",
-                "user"
-                # "site_bid_id",
-                # "for_skybank"
+                "user_who_edit"
             )
         })
     ]
@@ -188,36 +131,22 @@ class BidsDouble(forms.ModelForm):
 class BidsEdit(forms.ModelForm):
     class Meta:
         model = Bid
-        exclude = ("vybor", "user_who_edit", "created_dt", "updated_dt", "site_bid_id", "for_skybank", "city", )
-
-    def clean_status(self):
-        curentstatus = BidStatus.objects.get(id=self.cleaned_data['status'].id)
-        return curentstatus
-
-    def clean_groupid(self):
-        groupid = self.cleaned_data['groupid'].id
-        return groupid
+        exclude = ("vybor", "user", "user_who_edit", "created_dt", "updated_dt", "goupid")
 
     def __init__(self, *args, **kwargs):
         # status = kwargs.pop(status['code'], None)
         # status = kwargs['instance'].status
         super(BidsEdit, self).__init__(*args, **kwargs)
-        self.fields['status'] = forms.ModelMultipleChoiceField(queryset=BidStatus.objects.all(), required=False,
-                                                               widget=forms.Select(attrs={'class': "form-control"}, ))
         fields_required = []
         for key in self.fields:
             if key not in fields_required:
                 self.fields[key].required = False
-                print(key)
-        # self.fields['groupid'] = forms.ModelMultipleChoiceField(queryset=Group.objects.all(), required=False,
-        #                                                        widget=forms.Select(attrs={'class': "form-control"}, ))
-
 
 
 class DoubleEdit(forms.ModelForm):
     class Meta:
         model = BidDouble
-        exclude = ("partner_name", "lead_id", "webmaster_id", "crm_status", "site_bid_id", "for_skybank", "city")
+        exclude = ("partner_name", "lead_id", "webmaster_id", "crm_status", "site_bid_id", "for_skybank", "city", "created_dt", "updated_dt")
 
     # def clean_user(self):
     #     curentuser = self.user

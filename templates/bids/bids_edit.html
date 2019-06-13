@@ -4,20 +4,11 @@
 {% block content %}
     <!--форма редактирования заявки -->
     <div class="container-fluid">
-        {#    <div class="row">#}
-        {#        <div class="col-md-12">#}
-        {#            <div class="widget-wrap">#}
-        {#                <div class="row">#}
-        {#                    <div class="page-header filled full-block light">#}
         <div class="widget-header ">
-            {#        <div class="widget-header block-header clearfix">#}
             <div class="row">
                 <div class="col-md-6">
                     <h3 style="color: #00008B ">Редактирование заявки</h3>
-                    {#                    <p4 style="font-style:italic;text-decoration:underline">{{ timeobr }}</p4>#}
                 </div>
-                {#                <div class="col-md-6">#}
-                {#                </div>#}
             </div>
         </div>
         <div class="row">
@@ -25,7 +16,7 @@
                 <div class="widget-wrap">
                     <div class="widget-container margin-top-0">
                         <div class="widget-content">
-                            <form action="" method="post" class="j-forms " id="j-forms"
+                            <form action={{ request.get_full_path }} method="post" class="j-forms " id="j-forms"
                                   novalidate="novalidate" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="form-content">
@@ -190,7 +181,22 @@
                                                 <div class="row">
                                                     <div class="col-md-3 unit">
                                                         <label class="label">Статус</label>
-                                                        {{ bids_form.status }}
+                                                        <select class="filter-item__dropdown" name="status-list">
+                                                            {% for st_elem in f_status  %}
+                                                                    <option value="{{ st_elem.name }}" style="font-weight: bolder"
+                                                                            {% if st_elem.id == select_status.id %} selected {% endif %}>{{ st_elem.name }}</option>
+                                                                    {% for st_son_elem in s_status %}
+                                                                        {% if  st_son_elem.parent_level_status == st_elem%}
+                                                                            <option value="{{ st_son_elem.name }}"
+                                                                                    {% if st_elem.id == select_status.id  %}
+                                                                                        selected
+                                                                                    {% endif %}>
+                                                                                &nbsp;&nbsp;&nbsp; {{ st_son_elem.name }}
+                                                                            </option>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                            {% endfor %}
+                                                        </select>
                                                     </div>
                                                     <div class="col-md-5 unit">
                                                         {% if groups.count == 1 %}
@@ -563,9 +569,9 @@
                                                                        name="number_phone_work"
                                                                        placeholder="Код телефона рабочий"
                                                                        class="form-control " maxlength="10"
-                                                                       value='{{ bids_form.number_phone_work.value }}'
+                                                                       value='{{ bids_form.cod_number_phone_work.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.number_phone_work }}'
+                                                                       value='{{ bids_form.cod_number_phone_work }}'
                                                                         {% endif %}
 
                                                                 >

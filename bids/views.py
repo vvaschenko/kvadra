@@ -20,7 +20,7 @@ from bids.forms import BidsAdd, DoubleEdit, BidsEdit
 from bids.utils import list_name_tuple, get_key, get_value_excel
 from users.forms import UserEdit
 from users.models import ProfileUser
-from .models import Bid, BidImport, BidDouble
+from .models import Bid, BidImport, BidDouble, BidStatus
 
 log = logging.getLogger(__name__)
 tzutc = tzutc()
@@ -176,39 +176,42 @@ def doubleedit(request):
 
         return render(request, 'bids/doubleedit.html', {'bids_form': bids_form, 'groups': groups})
 
-
-# don't save
+# done
 @login_required
-@csrf_exempt
 def bidsedit(request):
+
     edit_id = request.GET.get('edit_id', None)
     if edit_id is None:
         return HttpResponseRedirect('/bids/bids/')
     else:
+        bid_obj = Bid.objects.get(id=edit_id)
+        user = bid_obj.user.id
+        user_obj = ProfileUser.objects.get(user=user)
+        groups = user_obj.user.groups.values_list('name', flat=True)
+        status_first_level = BidStatus.objects.filter(level='1')
+        status_second_level = BidStatus.objects.filter(level='2')
+        select_status = bid_obj.status
+        print(select_status)
         if request.method == 'POST':
-            bid_obj = Bid.objects.get(id=edit_id)
-            user = bid_obj.user.id
-            user_obj = ProfileUser.objects.get(user=user)
-            groups = user_obj.user.groups.values_list('name', flat=True)
             bids_form = BidsEdit(request.POST, instance=bid_obj)
             bids_user_form = UserEdit(request.POST, instance=ProfileUser.objects.get(user=user))
-            print(bids_form.is_valid())
-            print(bids_user_form.is_valid())
+            print(bids_form.errors)
+            print(bids_user_form.errors)
             if bids_form.is_valid() and bids_user_form.is_valid():
                 bids_form.save()
+                bid_obj.status = request.POST.get('status-list')
+                bid_obj.save()
                 bids_user_form.save()
                 return HttpResponseRedirect('/bids/bids/')
             else:
                 messages.error(request, 'Please correct the error below.')
         else:
-            bid_obj = Bid.objects.get(id=edit_id)
-            user = bid_obj.user.id
-            user_obj = ProfileUser.objects.get(user=user)
-            groups = user_obj.user.groups.values_list('name', flat=True)
             bids_form = BidsEdit(instance=bid_obj)
             bids_user_form = UserEdit(instance=ProfileUser.objects.get(user=user))
         return render(request, 'bids/bids_edit.html', {'bids_form': bids_form, 'bids_user_form': bids_user_form,
-                                                       'groups': groups})
+                                                       'groups': groups, "f_status": status_first_level,
+                                                       "s_status": status_second_level,
+                                                       "select_status": select_status})
 
 
 @login_required

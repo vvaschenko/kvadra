@@ -190,4 +190,3 @@ class UserEdit(forms.ModelForm):
         for key in self.fields:
             if key not in fields_required:
                 self.fields[key].required = False
-                print(key)
