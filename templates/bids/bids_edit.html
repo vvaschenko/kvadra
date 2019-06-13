@@ -183,12 +183,16 @@
                                                         <label class="label">Статус</label>
                                                         <select class="filter-item__dropdown" name="status-list">
                                                             {% for st_elem in f_status  %}
-                                                                    <option value="{{ st_elem.name }}" style="font-weight: bolder"
-                                                                            {% if st_elem.id == select_status.id %} selected {% endif %}>{{ st_elem.name }}</option>
+                                                                    <option value="{{ st_elem.id }}"
+                                                                            style="font-weight: bolder"
+                                                                            {% if st_elem == select_status %}
+                                                                                selected
+                                                                            {% endif %}> {{ st_elem.name }}
+                                                                    </option>
                                                                     {% for st_son_elem in s_status %}
-                                                                        {% if  st_son_elem.parent_level_status == st_elem%}
-                                                                            <option value="{{ st_son_elem.name }}"
-                                                                                    {% if st_elem.id == select_status.id  %}
+                                                                        {% if  st_son_elem.parent_level_status == st_elem %}
+                                                                            <option value="{{ st_son_elem.id }}"
+                                                                                    {% if st_son_elem == select_status  %}
                                                                                         selected
                                                                                     {% endif %}>
                                                                                 &nbsp;&nbsp;&nbsp; {{ st_son_elem.name }}

@@ -11,8 +11,15 @@
  */
 
 .project_names{
-
+  vertical-align: center;
+  width: 100%;
   font-size: 16px;
+  margin-top: 15px;
+}
+
+.filter-item__dropdown{
+  height: 39px;
+  width: 100%;
 }
 
 .waves-effect {

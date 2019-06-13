@@ -181,8 +181,12 @@
                 <a href="#"><i class="zmdi zmdi-view-dashboard"></i><span class="list-label">Заявки</span></a>
                 <ul>
                     <li class="menunumber"><a href={% url 'bids' %}>Заявки просмотр</a></li>
-                    <li class="menunumber"><a href={% url 'bidsdouble' %}>Заявки дубль</a></li>
-                    <li class="menunumber"><a href={% url 'bidsimport' %}>Импорт заявок</a></li>
+                    {% if perms.bids.view_biddouble %}
+                        <li class="menunumber"><a href={% url 'bidsdouble' %}>Заявки дубль</a></li>
+                    {% endif %}
+                    {% if perms.bids.view_bidimport %}
+                        <li class="menunumber"><a href={% url 'bidsimport' %}>Импорт заявок</a></li>
+                    {% endif %}
 {#                    <li class="menunumber"><a href={% url 'mon_partitions' %}>Partitions viewer</a></li>#}
 {#                    <li class="menunumber"><a href={% url 'last' %}>Replication Delays</a></li>#}
                 </ul>

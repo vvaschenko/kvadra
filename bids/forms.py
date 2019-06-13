@@ -131,7 +131,7 @@ class BidsDouble(forms.ModelForm):
 class BidsEdit(forms.ModelForm):
     class Meta:
         model = Bid
-        exclude = ("vybor", "user", "user_who_edit", "created_dt", "updated_dt", "goupid")
+        exclude = ("vybor", "user", "user_who_edit", "created_dt", "updated_dt", "goupid", "status")
 
     def __init__(self, *args, **kwargs):
         # status = kwargs.pop(status['code'], None)
@@ -161,11 +161,4 @@ class DoubleEdit(forms.ModelForm):
         return groupid
 
     def __init__(self, *args, **kwargs):
-        # status = kwargs.pop(status['code'], None)
-        # status = kwargs['instance'].status
         super(DoubleEdit, self).__init__(*args, **kwargs)
-        self.fields['status'] = forms.ModelChoiceField(queryset=BidStatus.objects.all(), empty_label="Выберите статус",
-                                                       required=False,
-                                                       widget=forms.Select(attrs={'class': "form-control"}, ))
-        self.fields['groupid'] = forms.ModelMultipleChoiceField(queryset=Group.objects.all(), required=False,
-                                                                widget=forms.Select(attrs={'class': "form-control"}, ))

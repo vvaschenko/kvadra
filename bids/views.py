@@ -6,12 +6,12 @@ import json
 import logging
 
 import datetime
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth.models import Group, User
 from django.utils.datastructures import MultiValueDictKeyError
 
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from dateutil.tz import tzutc, tzlocal
 from django.http import JsonResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
@@ -49,14 +49,8 @@ def bids(request):
             if filterbids == '1':
                 starttime = datetime.datetime.strptime(stime, "%d.%m.%Y")
                 endtime = datetime.datetime.strptime(etime, "%d.%m.%Y")
-                if request.user.is_superuser:
-                    qs_bids = Bid.objects.select_related().filter(created_dt__range=[starttime, endtime]).all()
-                else:
-                    qs_bids = Bid.objects.filter(created_dt__range=[starttime, endtime],
-                                                 groupid=str(request.user.groups.values_list('id',
-                                                                                             flat=True).first())).select_related().all()
-                # m = Membership.objects.filter(person__name='x').values('person', 'person__phonenumber')
-                results['p_bids'] = qs_bids
+
+                qs_bids = Bid.objects.select_related().filter(created_dt__range=[starttime, endtime]).all()
                 results['success'] = True
                 return JsonResponse(results)
         if regim == 'bids_check':
@@ -70,7 +64,7 @@ def bids(request):
             return JsonResponse(results)
         if regim == 'migration_bids':
             try:
-                Bid.objects.filter(vybor=1).update(groupid=proekt, vybor=0)
+                Bid.objects.filter(vybor=1).update(vybor=0)
                 results['success'] = True
             except Exception as err:
                 log.error(u'Ошибка миграции проекта')
@@ -86,13 +80,7 @@ def bids(request):
             except Bid.DoesNotExist:
                 log.error(u'Запись не найдена')
             return JsonResponse(results)
-    if request.user.is_superuser:
-        qs_bids = Bid.objects.select_related().all()
-    else:
-        qs_bids = Bid.objects.filter(
-            groupid=str(request.user.groups.values_list('id', flat=True).first())).select_related().all()
-    # m = Membership.objects.filter(person__name='x').values('person', 'person__phonenumber')
-    context['p_bids'] = qs_bids
+    qs_bids = Bid.objects.select_related().all()
     context['timeobr'] = datetime.datetime.strftime(
         datetime.datetime.astimezone(max_datetime['datatime__max'], tzlocal),
         "%Y-%m-%d %H:%M:%S")
@@ -176,10 +164,10 @@ def doubleedit(request):
 
         return render(request, 'bids/doubleedit.html', {'bids_form': bids_form, 'groups': groups})
 
+
 # done
 @login_required
 def bidsedit(request):
-
     edit_id = request.GET.get('edit_id', None)
     if edit_id is None:
         return HttpResponseRedirect('/bids/bids/')
@@ -191,17 +179,18 @@ def bidsedit(request):
         status_first_level = BidStatus.objects.filter(level='1')
         status_second_level = BidStatus.objects.filter(level='2')
         select_status = bid_obj.status
-        print(select_status)
         if request.method == 'POST':
             bids_form = BidsEdit(request.POST, instance=bid_obj)
             bids_user_form = UserEdit(request.POST, instance=ProfileUser.objects.get(user=user))
-            print(bids_form.errors)
-            print(bids_user_form.errors)
+            # print(bids_form.errors)
+            # print(bids_user_form.errors)
+
             if bids_form.is_valid() and bids_user_form.is_valid():
+                print(bids_form)
                 bids_form.save()
-                bid_obj.status = request.POST.get('status-list')
-                bid_obj.save()
                 bids_user_form.save()
+                # status = request.POST.get('status-list')
+                # Bid.objects.get(id=edit_id).update(status=BidStatus.objects.get(id=status))
                 return HttpResponseRedirect('/bids/bids/')
             else:
                 messages.error(request, 'Please correct the error below.')
@@ -214,7 +203,13 @@ def bidsedit(request):
                                                        "select_status": select_status})
 
 
+def user_can_see_double(user):
+    group_perm = User.get_group_permissions(user)
+    return user.has_perm("bids.view_biddouble") or "bids.view_biddouble" in group_perm
+
+
 @login_required
+@user_passes_test(user_can_see_double)
 def bidsdouble(request):
     results = dict()
     results['success'] = False
@@ -232,18 +227,20 @@ def bidsdouble(request):
                 log.error(u'Запись не найдена')
         return JsonResponse(results)
 
-    if request.user.is_superuser:
-        qs_bids = BidDouble.objects.select_related().all()
-    else:
-        qs_bids = BidDouble.objects.filter(
-            groupid=str(request.user.groups.values_list('id', flat=True).first())).select_related().all()
+    qs_bids = BidDouble.objects.select_related().all()
     context = {'p_bids': qs_bids, 'timeobr': datetime.datetime.strftime(
         datetime.datetime.astimezone(max_datetime['datatime__max'], tzlocal),
         "%Y-%m-%d %H:%M:%S")}
     return render(request, 'bids/bids_double.html', context)
 
 
+def user_can_see_import(user):
+    group_perm = User.get_group_permissions(user)
+    return user.has_perm("bids.view_bidimport") or "bids.view_bidimport" in group_perm
+
+
 @login_required
+@user_passes_test(user_can_see_import)
 def bidsimport(request):
     context = {}
     results = dict()

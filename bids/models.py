@@ -105,6 +105,7 @@ class Bid(models.Model):
         verbose_name = "Заявки"
         verbose_name_plural = "Заявки"
 
+
     @staticmethod
     def get_queryset(request):
         # str(request.user.groups.values_list('id', flat=True).first())
@@ -213,6 +214,7 @@ class BidDouble(models.Model):
         verbose_name = "Заявка (Дубль)"
         verbose_name_plural = "Заявки (Дубли)"
 
+
     @staticmethod
     def get_queryset(request):
         query = BidDouble.objects.filter(groupid=str(request.user.groups.values_list('id', flat=True).first()))
@@ -291,6 +293,7 @@ class BidImport(models.Model):
     class Meta:
         verbose_name = "Импорт завки"
         verbose_name_plural = "Импорт заявок"
+
 
     def __str__(self):
         return self.id
