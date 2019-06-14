@@ -10,6 +10,14 @@
  * https://github.com/fians/Waves/blob/master/LICENSE
  */
 
+.history-text{
+  height: 26px;
+  text-align: right;
+  margin-top: 30px;
+
+  color: #00008B;
+}
+
 .project_names{
   vertical-align: center;
   width: 100%;

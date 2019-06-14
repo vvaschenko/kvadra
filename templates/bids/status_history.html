@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div>
+        {% for item in history_list %}
+            <div>
+            <span>{{ item.created_date }}</span>
+                <span>{{ item.new_status.name }}</span>
+            </div>
+        {% endfor %}
+
+        <button type="button" id="back_to_bit"
+                class="btn btn-danger secondary-btn" onclick="window.location.href='/bids/bidsedit/?edit_id={{ edit_id }}'">Отмена
+        </button>
+    </div>
+{% endblock %}

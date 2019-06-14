@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from bids import views
+from bids.views import StatusHistoryView
 
 urlpatterns = [
     url(r'^bidsimport/$', views.bidsimport, name='bidsimport'),
@@ -11,4 +12,6 @@ urlpatterns = [
     url(r'^doubleedit/(?P<edit_id>\d+)/$', views.doubleedit, name='doubleedit'),
     url(r'^bidsadd/$', views.bidsadd, name='bidsadd'),
     url(r'^bidsdouble/$', views.bidsdouble, name='bidsdouble'),
+    url(r'^status_history/(?P<edit_id>\d+)/$', StatusHistoryView.as_view(), name='status_history'),
+    url(r'^status_history/$', StatusHistoryView.as_view(), name='status_history'),
 ]

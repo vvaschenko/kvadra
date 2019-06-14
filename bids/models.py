@@ -2,6 +2,8 @@
 
 from django.db import models
 from django.contrib.auth.models import User, Group
+from django.db.models.signals import post_save, pre_save
+from django.dispatch import receiver
 
 
 class BidStatus(models.Model):
@@ -25,7 +27,10 @@ class BidStatus(models.Model):
         verbose_name_plural = "Статусы заявок"
 
     def __str__(self):
-        return self.name
+        if self.parent_level_status is None or self.parent_level_status == "":
+            return self.name
+        else:
+            return self.parent_level_status.name + "." + self.name
 
 
 class Bid(models.Model):
@@ -104,7 +109,6 @@ class Bid(models.Model):
     class Meta:
         verbose_name = "Заявки"
         verbose_name_plural = "Заявки"
-
 
     @staticmethod
     def get_queryset(request):
@@ -214,7 +218,6 @@ class BidDouble(models.Model):
         verbose_name = "Заявка (Дубль)"
         verbose_name_plural = "Заявки (Дубли)"
 
-
     @staticmethod
     def get_queryset(request):
         query = BidDouble.objects.filter(groupid=str(request.user.groups.values_list('id', flat=True).first()))
@@ -289,11 +292,33 @@ class BidImport(models.Model):
     updated_dt = models.DateTimeField("Дата изменения",
                                       auto_now=True)
 
-
     class Meta:
         verbose_name = "Импорт завки"
         verbose_name_plural = "Импорт заявок"
 
-
     def __str__(self):
         return self.id
+
+
+class StatusHistory(models.Model):
+    new_status = models.ForeignKey(BidStatus, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Имя статуса")
+    big = models.ForeignKey(Bid, on_delete=models.CASCADE, verbose_name="Заявка")
+    created_date = models.DateTimeField("Дата создания", auto_now_add=True)
+
+    def __str__(self):
+        return self.new_status.name + str(self.created_date)
+
+    class Meta:
+        verbose_name = "История статусов"
+        verbose_name_plural = "История статусов"
+
+
+@receiver([pre_save, post_save], sender=Bid)
+def create_history(sender, instance,  **kwargs):
+    try:
+        history = StatusHistory.objects.create(big=instance, new_status=instance.status)
+        history.save()
+    except:
+        print("create_new")
+
+

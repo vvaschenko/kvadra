@@ -9,6 +9,9 @@
                 <div class="col-md-6">
                     <h3 style="color: #00008B ">Редактирование заявки</h3>
                 </div>
+                <div class="col-md-6 hidden-sm" >
+                    <a href="/bids/status_history/?edit_id={{ request.GET.edit_id }}" class="history-text">История</a>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -181,26 +184,7 @@
                                                 <div class="row">
                                                     <div class="col-md-3 unit">
                                                         <label class="label">Статус</label>
-                                                        <select class="filter-item__dropdown" name="status-list">
-                                                            {% for st_elem in f_status  %}
-                                                                    <option value="{{ st_elem.id }}"
-                                                                            style="font-weight: bolder"
-                                                                            {% if st_elem == select_status %}
-                                                                                selected
-                                                                            {% endif %}> {{ st_elem.name }}
-                                                                    </option>
-                                                                    {% for st_son_elem in s_status %}
-                                                                        {% if  st_son_elem.parent_level_status == st_elem %}
-                                                                            <option value="{{ st_son_elem.id }}"
-                                                                                    {% if st_son_elem == select_status  %}
-                                                                                        selected
-                                                                                    {% endif %}>
-                                                                                &nbsp;&nbsp;&nbsp; {{ st_son_elem.name }}
-                                                                            </option>
-                                                                        {% endif %}
-                                                                    {% endfor %}
-                                                            {% endfor %}
-                                                        </select>
+                                                       {{ bids_form.status }}
                                                     </div>
                                                     <div class="col-md-5 unit">
                                                         {% if groups.count == 1 %}
@@ -1200,9 +1184,9 @@
                                     >Записать
                                     </button>
                                     <button type="button"
-                                            id="edit_otmena"
+                                            id="back_to_edit"
                                             class="btn btn-danger secondary-btn"
-                                            onclick="window.location.href='/bids/bids/'">Отмена
+                                            onclick="window.location.href='/bids/bidsedit/'">Отмена
                                     </button>
                                 </div>
 

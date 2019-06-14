@@ -1,4 +1,5 @@
 # coding=utf-8
+import re
 from time import sleep
 
 import xlrd
@@ -15,12 +16,13 @@ from django.shortcuts import render, get_object_or_404
 from dateutil.tz import tzutc, tzlocal
 from django.http import JsonResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import ListView
 
 from bids.forms import BidsAdd, DoubleEdit, BidsEdit
 from bids.utils import list_name_tuple, get_key, get_value_excel
 from users.forms import UserEdit
 from users.models import ProfileUser
-from .models import Bid, BidImport, BidDouble, BidStatus
+from .models import Bid, BidImport, BidDouble, BidStatus, StatusHistory
 
 log = logging.getLogger(__name__)
 tzutc = tzutc()
@@ -81,6 +83,7 @@ def bids(request):
                 log.error(u'Запись не найдена')
             return JsonResponse(results)
     qs_bids = Bid.objects.select_related().all()
+    context = {'p_bids': qs_bids}
     context['timeobr'] = datetime.datetime.strftime(
         datetime.datetime.astimezone(max_datetime['datatime__max'], tzlocal),
         "%Y-%m-%d %H:%M:%S")
@@ -176,21 +179,13 @@ def bidsedit(request):
         user = bid_obj.user.id
         user_obj = ProfileUser.objects.get(user=user)
         groups = user_obj.user.groups.values_list('name', flat=True)
-        status_first_level = BidStatus.objects.filter(level='1')
-        status_second_level = BidStatus.objects.filter(level='2')
         select_status = bid_obj.status
         if request.method == 'POST':
             bids_form = BidsEdit(request.POST, instance=bid_obj)
             bids_user_form = UserEdit(request.POST, instance=ProfileUser.objects.get(user=user))
-            # print(bids_form.errors)
-            # print(bids_user_form.errors)
-
             if bids_form.is_valid() and bids_user_form.is_valid():
-                print(bids_form)
                 bids_form.save()
                 bids_user_form.save()
-                # status = request.POST.get('status-list')
-                # Bid.objects.get(id=edit_id).update(status=BidStatus.objects.get(id=status))
                 return HttpResponseRedirect('/bids/bids/')
             else:
                 messages.error(request, 'Please correct the error below.')
@@ -198,9 +193,24 @@ def bidsedit(request):
             bids_form = BidsEdit(instance=bid_obj)
             bids_user_form = UserEdit(instance=ProfileUser.objects.get(user=user))
         return render(request, 'bids/bids_edit.html', {'bids_form': bids_form, 'bids_user_form': bids_user_form,
-                                                       'groups': groups, "f_status": status_first_level,
-                                                       "s_status": status_second_level,
+                                                       'groups': groups,
                                                        "select_status": select_status})
+
+
+class StatusHistoryView(ListView):
+    template_name = 'bids/status_history.html'
+    model = StatusHistory
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        edit_id = self.request.GET.get('edit_id', None)
+        context["edit_id"] = edit_id
+        print(StatusHistory.objects.filter(big=Bid.objects.get(pk=edit_id)))
+        context["history_list"] = StatusHistory.objects.filter(big=Bid.objects.get(pk=edit_id)).order_by("created_date")
+        return context
+
+    def get_queryset(self, **kwargs):
+        return StatusHistory.objects.all()
 
 
 def user_can_see_double(user):

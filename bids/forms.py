@@ -131,12 +131,13 @@ class BidsDouble(forms.ModelForm):
 class BidsEdit(forms.ModelForm):
     class Meta:
         model = Bid
-        exclude = ("vybor", "user", "user_who_edit", "created_dt", "updated_dt", "goupid", "status")
+        exclude = ("vybor", "user", "user_who_edit", "created_dt", "updated_dt", "goupid")
 
     def __init__(self, *args, **kwargs):
         # status = kwargs.pop(status['code'], None)
         # status = kwargs['instance'].status
         super(BidsEdit, self).__init__(*args, **kwargs)
+        self.fields["status"].queryset = BidStatus.objects.all()
         fields_required = []
         for key in self.fields:
             if key not in fields_required:
