@@ -70,7 +70,9 @@ class BidsAdd(forms.ModelForm):
 class BidsDouble(forms.ModelForm):
     class Meta:
         model = BidDouble
-        exclude = ("partner_name", "lead_id", "webmaster_id", "crm_status", "site_bid_id", "for_skybank", "city", "created_dt", "updated_dt",)
+        exclude = (
+        "partner_name", "lead_id", "webmaster_id", "crm_status", "site_bid_id", "for_skybank", "city", "created_dt",
+        "updated_dt",)
 
     fieldsets = [
         ("Телефоны", {
@@ -148,12 +150,12 @@ class BidsEdit(forms.ModelForm):
                 self.fields[key].required = False
 
 
-
-
 class DoubleEdit(forms.ModelForm):
     class Meta:
         model = BidDouble
-        exclude = ("partner_name", "lead_id", "webmaster_id", "crm_status", "site_bid_id", "for_skybank", "city", "created_dt", "updated_dt")
+        exclude = (
+        "partner_name", "lead_id", "webmaster_id", "crm_status", "site_bid_id", "for_skybank", "city", "created_dt",
+        "updated_dt")
 
     # def clean_user(self):
     #     curentuser = self.user

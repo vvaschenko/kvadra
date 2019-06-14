@@ -9,10 +9,13 @@
                 <div class="col-md-6">
                     <h3 style="color: #00008B ">Редактирование заявки</h3>
                 </div>
-                <div class="col-md-6 hidden-sm" >
-                    <a href="/bids/status_history/?edit_id={{ request.GET.edit_id }}" class="history-text">История</a>
-                </div>
+
             </div>
+            <div class="col-md-12 hidden-sm" >
+                        <div class="history-text">
+                            <a href="/bids/status_history/?edit_id={{ request.GET.edit_id }}" >История статусов</a>
+                        </div>
+                </div>
         </div>
         <div class="row">
             <div class="col-md-12">

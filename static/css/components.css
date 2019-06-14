@@ -13,8 +13,6 @@
 .history-text{
   height: 26px;
   text-align: right;
-  margin-top: 30px;
-
   color: #00008B;
 }
 
@@ -30,6 +28,10 @@
   width: 100%;
 }
 
+#id_status{
+  height: 40px;
+  width: 100%;
+}
 .waves-effect {
   position: relative;
   cursor: pointer;

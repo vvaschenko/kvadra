@@ -205,7 +205,7 @@ class StatusHistoryView(ListView):
         context = super().get_context_data(**kwargs)
         edit_id = self.request.GET.get('edit_id', None)
         context["edit_id"] = edit_id
-        context["history_list"] = StatusHistory.objects.filter(big=Bid.objects.get(pk=edit_id)).order_by("created_date")
+        context["history_list"] = StatusHistory.objects.filter(big=Bid.objects.get(pk=edit_id)).order_by("-created_date")
         return context
 
     def get_queryset(self, **kwargs):
