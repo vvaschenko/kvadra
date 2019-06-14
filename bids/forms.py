@@ -136,12 +136,18 @@ class BidsEdit(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         # status = kwargs.pop(status['code'], None)
         # status = kwargs['instance'].status
+        self.site_id = kwargs.pop('site_id')
         super(BidsEdit, self).__init__(*args, **kwargs)
-        self.fields["status"].queryset = BidStatus.objects.all()
+        bid = Bid.objects.get(id=self.site_id)
+        groups = bid.user.groups.all()
+        print(groups)
+        self.fields["status"].queryset = BidStatus.objects.filter(group__in=groups).distinct()
         fields_required = []
         for key in self.fields:
             if key not in fields_required:
                 self.fields[key].required = False
+
+
 
 
 class DoubleEdit(forms.ModelForm):

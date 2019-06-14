@@ -190,7 +190,7 @@ def bidsedit(request):
             else:
                 messages.error(request, 'Please correct the error below.')
         else:
-            bids_form = BidsEdit(instance=bid_obj)
+            bids_form = BidsEdit(instance=bid_obj, site_id=edit_id)
             bids_user_form = UserEdit(instance=ProfileUser.objects.get(user=user))
         return render(request, 'bids/bids_edit.html', {'bids_form': bids_form, 'bids_user_form': bids_user_form,
                                                        'groups': groups,
@@ -205,7 +205,6 @@ class StatusHistoryView(ListView):
         context = super().get_context_data(**kwargs)
         edit_id = self.request.GET.get('edit_id', None)
         context["edit_id"] = edit_id
-        print(StatusHistory.objects.filter(big=Bid.objects.get(pk=edit_id)))
         context["history_list"] = StatusHistory.objects.filter(big=Bid.objects.get(pk=edit_id)).order_by("created_date")
         return context
 

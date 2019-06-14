@@ -313,11 +313,19 @@ class StatusHistory(models.Model):
         verbose_name_plural = "История статусов"
 
 
-@receiver([pre_save, post_save], sender=Bid)
+@receiver(post_save, sender=Bid)
 def create_history(sender, instance,  **kwargs):
+    history = StatusHistory.objects.create(big=instance, new_status=instance.status)
+    history.save()
+
+
+@receiver(pre_save, sender=Bid)
+def create_history(sender, instance,  **kwargs):
+    st = StatusHistory.objects.filter(big=instance).order_by("-created_date")
     try:
-        history = StatusHistory.objects.create(big=instance, new_status=instance.status)
-        history.save()
+        if len(st)==0 or st[0].new_status.name != instance.status.name:
+            history = StatusHistory.objects.create(big=instance, new_status=instance.status)
+            history.save()
     except:
         print("create_new")
 
