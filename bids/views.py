@@ -24,9 +24,20 @@ log = logging.getLogger(__name__)
 tzutc = tzutc()
 
 
+def user_can_see_double(user):
+    group_perm = User.get_group_permissions(user)
+    return user.has_perm("bids.view_biddouble") or "bids.view_biddouble" in group_perm
+
+
 class BidView(ListView):
     template_name = 'bids/bids.html'
     model = Bid
+
+    def get(self, *args, **kwargs):
+        link = self.request.get_full_path()
+        if link.endswith("/bidsdouble/") and not user_can_see_double(self.request.user):
+            return HttpResponseRedirect('../../login/')
+        return super(BidView, self).get(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -125,7 +136,6 @@ def bidsedit(request):
                                                        "select_status": select_status})
 
 
-
 @login_required
 def bidsadd(request):
     if request.method == 'POST':
@@ -186,10 +196,6 @@ class StatusHistoryView(ListView):
     def get_queryset(self, **kwargs):
         return StatusHistory.objects.all()
 
-
-def user_can_see_double(user):
-    group_perm = User.get_group_permissions(user)
-    return user.has_perm("bids.view_biddouble") or "bids.view_biddouble" in group_perm
 
 
 @login_required

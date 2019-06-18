@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f516f07f-18a2-42cf-88b1-c2cc728aa469" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/bids/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bids/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bids/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bids/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,11 +53,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bids/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/users/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="25" selection-start-column="25" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bids/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="111" column="80" selection-start-line="111" selection-start-column="80" selection-end-line="111" selection-end-column="80" />
+            <state relative-caret-position="290">
+              <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
               <folding>
                 <element signature="e#15#26#0" expanded="true" />
               </folding>
@@ -68,13 +87,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bids/forms.py">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/django/core/handlers/wsgi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="20" column="40" lean-forward="true" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
-              <folding>
-                <element signature="e#15#39#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="980">
+              <caret line="111" selection-start-line="111" selection-end-line="111" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/django/forms/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="460">
+              <caret line="285" selection-start-line="285" selection-end-line="285" />
             </state>
           </provider>
         </entry>
@@ -280,12 +305,12 @@
       <workItem from="1560521347432" duration="10409000" />
       <workItem from="1560681895173" duration="9389000" />
       <workItem from="1560837721293" duration="427000" />
-      <workItem from="1560840397225" duration="10953000" />
+      <workItem from="1560840397225" duration="12932000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114997000" />
+    <option name="totallyTimeSpent" value="116976000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -306,7 +331,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8594928" weight="0.30887574" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.8594928" visible="true" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.8594928" visible="true" weight="0.18934911" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -393,15 +418,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="переделка tabs при добавлении - редактировании заявки" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bids/views.py</url>
-          <line>111</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Python.DjangoServer">
         <watch expression="BidStatus.objects.values_list('code', flat=True)" language="Python" />
@@ -432,16 +448,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/js/bidsimport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2155">
-          <caret line="55" column="48" selection-start-line="55" selection-start-column="48" selection-end-line="55" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/admmen.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/ajax-loader.gif">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -674,16 +680,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bids/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="31" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/django/utils/tree.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -763,25 +759,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bids/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="20" column="40" lean-forward="true" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+        <state relative-caret-position="174">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
           <folding>
             <element signature="e#15#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bids/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="25" selection-start-column="25" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/django/forms/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="285" selection-start-line="285" selection-end-line="285" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/django/core/handlers/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
+        <state relative-caret-position="980">
           <caret line="111" selection-start-line="111" selection-end-line="111" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bids/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="111" column="80" selection-start-line="111" selection-start-column="80" selection-end-line="111" selection-end-column="80" />
+        <state relative-caret-position="290">
+          <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
           <folding>
             <element signature="e#15#26#0" expanded="true" />
           </folding>
