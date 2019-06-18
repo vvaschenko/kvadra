@@ -1,101 +1,127 @@
 # coding=utf-8
-import re
-from time import sleep
-
 import xlrd
 import json
 import logging
 
 import datetime
-from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import Group, User
 from django.utils.datastructures import MultiValueDictKeyError
 
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404
-from dateutil.tz import tzutc, tzlocal
+from django.shortcuts import render
+from dateutil.tz import tzutc
 from django.http import JsonResponse, HttpResponseRedirect
-from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView
 
-from bids.forms import BidsAdd, DoubleEdit, BidsEdit
+from bids.forms import BidsAdd, BidsEdit
 from bids.utils import list_name_tuple, get_key, get_value_excel
 from users.forms import UserEdit
 from users.models import ProfileUser
-from .models import Bid, BidImport, BidDouble, BidStatus, StatusHistory
+from .models import Bid, BidImport, StatusHistory
 
 log = logging.getLogger(__name__)
 tzutc = tzutc()
-tzlocal = tzlocal()
 
 
-@login_required
-def bids(request):
-    context = {}
-    results = dict()
-    results['success'] = False
-    max_datetime = {'datatime__max': datetime.datetime.now(tzlocal)}
-    posts = Group.objects.all()
-    context["grouplist"] = posts
-    if request.method == 'POST':
-        del_id = request.POST.get('id', None)
-        del_delite = request.POST.get('delite', None)
-        zp_id = request.POST.get('zp_id', None)
-        regim = request.POST.get('regim', None)
-        workbids = request.POST.get('workbids', None)
-        stime = request.POST.get('starttime', None)
-        etime = request.POST.get('endtime', None)
-        filterbids = request.POST.get('filterbids', None)
-        proekt = request.POST.get('proekt', None)
-        if filterbids is not None:
-            if filterbids == '1':
-                starttime = datetime.datetime.strptime(stime, "%d.%m.%Y")
-                endtime = datetime.datetime.strptime(etime, "%d.%m.%Y")
+class BidView(ListView):
+    template_name = 'bids/bids.html'
+    model = Bid
 
-                qs_bids = Bid.objects.select_related().filter(created_dt__range=[starttime, endtime]).all()
-                results['success'] = True
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        link = self.request.get_full_path()
+        if link.endswith("/bids/"):
+            context["p_bids"] = Bid.objects.select_related().filter(is_double=False)
+        elif link.endswith("/bidsdouble/"):
+            context["p_bids"] = Bid.objects.select_related().filter(is_double=True)
+        else:
+            context["p_bids"] = Bid.objects.select_related().all()
+        context["group_list"] = Group.objects.all()
+        return context
+
+    def get_queryset(self, **kwargs):
+        results = dict()
+        results['success'] = False
+        if self.request.method == 'POST':
+            del_id = self.request.POST.get('id', None)
+            del_delite = self.request.POST.get('delite', None)
+            zp_id = self.request.POST.get('zp_id', None)
+            regim = self.request.POST.get('regim', None)
+            workbids = self.request.POST.get('workbids', None)
+            stime = self.request.POST.get('starttime', None)
+            etime = self.request.POST.get('endtime', None)
+            filterbids = self.request.POST.get('filterbids', None)
+
+            if filterbids is not None:
+                if filterbids == '1':
+                    starttime = datetime.datetime.strptime(stime, "%d.%m.%Y")
+                    endtime = datetime.datetime.strptime(etime, "%d.%m.%Y")
+                    results['success'] = True
+                    return Bid.objects.select_related().filter(created_dt__range=[starttime, endtime]).all()
+            if regim == 'bids_check':
+                bids_zp = Bid.objects.get(id=zp_id)
+                bids_zp.vybor = workbids
+                try:
+                    bids_zp.save()
+                    results['success'] = True
+                except:
+                    log.error(u'Ошибка записи в базу')
                 return JsonResponse(results)
-        if regim == 'bids_check':
-            bids_zp = Bid.objects.get(id=zp_id)
-            bids_zp.vybor = workbids
-            try:
-                bids_zp.save()
-                results['success'] = True
-            except:
-                log.error(u'Ошибка записи в базу')
-            return JsonResponse(results)
-        if regim == 'migration_bids':
-            try:
-                Bid.objects.filter(vybor=1).update(vybor=0)
-                results['success'] = True
-            except Exception as err:
-                log.error(u'Ошибка миграции проекта')
-                results['success'] = False
-            return JsonResponse(results)
+            if regim == 'migration_bids':
+                try:
+                    Bid.objects.filter(vybor=1).update(vybor=0)
+                    results['success'] = True
+                except Exception as err:
+                    log.error(u'Ошибка миграции проекта')
+                    results['success'] = False
+                return JsonResponse(results)
 
-        if del_delite == '1':
-            delstr = del_id.find('_')
-            idfordel = int(del_id[delstr + 1:])
-            try:
-                Bid.objects.get(id=idfordel).delete()
-                results['success'] = True
-            except Bid.DoesNotExist:
-                log.error(u'Запись не найдена')
-            return JsonResponse(results)
-    qs_bids = Bid.objects.select_related().all()
-    context = {'p_bids': qs_bids}
-    context['timeobr'] = datetime.datetime.strftime(
-        datetime.datetime.astimezone(max_datetime['datatime__max'], tzlocal),
-        "%Y-%m-%d %H:%M:%S")
-    return render(request, 'bids/bids.html', context)
+            if del_delite is not None:
 
-    # @staticmethod
-    # def get_queryset(request):
-    #     # str(request.user.groups.values_list('id', flat=True).first())
-    #     query = Bid.objects.filter(groupid=str(request.user.groups.values_list('id', flat=True).first()))
-    #     if request.user.is_superuser:
-    #         query = Bid.objects.all()
-    #     return query
+                delstr = del_id.find('_')
+                idfordel = int(del_id[delstr + 1:])
+                try:
+                    Bid.objects.get(id=idfordel).delete()
+                    results['success'] = True
+                except Bid.DoesNotExist:
+                    log.error(u'Запись не найдена')
+        link = self.request.get_full_path()
+        if link.endswith("/bids/"):
+            return Bid.objects.select_related().filter(is_double=False)
+        elif link.endswith("/bidsdouble/"):
+            return Bid.objects.select_related().filter(is_double=True)
+        return Bid.objects.all()
+
+
+# done
+@login_required
+def bidsedit(request):
+    edit_id = request.GET.get('edit_id', None)
+    if edit_id is None:
+        return HttpResponseRedirect('/bids/bids/')
+    else:
+        bid_obj = Bid.objects.get(id=edit_id)
+        user = bid_obj.user.id
+        user_obj = ProfileUser.objects.get(user=user)
+        groups = user_obj.user.groups.values_list('name', flat=True)
+        select_status = bid_obj.status
+        if request.method == 'POST':
+            bids_form = BidsEdit(request.POST, instance=bid_obj)
+            bids_user_form = UserEdit(request.POST, instance=ProfileUser.objects.get(user=user))
+            if bids_form.is_valid() and bids_user_form.is_valid():
+                bids_form.save()
+                bids_user_form.save()
+                return HttpResponseRedirect('/bids/bids/')
+            else:
+                messages.error(request, 'Please correct the error below.')
+        else:
+            bids_form = BidsEdit(instance=bid_obj, site_id=edit_id)
+            bids_user_form = UserEdit(instance=ProfileUser.objects.get(user=user))
+        return render(request, 'bids/bids_edit.html', {'bids_form': bids_form, 'bids_user_form': bids_user_form,
+                                                       'groups': groups,
+                                                       "select_status": select_status})
+
 
 
 @login_required
@@ -139,62 +165,7 @@ def bidsadd(request):
         bids_user_form = UserEdit()
 
     return render(request, 'bids/bids_add.html',
-                  {'timeobr': datetime.datetime.strftime(datetime.datetime.now(), "%A, %d. %B %Y %I:%M%p"),
-                   'bids_form': bids_form, 'bids_user_form': bids_user_form})
-
-
-@login_required
-def doubleedit(request):
-    edit_id = request.GET.get('edit_id', None)
-    if edit_id is None:
-        return HttpResponseRedirect('/bids/bidsdouble/')
-    else:
-        # qs_bids = BidDouble.objects.get(id=edit_id)
-        bid_double_obj = BidDouble.objects.get(id=edit_id)
-        user = bid_double_obj.user.id
-        user_obj = ProfileUser.objects.get(user=user)
-        groups = user_obj.user.groups.values_list('name', flat=True)
-        bids_form = DoubleEdit(instance=bid_double_obj)
-        if request.POST:
-            bids_form = DoubleEdit(request.POST, instance=BidDouble.objects.get(id=edit_id))
-            # bids_form = DoubleEdit(request.POST)
-            try:
-                if bids_form.is_valid():
-                    bids_form.save()
-                    return HttpResponseRedirect('/bids/bidsdouble/')
-            except Exception as err:
-                print(err)
-
-        return render(request, 'bids/doubleedit.html', {'bids_form': bids_form, 'groups': groups})
-
-
-# done
-@login_required
-def bidsedit(request):
-    edit_id = request.GET.get('edit_id', None)
-    if edit_id is None:
-        return HttpResponseRedirect('/bids/bids/')
-    else:
-        bid_obj = Bid.objects.get(id=edit_id)
-        user = bid_obj.user.id
-        user_obj = ProfileUser.objects.get(user=user)
-        groups = user_obj.user.groups.values_list('name', flat=True)
-        select_status = bid_obj.status
-        if request.method == 'POST':
-            bids_form = BidsEdit(request.POST, instance=bid_obj)
-            bids_user_form = UserEdit(request.POST, instance=ProfileUser.objects.get(user=user))
-            if bids_form.is_valid() and bids_user_form.is_valid():
-                bids_form.save()
-                bids_user_form.save()
-                return HttpResponseRedirect('/bids/bids/')
-            else:
-                messages.error(request, 'Please correct the error below.')
-        else:
-            bids_form = BidsEdit(instance=bid_obj, site_id=edit_id)
-            bids_user_form = UserEdit(instance=ProfileUser.objects.get(user=user))
-        return render(request, 'bids/bids_edit.html', {'bids_form': bids_form, 'bids_user_form': bids_user_form,
-                                                       'groups': groups,
-                                                       "select_status": select_status})
+                  {'bids_form': bids_form, 'bids_user_form': bids_user_form})
 
 
 class StatusHistoryView(ListView):
@@ -205,7 +176,8 @@ class StatusHistoryView(ListView):
         context = super().get_context_data(**kwargs)
         edit_id = self.request.GET.get('edit_id', None)
         context["edit_id"] = edit_id
-        context["history_list"] = StatusHistory.objects.filter(big=Bid.objects.get(pk=edit_id)).order_by("-created_date")
+        context["history_list"] = StatusHistory.objects.filter(big=Bid.objects.get(pk=edit_id)).order_by(
+            "-created_date")
         return context
 
     def get_queryset(self, **kwargs):
@@ -220,27 +192,7 @@ def user_can_see_double(user):
 @login_required
 @user_passes_test(user_can_see_double)
 def bidsdouble(request):
-    results = dict()
-    results['success'] = False
-    max_datetime = {'datatime__max': datetime.datetime.now(tzlocal)}
-    if request.method == 'POST':
-        del_id = request.POST.get('id', None)
-        del_delite = request.POST.get('delite', None)
-        if del_delite == '1':
-            delstr = del_id.find('_')
-            idfordel = int(del_id[delstr + 1:])
-            try:
-                BidDouble.objects.get(id=idfordel).delete()
-                results['success'] = True
-            except Bid.DoesNotExist:
-                log.error(u'Запись не найдена')
-        return JsonResponse(results)
-
-    qs_bids = BidDouble.objects.select_related().all()
-    context = {'p_bids': qs_bids, 'timeobr': datetime.datetime.strftime(
-        datetime.datetime.astimezone(max_datetime['datatime__max'], tzlocal),
-        "%Y-%m-%d %H:%M:%S")}
-    return render(request, 'bids/bids_double.html', context)
+    pass
 
 
 def user_can_see_import(user):
@@ -350,7 +302,6 @@ def bidsimport(request):
                         results['error'] = 'Поле номер паспорта должно быть заполнено'
                         return JsonResponse(results)
 
-                    # print(bachlist)
                     try:
                         # import_db = BidImport.objects.create(**bachlist)
                         if len(bachlist) > 0:

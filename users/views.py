@@ -193,7 +193,7 @@ def sign_up(request):
 
 def log_out(request):
     if 'back' in request.POST:
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/bids/bids/')
     elif 'log_out' in request.POST:
         auth.logout(request)
         return HttpResponseRedirect('/')

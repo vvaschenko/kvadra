@@ -23,7 +23,7 @@
                     <div class="widget-container margin-top-0">
                         <div class="widget-content">
                             <form action={{ request.get_full_path }} method="post" class="j-forms " id="j-forms"
-                                  novalidate="novalidate" enctype="multipart/form-data">
+                                  novalidate="novalidate" enctype="multipart/form-data" method="post">
                                 {% csrf_token %}
                                 <div class="form-content">
                                     <div id="tabs">
