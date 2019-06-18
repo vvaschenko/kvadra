@@ -111,6 +111,7 @@ class Bid(models.Model):
     class Meta:
         verbose_name = "Заявки"
         verbose_name_plural = "Заявки"
+        permissions = [('view_bid_double', 'Может видеть дубликаты')]
 
     def __str__(self):
         return "заявка " + str(self.id)

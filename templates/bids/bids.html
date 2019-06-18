@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+
     <!-- Modal dialog del alert -->
     <div id="bids_del" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-sm">
@@ -29,7 +30,7 @@
                     <ul class="list-page-breadcrumb">
                         <li>
                             <a href="{% url 'bids' %}">Заявки<i class="zmdi zmdi-chevron-right"></i></a>
-                            <a href="{% url 'bidsdouble' %}">Дубли<i class="zmdi zmdi-chevron-right"></i></a>
+                            {% if perms.bids.view_bid_double %}<a href="{% url 'bidsdouble' %}">Дубли<i class="zmdi zmdi-chevron-right"></i></a>{% endif %}
                         </li>
                     </ul>
             </div>
@@ -148,7 +149,7 @@
                                            data-edit_id="{{ post.id }}"
                                         ><span class="zmdi zmdi-edit"></span></a>
                                         <a title="Удалить" class="row-delete" id="del_{{ post.id }}"
-                                           onclick="bids_del(id,'add')"><span class="zmdi zmdi-close"></span></a>
+                                           onclick="bids_delete({{ post.id }},'add')"><span class="zmdi zmdi-close"></span></a>
                                     </td>
                                 </tr>
                             {% endfor %}

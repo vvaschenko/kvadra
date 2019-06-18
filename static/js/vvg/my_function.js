@@ -740,7 +740,7 @@ function showquery(id) {
     }
 }
 
-function bids_del(id, regim) {
+function bids_delete(id, regim) {
     let data = {};
     let currentelement = document.getElementById(id);
     data.csrfmiddlewaretoken = getCookie('csrftoken');
@@ -752,15 +752,16 @@ function bids_del(id, regim) {
         data.id = id;
         data.delite = 1;
         data.regim = regim;
+
         switch (regim) {
             case 'add':
                 $.ajax(
                     {
-                        url: 'bids/',
                         type: 'POST',
+                        url: '/bids/bids/',
                         data: data,
                         success: function (data, textStatus, XHR) {
-                            // console.log("запрос DELETE отработал")
+                            // console.log("запрос DELETE отработал");
                             location.reload();
                         },
                         error: function (xhr, status, error) {
@@ -772,7 +773,7 @@ function bids_del(id, regim) {
             case 'double':
                 $.ajax(
                     {
-                        url: 'bidsdouble/',
+                        url: '/bids/bids/',
                         type: 'POST',
                         data: data,
                         success: function (data, textStatus, XHR) {
@@ -786,12 +787,7 @@ function bids_del(id, regim) {
                 );
         }
 
-
-        // alert("Нажата кнопка ДА")
     };
-    // document.querySelector('#delno').onclick = function() {
-    //
-    // };
 
 }
 

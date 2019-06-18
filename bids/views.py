@@ -11,8 +11,8 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib import messages
 from django.shortcuts import render
 from dateutil.tz import tzutc
-from django.http import JsonResponse, HttpResponseRedirect
-from django.views.generic import ListView
+from django.http import JsonResponse, HttpResponseRedirect, Http404, HttpResponse
+from django.views.generic import ListView, DeleteView
 
 from bids.forms import BidsAdd, BidsEdit
 from bids.utils import list_name_tuple, get_key, get_value_excel
@@ -26,7 +26,7 @@ tzutc = tzutc()
 
 def user_can_see_double(user):
     group_perm = User.get_group_permissions(user)
-    return user.has_perm("bids.view_biddouble") or "bids.view_biddouble" in group_perm
+    return user.has_perm("bids.view_bid_double") or "bids.view_bid_double" in group_perm
 
 
 class BidView(ListView):
@@ -38,6 +38,42 @@ class BidView(ListView):
         if link.endswith("/bidsdouble/") and not user_can_see_double(self.request.user):
             return HttpResponseRedirect('../../login/')
         return super(BidView, self).get(*args, **kwargs)
+
+    def post(self, request):
+        del_id = request.POST.get('id', None)
+        print(del_id)
+        zp_id = self.request.POST.get('zp_id', None)
+        regim = self.request.POST.get('regim', None)
+        workbids = self.request.POST.get('workbids', None)
+        stime = self.request.POST.get('starttime', None)
+        etime = self.request.POST.get('endtime', None)
+        filterbids = self.request.POST.get('filterbids', None)
+
+        if filterbids is not None:
+            if filterbids == '1':
+                starttime = datetime.datetime.strptime(stime, "%d.%m.%Y")
+                endtime = datetime.datetime.strptime(etime, "%d.%m.%Y")
+                return Bid.objects.select_related().filter(created_dt__range=[starttime, endtime]).all()
+        if regim == 'bids_check':
+            bids_zp = Bid.objects.get(id=zp_id)
+            bids_zp.vybor = workbids
+            try:
+                bids_zp.save()
+            except:
+                log.error(u'Ошибка записи в базу')
+            return JsonResponse(status=201)
+        if regim == 'migration_bids':
+            try:
+                Bid.objects.filter(vybor=1).update(vybor=0)
+            except Exception as err:
+                log.error(u'Ошибка миграции проекта')
+            return JsonResponse(status=201)
+        if del_id is not None:
+            try:
+                Bid.objects.get(id=del_id).delete()
+            except Bid.DoesNotExist:
+                log.error(u'Запись не найдена')
+        return HttpResponse(status=201)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -52,51 +88,6 @@ class BidView(ListView):
         return context
 
     def get_queryset(self, **kwargs):
-        results = dict()
-        results['success'] = False
-        if self.request.method == 'POST':
-            del_id = self.request.POST.get('id', None)
-            del_delite = self.request.POST.get('delite', None)
-            zp_id = self.request.POST.get('zp_id', None)
-            regim = self.request.POST.get('regim', None)
-            workbids = self.request.POST.get('workbids', None)
-            stime = self.request.POST.get('starttime', None)
-            etime = self.request.POST.get('endtime', None)
-            filterbids = self.request.POST.get('filterbids', None)
-
-            if filterbids is not None:
-                if filterbids == '1':
-                    starttime = datetime.datetime.strptime(stime, "%d.%m.%Y")
-                    endtime = datetime.datetime.strptime(etime, "%d.%m.%Y")
-                    results['success'] = True
-                    return Bid.objects.select_related().filter(created_dt__range=[starttime, endtime]).all()
-            if regim == 'bids_check':
-                bids_zp = Bid.objects.get(id=zp_id)
-                bids_zp.vybor = workbids
-                try:
-                    bids_zp.save()
-                    results['success'] = True
-                except:
-                    log.error(u'Ошибка записи в базу')
-                return JsonResponse(results)
-            if regim == 'migration_bids':
-                try:
-                    Bid.objects.filter(vybor=1).update(vybor=0)
-                    results['success'] = True
-                except Exception as err:
-                    log.error(u'Ошибка миграции проекта')
-                    results['success'] = False
-                return JsonResponse(results)
-
-            if del_delite is not None:
-
-                delstr = del_id.find('_')
-                idfordel = int(del_id[delstr + 1:])
-                try:
-                    Bid.objects.get(id=idfordel).delete()
-                    results['success'] = True
-                except Bid.DoesNotExist:
-                    log.error(u'Запись не найдена')
         link = self.request.get_full_path()
         if link.endswith("/bids/"):
             return Bid.objects.select_related().filter(is_double=False)
@@ -195,13 +186,6 @@ class StatusHistoryView(ListView):
 
     def get_queryset(self, **kwargs):
         return StatusHistory.objects.all()
-
-
-
-@login_required
-@user_passes_test(user_can_see_double)
-def bidsdouble(request):
-    pass
 
 
 def user_can_see_import(user):
