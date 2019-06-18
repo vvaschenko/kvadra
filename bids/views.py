@@ -107,8 +107,10 @@ def bidsedit(request):
         groups = user_obj.user.groups.values_list('name', flat=True)
         select_status = bid_obj.status
         if request.method == 'POST':
-            bids_form = BidsEdit(request.POST, instance=bid_obj)
             bids_user_form = UserEdit(request.POST, instance=ProfileUser.objects.get(user=user))
+            print(bids_user_form.errors)
+            bids_form = BidsEdit(request.POST, instance=bid_obj, site_id=edit_id)
+            print(bids_form.errors)
             if bids_form.is_valid() and bids_user_form.is_valid():
                 bids_form.save()
                 bids_user_form.save()
@@ -140,10 +142,11 @@ def bidsadd(request):
             Bid.objects.get(itn=dict_str['itn'], passport_series=dict_str['passport_series'],
                             passport_number=dict_str['passport_number'])
             try:
+                pass
                 # BidDouble.objects.create(**bids_form.cleaned_data)
-                obj = BidDouble.objects.create(**bids_form.cleaned_data)
+                # obj = BidDouble.objects.create(**bids_form.cleaned_data)
 
-                obj.save()
+                # obj.save()
                 return HttpResponseRedirect('/bids/bidsdouble')
             except Exception as qqq:
                 print(qqq)
@@ -326,7 +329,7 @@ def bidsimport(request):
                         # Bid.objects.get(**dict_str)
                         Bid.objects.get(itn=dict_str['itn'], passport_series=dict_str['passport_series'],
                                         passport_number=dict_str['passport_number'])
-                        obj = BidDouble.objects.create(**dict_str)
+                        # obj = BidDouble.objects.create(**dict_str)
                         obj.save()
                         count_dubl += 1
                     except Bid.DoesNotExist:

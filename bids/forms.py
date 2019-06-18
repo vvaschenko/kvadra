@@ -6,7 +6,7 @@ from .models import Bid, BidStatus
 class BidsAdd(forms.ModelForm):
     class Meta:
         model = Bid
-        exclude = ("vybor", "user", "user_who_edit", "created_dt", "updated_dt", "goupid", "is_double")
+        exclude = ("vybor", "user", "user_who_edit", "created_dt", "updated_dt",  "is_double")
 
     def clean_user(self):
         curentuser = self.user
@@ -16,7 +16,7 @@ class BidsAdd(forms.ModelForm):
 class BidsEdit(forms.ModelForm):
     class Meta:
         model = Bid
-        exclude = ("vybor", "user", "user_who_edit", "created_dt", "updated_dt", "goupid", "is_double")
+        exclude = ("vybor", "user", "user_who_edit", "created_dt", "updated_dt", "is_double")
 
     def __init__(self, *args, **kwargs):
         self.site_id = kwargs.pop('site_id')

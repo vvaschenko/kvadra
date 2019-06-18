@@ -69,6 +69,7 @@ class Bid(models.Model):
     position = models.CharField("Посада", max_length=255, null=True, blank=True)
 
     number_phone_work = models.CharField("Номер телефона рабочий", max_length=20, null=True, blank=True)
+
     cod_number_phone_work = models.CharField("Код телефона рабочий", max_length=10, null=True, blank=True)
 
     # Доходы
@@ -110,14 +111,6 @@ class Bid(models.Model):
     class Meta:
         verbose_name = "Заявки"
         verbose_name_plural = "Заявки"
-
-    @staticmethod
-    def get_queryset(request):
-        # str(request.user.groups.values_list('id', flat=True).first())
-        query = Bid.objects.filter(groupid=str(request.user.groups.values_list('id', flat=True).first()))
-        if request.user.is_superuser:
-            query = Bid.objects.all()
-        return query
 
     def __str__(self):
         return "заявка " + str(self.id)
