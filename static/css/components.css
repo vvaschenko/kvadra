@@ -28,6 +28,10 @@
   width: 100%;
 }
 
+.title{
+  text-align: center;
+}
+
 #id_status{
   height: 40px;
   width: 100%;

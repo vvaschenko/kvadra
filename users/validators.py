@@ -48,7 +48,7 @@ def validate_passport_series(value):
             True if regex.search(r'\p{IsCyrillic}', s) else False
         )
 
-    if not all(is_cyrillic):
+    if not all(is_cyrillic) or splitted is None or splitted == "":
         raise ValidationError(
             message="Серия паспорта должна состоять полностью из символов Кириллицы"
         )

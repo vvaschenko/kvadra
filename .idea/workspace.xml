@@ -3,15 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="f516f07f-18a2-42cf-88b1-c2cc728aa469" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bids/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/bids/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bids/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bids/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/vvg/my_function.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/vvg/my_function.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bids/bids.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bids/bids.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bids/bids_add_old.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bids/bids_double.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bids/bids_edit_old.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bids/doubleedit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/components.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/components.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bids/bids_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bids/bids_add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/validators.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/validators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,27 +62,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/bids/bids.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
+            <state relative-caret-position="288">
               <caret line="145" column="40" lean-forward="true" selection-start-line="145" selection-start-column="40" selection-end-line="145" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/js/vvg/my_function.js">
+        <entry file="file://$PROJECT_DIR$/bids/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="751" column="20" lean-forward="true" selection-start-line="751" selection-start-column="20" selection-end-line="751" selection-end-column="20" />
+            <state relative-caret-position="140">
+              <caret line="7" column="19" lean-forward="true" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
               <folding>
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+                <element signature="e#15#39#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/users/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="186" column="32" lean-forward="true" selection-start-line="186" selection-start-column="32" selection-end-line="186" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -92,31 +92,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-19">
-              <caret line="155" column="34" lean-forward="true" selection-start-line="155" selection-start-column="34" selection-end-line="155" selection-end-column="34" />
+            <state relative-caret-position="1">
+              <caret line="201" lean-forward="true" selection-start-line="201" selection-end-line="201" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/bids/views.py">
+        <entry file="file://$PROJECT_DIR$/users/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1871">
-              <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
+            <state relative-caret-position="289">
+              <caret line="174" column="24" lean-forward="true" selection-start-line="174" selection-start-column="24" selection-end-line="174" selection-end-column="24" />
               <folding>
-                <element signature="e#15#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bids/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <element signature="e#15#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -135,9 +123,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>del_id</find>
-      <find>qs_bids</find>
-      <find>starttime</find>
       <find>bidview</find>
       <find>bids</find>
       <find>p_bids</find>
@@ -164,6 +149,9 @@
       <find>resp</find>
       <find>дуб</find>
       <find>ду</find>
+      <find>group</find>
+      <find>groups</find>
+      <find>create_new</find>
       <find>bids_del</find>
     </findStrings>
   </component>
@@ -182,25 +170,26 @@
         <option value="$PROJECT_DIR$/kvadra/settings.py" />
         <option value="$PROJECT_DIR$/templates/users/profile.html" />
         <option value="$PROJECT_DIR$/templates/bids/bids_double.html" />
-        <option value="$PROJECT_DIR$/users/forms.py" />
         <option value="$PROJECT_DIR$/users/urls.py" />
         <option value="$PROJECT_DIR$/users/models.py" />
         <option value="$PROJECT_DIR$/users/admin.py" />
         <option value="$PROJECT_DIR$/static/css/history.css" />
         <option value="$PROJECT_DIR$/templates/bids/status_history.html" />
-        <option value="$PROJECT_DIR$/static/css/components.css" />
-        <option value="$PROJECT_DIR$/users/views.py" />
-        <option value="$PROJECT_DIR$/users/validators.py" />
-        <option value="$PROJECT_DIR$/templates/bids/bids_edit.html" />
         <option value="$PROJECT_DIR$/templates/bids/doubleedit.html" />
         <option value="$PROJECT_DIR$/bids/admin.py" />
-        <option value="$PROJECT_DIR$/bids/forms.py" />
         <option value="$PROJECT_DIR$/bids/models.py" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/bids/urls.py" />
         <option value="$PROJECT_DIR$/static/js/vvg/my_function.js" />
         <option value="$PROJECT_DIR$/templates/bids/bids.html" />
+        <option value="$PROJECT_DIR$/templates/bids/bids_edit.html" />
+        <option value="$PROJECT_DIR$/templates/bids/bids_add.html" />
+        <option value="$PROJECT_DIR$/users/forms.py" />
         <option value="$PROJECT_DIR$/bids/views.py" />
+        <option value="$PROJECT_DIR$/bids/forms.py" />
+        <option value="$PROJECT_DIR$/users/validators.py" />
+        <option value="$PROJECT_DIR$/static/css/components.css" />
+        <option value="$PROJECT_DIR$/users/views.py" />
       </list>
     </option>
   </component>
@@ -242,14 +231,7 @@
               <item name="kvadra" type="b2602c69:ProjectViewProjectNode" />
               <item name="kvadra" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="kvadra" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kvadra" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="vvg" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="kvadra" type="b2602c69:ProjectViewProjectNode" />
@@ -342,12 +324,12 @@
       <workItem from="1560521347432" duration="10409000" />
       <workItem from="1560681895173" duration="9389000" />
       <workItem from="1560837721293" duration="427000" />
-      <workItem from="1560840397225" duration="24023000" />
+      <workItem from="1560840397225" duration="29781000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="128067000" />
+    <option name="totallyTimeSpent" value="133825000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -367,7 +349,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8594928" visible="true" weight="0.23076923" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8594928" visible="true" weight="0.14556213" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8594928" weight="0.3112426" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -386,13 +368,13 @@
       <window_info anchor="right" id="Database" order="4" weight="0.32967785" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27553117" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2830706" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8594928" visible="true" weight="0.13136095" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8594928" weight="0.38698226" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8594928" visible="true" weight="0.19526628" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8594928" weight="0.3112426" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -400,7 +382,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3289941" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3289941" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.14050719" side_tool="true" weight="0.3337278" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3739645" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.27573964" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3289941" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.3289941" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -485,26 +467,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/ajax-loader.gif">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/vvg/sendfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-31" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/vvg/poisktext.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-31" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/vvg/menuact.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/vvg/jquery-resume.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -534,13 +496,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/users/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="189" selection-start-line="189" selection-end-line="189" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/bids/set_bid_status.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -567,16 +522,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/users/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="192" lean-forward="true" selection-start-line="192" selection-end-line="192" />
-          <folding>
-            <element signature="e#15#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/bids/status_history.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -587,13 +532,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/components.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/css/history.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -601,13 +539,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
           <caret line="514" column="16" selection-start-line="514" selection-start-column="12" selection-end-line="514" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/users/validators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="47" column="54" selection-start-line="47" selection-start-column="54" selection-end-line="47" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -676,13 +607,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="353">
           <caret line="93" selection-start-line="93" selection-end-line="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bids/bids_edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="1181" column="49" selection-start-line="1181" selection-start-column="45" selection-end-line="1181" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -763,16 +687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bids/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="e#15#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/django/core/handlers/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="980">
@@ -804,53 +718,125 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/vvg/my_function.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4451">
+          <caret line="822" column="9" lean-forward="true" selection-start-line="822" selection-start-column="9" selection-end-line="822" selection-end-column="9" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bids/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        <state relative-caret-position="280">
+          <caret line="14" column="11" lean-forward="true" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="19" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bids/bids_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="190" column="58" selection-end-line="1207" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/bids/bids.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
+        <state relative-caret-position="288">
           <caret line="145" column="40" lean-forward="true" selection-start-line="145" selection-start-column="40" selection-end-line="145" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
+    <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python37/site-packages/prompt_toolkit/cache.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-19">
-          <caret line="155" column="34" lean-forward="true" selection-start-line="155" selection-start-column="34" selection-end-line="155" selection-end-column="34" />
+        <state relative-caret-position="977">
+          <caret line="104" column="16" selection-start-line="104" selection-start-column="16" selection-end-line="104" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/vvg/my_function.js">
+    <entry file="file://$PROJECT_DIR$/templates/bids/bids_add.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="751" column="20" lean-forward="true" selection-start-line="751" selection-start-column="20" selection-end-line="751" selection-end-column="20" />
+        <state relative-caret-position="-624">
+          <caret line="394" column="72" lean-forward="true" selection-start-line="394" selection-start-column="72" selection-end-line="394" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bids/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="19" lean-forward="true" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
           <folding>
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+            <element signature="e#15#39#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="186" column="32" lean-forward="true" selection-start-line="186" selection-start-column="32" selection-end-line="186" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/components.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="31" column="20" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/users/registr.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="21" column="71" lean-forward="true" selection-start-line="21" selection-start-column="71" selection-end-line="21" selection-end-column="71" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bids/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1871">
-          <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
+        <state relative-caret-position="77">
+          <caret line="138" column="32" lean-forward="true" selection-start-line="138" selection-start-column="32" selection-end-line="138" selection-end-column="32" />
           <folding>
             <element signature="e#15#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/users/login.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/validators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="51" column="30" lean-forward="true" selection-start-line="51" selection-start-column="30" selection-end-line="51" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1">
+          <caret line="201" lean-forward="true" selection-start-line="201" selection-end-line="201" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="174" column="24" lean-forward="true" selection-start-line="174" selection-start-column="24" selection-end-line="174" selection-end-column="24" />
+          <folding>
+            <element signature="e#15#28#0" expanded="true" />
           </folding>
         </state>
       </provider>

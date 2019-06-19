@@ -16,7 +16,7 @@ from django.views.generic import ListView, DeleteView
 
 from bids.forms import BidsAdd, BidsEdit
 from bids.utils import list_name_tuple, get_key, get_value_excel
-from users.forms import UserEdit
+from users.forms import UserEdit, UserAdd
 from users.models import ProfileUser
 from .models import Bid, BidImport, StatusHistory
 
@@ -130,46 +130,24 @@ def bidsedit(request):
 @login_required
 def bidsadd(request):
     if request.method == 'POST':
-        # if request.is_ajax() and request.method == 'POST':
-        dict_str = {}
+        bids_user_form = UserAdd(request.POST)
         bids_form = BidsAdd(request.POST)
-        bids_user_form = UserEdit(request.POST)
-        bids_form.user = request.user
-        dict_str['itn'] = bids_user_form.data['itn']
-        dict_str['passport_series'] = bids_user_form.data['passport_series']
-        dict_str['passport_number'] = bids_user_form.data['passport_number']
+        print(bids_form.errors)
+        print(bids_user_form.errors)
+        if bids_form.is_valid() and bids_user_form.is_valid():
+            user = bids_user_form.save()
+            # need to create user and save he to bids_form
+            bid = bids_form.save(commit=False)
+            bid.user = user
+            bid.save()
 
-        try:
-            Bid.objects.get(itn=dict_str['itn'], passport_series=dict_str['passport_series'],
-                            passport_number=dict_str['passport_number'])
-            try:
-                pass
-                # BidDouble.objects.create(**bids_form.cleaned_data)
-                # obj = BidDouble.objects.create(**bids_form.cleaned_data)
-
-                # obj.save()
-                return HttpResponseRedirect('/bids/bidsdouble')
-            except Exception as qqq:
-                print(qqq)
-        except (Bid.DoesNotExist, Exception) as qwe:
-            try:
-                if bids_form.is_valid():
-                    try:
-                        bids_form.save()
-                        return HttpResponseRedirect('/bids/bids')
-                    except Exception as err:
-                        print(err)
-                else:
-                    messages.error(request, 'Please correct the error below.')
-            except Exception as wwww:
-                print(wwww)
-            print(qwe)
+            return HttpResponseRedirect('/bids/bids/')
+        else:
+            messages.error(request, 'Please correct the error below.')
     else:
         bids_form = BidsAdd()
-        bids_user_form = UserEdit()
-
-    return render(request, 'bids/bids_add.html',
-                  {'bids_form': bids_form, 'bids_user_form': bids_user_form})
+        bids_user_form = UserAdd()
+    return render(request, 'bids/bids_add.html', {'bids_form': bids_form, 'bids_user_form': bids_user_form})
 
 
 class StatusHistoryView(ListView):

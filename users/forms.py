@@ -177,10 +177,17 @@ class RestPassword(forms.Form):
 #         model = PreferenceMon
 #         fields = '__all__'
 
+
+class UserAdd(forms.ModelForm):
+    class Meta:
+        model = ProfileUser
+        exclude = ("user", "avatar", "id_telegram")
+
+
 class UserEdit(forms.ModelForm):
     class Meta:
         model = ProfileUser
-        exclude = ("user", "avatar", "id_telegram", "")
+        exclude = ("user", "avatar", "id_telegram")
 
     def __init__(self, *args, **kwargs):
         # status = kwargs.pop(status['code'], None)

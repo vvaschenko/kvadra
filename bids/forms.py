@@ -6,7 +6,7 @@ from .models import Bid, BidStatus
 class BidsAdd(forms.ModelForm):
     class Meta:
         model = Bid
-        exclude = ("vybor", "user", "user_who_edit", "created_dt", "updated_dt",  "is_double")
+        exclude = ("vybor", "user", "user_who_edit", "created_dt", "updated_dt", "is_double")
 
     def clean_user(self):
         curentuser = self.user
@@ -28,4 +28,3 @@ class BidsEdit(forms.ModelForm):
         for key in self.fields:
             if key not in fields_required:
                 self.fields[key].required = False
-
