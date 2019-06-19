@@ -41,27 +41,10 @@ class BidView(ListView):
 
     def post(self, request):
         del_id = request.POST.get('id', None)
-        print(del_id)
         zp_id = self.request.POST.get('zp_id', None)
+        print(zp_id)
         regim = self.request.POST.get('regim', None)
-        workbids = self.request.POST.get('workbids', None)
-        stime = self.request.POST.get('starttime', None)
-        etime = self.request.POST.get('endtime', None)
-        filterbids = self.request.POST.get('filterbids', None)
 
-        if filterbids is not None:
-            if filterbids == '1':
-                starttime = datetime.datetime.strptime(stime, "%d.%m.%Y")
-                endtime = datetime.datetime.strptime(etime, "%d.%m.%Y")
-                return Bid.objects.select_related().filter(created_dt__range=[starttime, endtime]).all()
-        if regim == 'bids_check':
-            bids_zp = Bid.objects.get(id=zp_id)
-            bids_zp.vybor = workbids
-            try:
-                bids_zp.save()
-            except:
-                log.error(u'Ошибка записи в базу')
-            return JsonResponse(status=201)
         if regim == 'migration_bids':
             try:
                 Bid.objects.filter(vybor=1).update(vybor=0)
@@ -114,7 +97,9 @@ def bidsedit(request):
             bids_form = BidsEdit(request.POST, instance=bid_obj, site_id=edit_id)
             print(bids_form.errors)
             if bids_form.is_valid() and bids_user_form.is_valid():
-                bids_form.save()
+                bid = bids_form.save(commit=False)
+                bid.user_who_edit = request.user
+                bid.save()
                 bids_user_form.save()
                 return HttpResponseRedirect('/bids/bids/')
             else:

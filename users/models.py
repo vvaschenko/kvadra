@@ -5,7 +5,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
-
 from users.validators import (validate_birthday, validate_contact_phone_numeric, validate_contact_phone_length,
                               validate_passport_series)
 
@@ -76,7 +75,6 @@ class ProfileUser(models.Model):
 
     apartment_number_fiz = models.CharField("Номер Квартири Проживання", max_length=10, null=True, blank=True)
 
-
     # Паспорт / ID карта
     passport_series = models.CharField("Серия паспорта",
                                        max_length=16,
@@ -92,11 +90,12 @@ class ProfileUser(models.Model):
 
     date_of_issue = models.DateField("Паспорт Дата Видачі", null=True, blank=True)
 
-    mailing_list = models.CharField("Участь в розсилках", max_length=255, null=True, blank=True)
-
+    mailing_list = models.BooleanField("Участь в розсилках", default=True)
 
     def __str__(self):
-        return str(self.last_name)+" "+str(self.first_name)+" "+str(self.middle_name)+" "+str(self.user.groups.values_list('name', flat=True))
+        return str(self.last_name) + " " + str(self.first_name) + " " + str(self.middle_name) + " " + str(
+            self.user.groups.values_list('name', flat=True))
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

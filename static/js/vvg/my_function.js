@@ -1404,22 +1404,18 @@ function migration_bids() {
 function filterbids() {
     let stime = document.getElementById('datetimepickerbids1').value.split('.');
     let etime = document.getElementById('datetimepickerbids2').value.split('.');
-    let tablebids = document.getElementById("bidsview");
-    let rows = tablebids.rows;
 
     let starttime = Date.parse(new Date(stime[2], stime[1]-1, stime[0]));
     let endtime = Date.parse(new Date(etime[2], etime[1]-1, etime[0]));
-    $("#bidsview tr").each(function () {
 
-        var pr_data = new Date($(this).find('#cr_data')[0].innerHTML).toLocaleDateString();
-        var cur_data = Date.parse(new Date(pr_data.split('.')[2],pr_data.split('.')[1]-1,pr_data.split('.')[0]));
-        // var cur_data = Date.parse($(this).find('#cr_data')[0].innerHTML);
+    let today = new Date();
+    let cur_data = Date.parse(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+
+    $("#bidsview tr").each(function () {
         if(cur_data <= endtime && cur_data >= starttime) {
-            // $(this).css(display, "");
             $(this).show();
         }
         else {
-            // $(this).css(display, "none");
             $(this).hide();
         }
     });
