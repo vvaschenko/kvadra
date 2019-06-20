@@ -184,7 +184,6 @@ def sign_up(request):
             else:
                 return HttpResponse('Return an invalid login error message.')
 
-
     else:
         form = Registration()
 

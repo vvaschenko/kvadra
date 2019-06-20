@@ -129,9 +129,7 @@
                                 <tr role="row" class="even">
                                     <td>
                                         <input id="my_checkbox_{{ post.pk }}" type="checkbox" class="checkbox_bids"
-                                               data-zp_id="{{ post.id }}"
-                                               value={{ post.vybor }} {% if post.vybor == 1%} checked {% endif %}
-                                        >
+                                               data-zp_id="{{ post.id }}">
                                     </td>
                                     <td title="Двойное нажатие откроет редактор заявки"
                                         ondblclick="window.location.href='/bids/bidsedit/?edit_id={{ post.id }}'"

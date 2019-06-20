@@ -1371,30 +1371,33 @@ $(function () {
 });
 
 function migration_bids() {
-    let data_d = {};
-    data_d.proekt = document.getElementById('groupbids').value;
-    data_d.csrfmiddlewaretoken = getCookie('csrftoken');
-    data_d.regim = 'migration_bids';
+    let checkboxes = document.getElementsByClassName("checkbox_bids");
+    let bid_id_arr = [];
+    for ( let i=0; i<checkboxes.length; i++)
+    {
+        if(checkboxes[i].checked) {
+            bid_id_arr.push(checkboxes[i].getAttribute("data-zp_id"));
+        }
+    }
     $('input:checked').prop('checked', false);
     $.ajax(
         {
-            url: 'bids/',
+            url: '/bids/bids/',
             type: 'POST',
-            data: data_d,
+            data: {"csrfmiddlewaretoken": getCookie('csrftoken'), "bid_id_arr[]": bid_id_arr,
+                "group_id": document.getElementById('groupbids').value},
             success: function (data, textStatus, XHR) {
                 if (data.success) {
                     alert('Переброска завершена');
-                    // $('#groupbids')[0].selected = true;
                     location.reload();
                 }
                 else {
-                    alert('Возникла проблема при переносе в выбранные проект');
+                    alert('Возникла проблема при переносе в выбранный проект');
                 }
-                // console.log("запрос DELETE отработал")
 
             },
             error: function (xhr, status, error) {
-                alert('Возникла ошибка: Ошибка получения данных -' + xhr.responseText);
+                // alert('Возникла ошибка: Ошибка получения данных -' + xhr.responseText);
             }
         }
     );

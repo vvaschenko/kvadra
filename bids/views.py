@@ -41,14 +41,16 @@ class BidView(ListView):
 
     def post(self, request):
         del_id = request.POST.get('id', None)
-        zp_id = self.request.POST.get('zp_id', None)
-        print(zp_id)
-        regim = self.request.POST.get('regim', None)
-
-        if regim == 'migration_bids':
+        group_id = self.request.POST.get('group_id', None)
+        bid_arr = self.request.POST.getlist('bid_id_arr[]', None)
+        if group_id is not None:
             try:
-                Bid.objects.filter(vybor=1).update(vybor=0)
-            except Exception as err:
+                for item in bid_arr:
+                    bid_item = Bid.objects.get(id=int(item))
+                    bid_item.user.groups.clear()
+                    bid_item.user.groups.add(Group.objects.get(id=int(group_id)))
+                    bid_item.save()
+            except Exception:
                 log.error(u'Ошибка миграции проекта')
             return JsonResponse(status=201)
         if del_id is not None:
