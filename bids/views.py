@@ -117,24 +117,43 @@ def bidsedit(request):
 @login_required
 def bidsadd(request):
     if request.method == 'POST':
-        bids_user_form = UserAdd(request.POST)
         bids_form = BidsAdd(request.POST)
-        print(bids_form.errors)
-        print(bids_user_form.errors)
-        if bids_form.is_valid() and bids_user_form.is_valid():
-            user = bids_user_form.save()
-            # need to create user and save he to bids_form
-            bid = bids_form.save(commit=False)
-            bid.user = user
-            bid.save()
+        bids_user_form = UserAdd(request.POST)
+        bids_form.user = request.user
+        itn = bids_user_form.data['itn']
+        passport_series = bids_user_form.data['passport_series']
+        passport_number = bids_user_form.data['passport_number']
 
-            return HttpResponseRedirect('/bids/bids/')
+        try:
+            user = ProfileUser.objects.get(itn=itn, passport_series=passport_series,
+                                           passport_number=passport_number)
+        except:
+            username = "U_"+str(itn)+str(passport_series)+str(passport_number)
+            u_email = "U_"+str(itn)+str(passport_series)+str(passport_number)+"@kvadra.com"
+            passport_number = "password1029"
+            user = User.objects.create(username=username, email=u_email, password=passport_number)
+        user.save()
+        bid = Bid.objects.filter(user=user)
+        if len(bid) > 0:
+            obj = Bid.objects.create(user=user)
+            obj.is_double = True
+            obj.save()
+            return HttpResponseRedirect('/bids/bidsdouble')
         else:
-            messages.error(request, 'Please correct the error below.')
+            if bids_form.is_valid():
+                try:
+                    obj = Bid.objects.create(user=user)
+                    obj.save()
+                    return HttpResponseRedirect('/bids/bids')
+                except Exception as err:
+                    print(err)
+            else:
+                messages.error(request, 'Please correct the error below.')
     else:
-        bids_form = BidsAdd()
         bids_user_form = UserAdd()
-    return render(request, 'bids/bids_add.html', {'bids_form': bids_form, 'bids_user_form': bids_user_form})
+        bids_form = BidsAdd()
+    return render(request, 'bids/bids_add.html',
+                  {'bids_form': bids_form, 'bids_user_form': bids_user_form})
 
 
 class StatusHistoryView(ListView):
