@@ -1421,7 +1421,6 @@ $("#f-status-select").change(function () {
         },
         success: function (data) {   // `data` is the return of the `load_cities` view function
             $("#s-status-select").html(data);  // replace the contents of the city input with the data that came from the server
-            console.log(data);
         }
       });
 

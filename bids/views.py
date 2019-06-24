@@ -105,9 +105,7 @@ def bidsedit(request):
                                                 level=2).distinct()
         if request.method == 'POST':
             f_choosed = request.POST.get('f-status-list', None)
-            print(f_choosed)
             s_choosed = request.POST.get('s-status-list', None)
-            print(s_choosed)
             if s_choosed is not None and s_choosed != "None":
                 status = BidStatus.objects.get(id=s_choosed)
             elif f_choosed is not None:
