@@ -23,7 +23,8 @@
                     <div class="widget-container margin-top-0">
                         <div class="widget-content">
                             <form action={{ request.get_full_path }} method="post" class="j-forms " id="j-forms"
-                                  novalidate="novalidate" enctype="multipart/form-data" method="post">
+                                  novalidate="novalidate" data-status-url="{% url 'ajax_load_status' %}"
+                                  enctype="multipart/form-data" method="post">
                                 {% csrf_token %}
                                 <div class="form-content">
                                     <div id="tabs">
@@ -187,7 +188,25 @@
                                                 <div class="row">
                                                     <div class="col-md-3 unit">
                                                         <label class="label">Статус</label>
-                                                       {{ bids_form.status }}
+                                                       <select class="filter-item__dropdown" id = "f-status-select" name="f-status-list">
+                                                            <option value="None" {% if selected_status == None %} selected {% endif %}>-------</option>
+                                                            {% for st_elem in f_status  %}
+                                                                    <option value="{{ st_elem.id }}" {% if selected_status == st_elem or selected_status.parent_level_status == st_elem%} selected {% endif %}>
+                                                                        {{ st_elem.name }}
+                                                                    </option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3 unit">
+                                                        <label class="label">Статус второго уровня</label>
+                                                       <select class="filter-item__dropdown" id="s-status-select" name="s-status-list">
+                                                            <option value="None" {% if selected_status == None or selected_status.level == 1 %} selected {% endif %}>-------</option>
+                                                            {% for st_elem in s_status  %}
+                                                                    <option value="{{ st_elem.id }}" {% if selected_status == st_elem %} selected {% endif %}>
+                                                                         {{ st_elem.name }}
+                                                                    </option>
+                                                            {% endfor %}
+                                                       </select>
                                                     </div>
                                                     <div class="col-md-5 unit">
                                                         {% if groups.count == 1 %}

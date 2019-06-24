@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^bidsdouble/$', login_required(BidView.as_view()), name='bidsdouble'),
     url(r'^status_history/(?P<edit_id>\d+)/$', StatusHistoryView.as_view(), name='status_history'),
     url(r'^status_history/$', StatusHistoryView.as_view(), name='status_history'),
+    url(r'^ajax/load-status/$', views.select_status, name='ajax_load_status'),
 ]

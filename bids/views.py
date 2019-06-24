@@ -13,12 +13,13 @@ from django.shortcuts import render
 from dateutil.tz import tzutc
 from django.http import JsonResponse, HttpResponseRedirect, Http404, HttpResponse
 from django.views.generic import ListView, DeleteView
+from rest_framework import serializers
 
 from bids.forms import BidsAdd, BidsEdit
 from bids.utils import list_name_tuple, get_key, get_value_excel
 from users.forms import UserEdit, UserAdd
 from users.models import ProfileUser
-from .models import Bid, BidImport, StatusHistory
+from .models import Bid, BidImport, StatusHistory, BidStatus
 
 log = logging.getLogger(__name__)
 tzutc = tzutc()
@@ -92,15 +93,37 @@ def bidsedit(request):
         user = bid_obj.user.id
         user_obj = ProfileUser.objects.get(user=user)
         groups = user_obj.user.groups.values_list('name', flat=True)
-        select_status = bid_obj.status
+        group_list = user_obj.user.groups.all()
+        selected_status = bid_obj.status
+        f_status = BidStatus.objects.filter(group__in=group_list, level=1).distinct()
+        if selected_status.level == "2":
+            s_status = BidStatus.objects.filter(group__in=group_list, parent_level_status=selected_status.parent_level_status,
+                                                level=2).distinct()
+        else:
+            s_status = BidStatus.objects.filter(group__in=group_list,
+                                                parent_level_status=selected_status,
+                                                level=2).distinct()
         if request.method == 'POST':
+            f_choosed = request.POST.get('f-status-list', None)
+            print(f_choosed)
+            s_choosed = request.POST.get('s-status-list', None)
+            print(s_choosed)
+            if s_choosed is not None and s_choosed != "None":
+                status = BidStatus.objects.get(id=s_choosed)
+            elif f_choosed is not None:
+                status = BidStatus.objects.get(id=f_choosed)
+            else:
+                status = None
             bids_user_form = UserEdit(request.POST, instance=ProfileUser.objects.get(user=user))
-            print(bids_user_form.errors)
             bids_form = BidsEdit(request.POST, instance=bid_obj, site_id=edit_id)
-            print(bids_form.errors)
+            # print(bids_user_form.errors)
+            # print(bids_form.errors)
+
             if bids_form.is_valid() and bids_user_form.is_valid():
                 bid = bids_form.save(commit=False)
+                bid.status = BidStatus.objects.get(id=2)
                 bid.user_who_edit = request.user
+                bid.status = status
                 bid.save()
                 bids_user_form.save()
                 return HttpResponseRedirect('/bids/bids/')
@@ -111,12 +134,28 @@ def bidsedit(request):
             bids_user_form = UserEdit(instance=ProfileUser.objects.get(user=user))
         return render(request, 'bids/bids_edit.html', {'bids_form': bids_form, 'bids_user_form': bids_user_form,
                                                        'groups': groups,
-                                                       "select_status": select_status})
+                                                       "f_status": f_status,
+                                                       "s_status": s_status,
+                                                       "selected_status": selected_status})
+
+
+def select_status(request):
+    edit_id = request.GET.get('edit_id')
+    bid_obj = Bid.objects.get(id=edit_id)
+    user = bid_obj.user.id
+    user_obj = ProfileUser.objects.get(user=user)
+    group_list = user_obj.user.groups.all()
+    selected_status = request.GET.get('status_id')
+    s_status = BidStatus.objects.filter(group__in=group_list, parent_level_status=selected_status, level=2).distinct()
+    return render(request, 'bids/status_dropdown_list_options.html', {'s_status': s_status})
 
 
 @login_required
 def bidsadd(request):
+    f_status = BidStatus.objects.filter(level=1).distinct()
+    # s_status = BidStatus.objects.filter(level=2).distinct()
     if request.method == 'POST':
+
         bids_form = BidsAdd(request.POST)
         bids_user_form = UserAdd(request.POST)
         bids_form.user = request.user
@@ -128,8 +167,8 @@ def bidsadd(request):
             user = ProfileUser.objects.get(itn=itn, passport_series=passport_series,
                                            passport_number=passport_number)
         except:
-            username = "U_"+str(itn)+str(passport_series)+str(passport_number)
-            u_email = "U_"+str(itn)+str(passport_series)+str(passport_number)+"@kvadra.com"
+            username = "U_" + str(itn) + str(passport_series) + str(passport_number)
+            u_email = "U_" + str(itn) + str(passport_series) + str(passport_number) + "@kvadra.com"
             passport_number = "password1029"
             user = User.objects.create(username=username, email=u_email, password=passport_number)
         user.save()
@@ -153,7 +192,9 @@ def bidsadd(request):
         bids_user_form = UserAdd()
         bids_form = BidsAdd()
     return render(request, 'bids/bids_add.html',
-                  {'bids_form': bids_form, 'bids_user_form': bids_user_form})
+                  {'bids_form': bids_form,
+                   'bids_user_form': bids_user_form,
+                   "f_status": f_status})
 
 
 class StatusHistoryView(ListView):

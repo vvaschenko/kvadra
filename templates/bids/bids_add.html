@@ -141,9 +141,27 @@
                                             <div class="row"></div>
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-md-3 unit">
+                                                     <div class="col-md-3 unit">
                                                         <label class="label">Статус</label>
-                                                       {{ bids_form.status }}
+                                                       <select class="filter-item__dropdown" name="status-list">
+                                                            <option value="None">-------</option>
+                                                            {% for st_elem in f_status  %}
+                                                                    <option value="{{ st_elem.id }}">
+                                                                        {{ st_elem.name }}
+                                                                    </option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3 unit">
+                                                        <label class="label">Статус второго уровня</label>
+                                                       <select class="filter-item__dropdown" name="status-list">
+                                                            <option value="None">-------</option>
+                                                            {% for st_elem in s_status  %}
+                                                                    <option value="{{ st_elem.id }}">
+                                                                         {{ st_elem.name }}
+                                                                    </option>
+                                                            {% endfor %}
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>

@@ -1404,6 +1404,31 @@ function migration_bids() {
 
 }
 
+$("#f-status-select").change(function () {
+      var url = $("#j-forms").attr("data-status-url");  // get the url of the `load_cities` view
+      var statusId = $(this).val();  // get the selected country ID from the HTML input
+      var url_string = window.location.href;
+      var page_url = new URL(url_string);
+      var edit_id = page_url.searchParams.get("edit_id");
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'edit_id': edit_id,
+          'status_id':   statusId
+
+            // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+            $("#s-status-select").html(data);  // replace the contents of the city input with the data that came from the server
+            console.log(data);
+        }
+      });
+
+    });
+
+
+
 function filterbids() {
     let stime = document.getElementById('datetimepickerbids1').value.split('.');
     let etime = document.getElementById('datetimepickerbids2').value.split('.');

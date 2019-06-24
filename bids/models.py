@@ -30,7 +30,7 @@ class BidStatus(models.Model):
         if self.parent_level_status is None or self.parent_level_status == "":
             return self.name
         else:
-            return self.parent_level_status.name + "." + self.name
+            return self.name
 
 
 class Bid(models.Model):
@@ -114,7 +114,7 @@ class Bid(models.Model):
         permissions = [('view_bid_double', 'Может видеть дубликаты')]
 
     def __str__(self):
-        return "заявка " + str(self.id)
+        return "заявка " + str(self.id) + " " + self.user.username
 
 
 class BidImport(models.Model):
