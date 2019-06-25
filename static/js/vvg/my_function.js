@@ -1,4 +1,17 @@
 // klick = 0;
+
+  $(document).ready(function () {
+    $(".selectpicker").selectpicker();
+    $(".bootstrap-select").click(function () {
+        if ($(this).hasClass("open")){
+            $(this).removeClass("open");
+        }
+        else{
+           $(this).addClass("open");
+        }
+    });
+  });
+
 function viewlogall() {
     let data_all = {};
     data_all.zero = 0;
@@ -1370,9 +1383,14 @@ $(function () {
 
 });
 
+
+
+
+
 function migration_bids() {
     let checkboxes = document.getElementsByClassName("checkbox_bids");
     let bid_id_arr = [];
+    let groups_id = $('.selectpicker').val()
     for ( let i=0; i<checkboxes.length; i++)
     {
         if(checkboxes[i].checked) {
@@ -1385,19 +1403,13 @@ function migration_bids() {
             url: '/bids/bids/',
             type: 'POST',
             data: {"csrfmiddlewaretoken": getCookie('csrftoken'), "bid_id_arr[]": bid_id_arr,
-                "group_id": document.getElementById('groupbids').value},
+                "group_id[]": groups_id},
             success: function (data, textStatus, XHR) {
-                if (data.success) {
                     alert('Переброска завершена');
-                    location.reload();
-                }
-                else {
-                    alert('Возникла проблема при переносе в выбранный проект');
-                }
 
             },
             error: function (xhr, status, error) {
-                // alert('Возникла ошибка: Ошибка получения данных -' + xhr.responseText);
+                alert('Возникла ошибка: Ошибка получения данных -' + xhr.responseText);
             }
         }
     );

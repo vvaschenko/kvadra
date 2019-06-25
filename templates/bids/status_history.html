@@ -13,14 +13,16 @@
                 <h3 style="color: #00008B ">История изменений статуса</h3>
             </div>
             <div class="table-title">
-                <div class="col-md-6 table-item">Время</div>
-                <div class="col-md-6 table-item">Статус</div>
+                <div class="col-md-4 table-item">Время</div>
+                <div class="col-md-4 table-item">Статус</div>
+                <div class="col-md-4 table-item">Пользователь</div>
             </div>
 
         {% for item in history_list %}
             <div class="history-table">
-                <div class="col-md-6 history-item">{{ item.created_date }}</div>
-                <div class="col-md-6 history-item">{{ item.new_status.name }}</div>
+                <div class="col-md-4 history-item">{{ item.created_date }}</div>
+                <div class="col-md-4 history-item">{% if item.new_status.parent_level_status != None %}{{ item.new_status.parent_level_status  }} - {% endif %}{{ item.new_status.name }}</div>
+                <div class="col-md-4 history-item">{{ item.user_who_edit }}</div>
             </div>
         {% endfor %}
 

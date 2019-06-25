@@ -42,23 +42,25 @@ class BidView(ListView):
 
     def post(self, request):
         del_id = request.POST.get('id', None)
-        group_id = self.request.POST.get('group_id', None)
+        group_id = self.request.POST.getlist('group_id[]', None)
+        print(del_id)
         bid_arr = self.request.POST.getlist('bid_id_arr[]', None)
-        if group_id is not None:
-            try:
-                for item in bid_arr:
-                    bid_item = Bid.objects.get(id=int(item))
-                    bid_item.user.groups.clear()
-                    bid_item.user.groups.add(Group.objects.get(id=int(group_id)))
-                    bid_item.save()
-            except Exception:
-                log.error(u'Ошибка миграции проекта')
-            return JsonResponse(status=201)
         if del_id is not None:
             try:
                 Bid.objects.get(id=del_id).delete()
             except Bid.DoesNotExist:
                 log.error(u'Запись не найдена')
+        elif group_id is not None and group_id != []:
+            try:
+                for item in bid_arr:
+                    bid_item = Bid.objects.get(id=int(item))
+                    bid_item.user.groups.clear()
+                    for gr in group_id:
+                        bid_item.user.groups.add(Group.objects.get(id=int(gr)))
+                    bid_item.save()
+            except Exception:
+                log.error(u'Ошибка миграции проекта')
+            return HttpResponse(status=201)
         return HttpResponse(status=201)
 
     def get_context_data(self, **kwargs):
@@ -203,7 +205,7 @@ class StatusHistoryView(ListView):
         context = super().get_context_data(**kwargs)
         edit_id = self.request.GET.get('edit_id', None)
         context["edit_id"] = edit_id
-        context["history_list"] = StatusHistory.objects.filter(big=Bid.objects.get(pk=edit_id)).order_by(
+        context["history_list"] = StatusHistory.objects.filter(bid=Bid.objects.get(pk=edit_id)).order_by(
             "-created_date")
         return context
 

@@ -5,8 +5,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bids/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bids/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bids/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bids/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/lib/jquery.syntaxhighlighter.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/lib/jquery.syntaxhighlighter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/vvg/my_function.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/vvg/my_function.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bids/bids.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bids/bids.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bids/status_history.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bids/status_history.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,11 +59,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bids/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="125" column="37" lean-forward="true" selection-start-line="125" selection-start-column="37" selection-end-line="125" selection-end-column="37" />
+            <state relative-caret-position="656">
+              <caret line="48" column="16" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="16" />
               <folding>
                 <element signature="e#15#26#0" expanded="true" />
               </folding>
@@ -69,33 +72,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/bids/bids_edit.html">
+        <entry file="file://$PROJECT_DIR$/templates/bids/bids.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="186" column="68" lean-forward="true" selection-start-line="186" selection-start-column="68" selection-end-line="186" selection-end-column="68" />
+            <state relative-caret-position="340">
+              <caret line="89" column="62" lean-forward="true" selection-start-line="89" selection-start-column="62" selection-end-line="89" selection-end-column="62" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bids/models.py">
+        <entry file="file://$PROJECT_DIR$/static/js/vvg/my_function.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="192" column="47" lean-forward="true" selection-start-line="192" selection-start-column="47" selection-end-line="192" selection-end-column="47" />
+            <state relative-caret-position="202">
+              <caret line="1400" column="11" lean-forward="true" selection-start-line="1400" selection-start-column="11" selection-end-line="1400" selection-end-column="11" />
               <folding>
-                <element signature="e#16#44#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/users/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
-              <folding>
-                <element signature="e#15#72#0" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -114,17 +112,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>post</find>
-      <find>delite</find>
-      <find>stat</find>
-      <find>peti</find>
-      <find>pre</find>
-      <find>get</find>
-      <find>is_</find>
-      <find>groupid</find>
-      <find>resp</find>
-      <find>дуб</find>
-      <find>ду</find>
       <find>create_new</find>
       <find>bids_del</find>
       <find>пере</find>
@@ -138,12 +125,23 @@
       <find>__init</find>
       <find>__init__</find>
       <find>registr</find>
-      <find>ajax</find>
       <find>onc</find>
       <find>groups</find>
-      <find>migration_bids</find>
       <find>print</find>
       <find>console.log</find>
+      <find>big</find>
+      <find>bootstrap-select</find>
+      <find>bootstrapcdn</find>
+      <find>ajax.googleapis</find>
+      <find>ajax</find>
+      <find>migr</find>
+      <find>bootstrap-select.min.js</find>
+      <find>prett</find>
+      <find>defer</find>
+      <find>my</find>
+      <find>bootstrap</find>
+      <find>mult</find>
+      <find>migration_bids</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -163,26 +161,28 @@
         <option value="$PROJECT_DIR$/templates/bids/bids_double.html" />
         <option value="$PROJECT_DIR$/users/urls.py" />
         <option value="$PROJECT_DIR$/static/css/history.css" />
-        <option value="$PROJECT_DIR$/templates/bids/status_history.html" />
         <option value="$PROJECT_DIR$/templates/bids/doubleedit.html" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/users/forms.py" />
         <option value="$PROJECT_DIR$/users/validators.py" />
         <option value="$PROJECT_DIR$/static/css/components.css" />
         <option value="$PROJECT_DIR$/users/admin.py" />
         <option value="$PROJECT_DIR$/bids/admin.py" />
         <option value="$PROJECT_DIR$/static/js/vvg/jquery-resume.js" />
-        <option value="$PROJECT_DIR$/templates/bids/bids.html" />
         <option value="$PROJECT_DIR$/users/views.py" />
         <option value="$PROJECT_DIR$/templates/bids/bids_add.html" />
         <option value="$PROJECT_DIR$/bids/forms.py" />
         <option value="$PROJECT_DIR$/bids/urls.py" />
         <option value="$PROJECT_DIR$/templates/bids/status_dropdown_list_options.html" />
         <option value="$PROJECT_DIR$/templates/bids/bids_edit.html" />
-        <option value="$PROJECT_DIR$/bids/views.py" />
-        <option value="$PROJECT_DIR$/bids/models.py" />
-        <option value="$PROJECT_DIR$/static/js/vvg/my_function.js" />
         <option value="$PROJECT_DIR$/users/models.py" />
+        <option value="$PROJECT_DIR$/bids/models.py" />
+        <option value="$PROJECT_DIR$/templates/bids/status_history.html" />
+        <option value="$PROJECT_DIR$/static/js/vvg/datepicker1.js" />
+        <option value="$PROJECT_DIR$/static/js/lib/jquery.syntaxhighlighter.js" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/templates/bids/bids.html" />
+        <option value="$PROJECT_DIR$/static/js/vvg/my_function.js" />
+        <option value="$PROJECT_DIR$/bids/views.py" />
       </list>
     </option>
   </component>
@@ -304,12 +304,13 @@
       <workItem from="1560840397225" duration="31186000" />
       <workItem from="1560938913543" duration="11814000" />
       <workItem from="1561027666386" duration="20689000" />
-      <workItem from="1561365692261" duration="17989000" />
+      <workItem from="1561365692261" duration="21078000" />
+      <workItem from="1561446031192" duration="10542000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="185722000" />
+    <option name="totallyTimeSpent" value="199353000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -324,12 +325,12 @@
     <frame x="-7" y="-7" width="1519" height="977" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2954078" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29952022" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8594928" weight="0.32662722" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3289941" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8594928" visible="true" weight="0.20473373" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8594928" weight="0.3112426" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -338,7 +339,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3289941" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3289941" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.14050719" side_tool="true" weight="0.3337278" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.21065089" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3846154" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3289941" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.3289941" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -447,21 +448,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/kvadra/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="138" column="26" selection-start-line="138" selection-start-column="26" selection-end-line="138" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/prettify.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="22" lean-forward="true" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bids/bids_double.html" />
     <entry file="file://$PROJECT_DIR$/templates/bids/doubleedit.html" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/django/contrib/staticfiles/handlers.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -623,22 +609,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="201" lean-forward="true" selection-start-line="201" selection-end-line="201" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/vvg/datepicker1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/vvg/datepicker.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -749,13 +719,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bids/bids.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1620">
-          <caret line="81" column="58" selection-start-line="81" selection-start-column="58" selection-end-line="81" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/bids/bids_add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -770,33 +733,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/vvg/my_function.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="1422" column="128" selection-start-line="1422" selection-start-column="128" selection-end-line="1422" selection-end-column="128" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bids/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="125" column="37" lean-forward="true" selection-start-line="125" selection-start-column="37" selection-end-line="125" selection-end-column="37" />
-          <folding>
-            <element signature="e#15#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/bids/bids_edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -804,22 +740,94 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/users/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1380">
+          <caret line="87" column="59" lean-forward="true" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="59" />
+          <folding>
+            <element signature="e#15#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/vvg/datepicker1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" selection-start-line="7" selection-end-line="9" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/lib/prettify.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="215" column="6" lean-forward="true" selection-start-line="215" selection-start-column="6" selection-end-line="215" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bids/status_history.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-120">
+          <caret line="9" column="31" lean-forward="true" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/lib/jquery.syntaxhighlighter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="215" column="11" selection-start-line="215" selection-start-column="11" selection-end-line="215" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="940">
+          <caret line="47" column="54" selection-start-line="47" selection-start-column="45" selection-end-line="47" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/vvg/my_function.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="1400" column="11" lean-forward="true" selection-start-line="1400" selection-start-column="11" selection-end-line="1400" selection-end-column="11" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bids/bids.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="89" column="62" lean-forward="true" selection-start-line="89" selection-start-column="62" selection-end-line="89" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bids/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="192" column="47" lean-forward="true" selection-start-line="192" selection-start-column="47" selection-end-line="192" selection-end-column="47" />
+        <state relative-caret-position="707">
+          <caret line="214" column="49" selection-start-line="214" selection-start-column="49" selection-end-line="214" selection-end-column="49" />
           <folding>
             <element signature="e#16#44#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/users/models.py">
+    <entry file="file://$PROJECT_DIR$/bids/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
+        <state relative-caret-position="656">
+          <caret line="48" column="16" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="16" />
           <folding>
-            <element signature="e#15#72#0" expanded="true" />
+            <element signature="e#15#26#0" expanded="true" />
           </folding>
         </state>
       </provider>

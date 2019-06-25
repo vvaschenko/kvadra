@@ -193,6 +193,10 @@ class StatusHistory(models.Model):
                                    verbose_name="Имя статуса")
     bid = models.ForeignKey(Bid, on_delete=models.CASCADE, verbose_name="Заявка")
     created_date = models.DateTimeField("Дата создания", auto_now_add=True)
+    user_who_edit = models.ForeignKey(User,
+                                      verbose_name="Пользователь изменивший этот статус",
+                                      blank=True,
+                                      null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.new_status.name + str(self.created_date)
@@ -202,25 +206,20 @@ class StatusHistory(models.Model):
         verbose_name_plural = "История статусов"
 
 
-@receiver(post_save, sender=Bid)
-def create_history(sender, instance, **kwargs):
-    print(instance.status)
-    history = StatusHistory.objects.create(bid=instance, new_status=instance.status)
-    history.save()
-
-
 @receiver(pre_save, sender=Bid)
 def create_history(sender, instance, **kwargs):
-    st = StatusHistory.objects.all()
-    print(st)
-    #st = StatusHistory.objects.filter(bid__id=instance.id).order_by("-created_date")
+    st = StatusHistory.objects.filter(bid__id=instance.id).order_by("-created_date")
     try:
-        print("change")
-        print(st)
-        print(st[0].new_status.name)
-        print(instance.status.name)
         if len(st) == 0 or st[0].new_status.name != instance.status.name:
-            history = StatusHistory.objects.create(bid=instance, new_status=instance.status)
+            history = StatusHistory.objects.create(bid=instance, new_status=instance.status,
+                                                   user_who_edit=instance.user_who_edit)
             history.save()
     except:
         print("create_new")
+
+
+@receiver(post_save, sender=Bid)
+def create_history(sender, instance, **kwargs):
+    history = StatusHistory.objects.create(bid=instance, new_status=instance.status,
+                                           user_who_edit=instance.user_who_edit)
+    history.save()
