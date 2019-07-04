@@ -3,7 +3,6 @@ import xlrd
 import json
 import logging
 
-import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import Group, User
 from django.utils.datastructures import MultiValueDictKeyError
@@ -11,9 +10,8 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib import messages
 from django.shortcuts import render
 from dateutil.tz import tzutc
-from django.http import JsonResponse, HttpResponseRedirect, Http404, HttpResponse
-from django.views.generic import ListView, DeleteView
-from rest_framework import serializers
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
+from django.views.generic import ListView
 
 from bids.forms import BidsAdd, BidsEdit
 from bids.utils import list_name_tuple, get_key, get_value_excel
@@ -98,7 +96,7 @@ def bidsedit(request):
         group_list = user_obj.user.groups.all()
         selected_status = bid_obj.status
         f_status = BidStatus.objects.filter(group__in=group_list, level=1).distinct()
-        if selected_status.level == "2":
+        if selected_status is not None and selected_status.level == "2":
             s_status = BidStatus.objects.filter(group__in=group_list, parent_level_status=selected_status.parent_level_status,
                                                 level=2).distinct()
         else:
@@ -150,38 +148,67 @@ def select_status(request):
     return render(request, 'bids/status_dropdown_list_options.html', {'s_status': s_status})
 
 
+def add_select_status(request):
+    selected_status = request.GET.get('status_id')
+    s_status = BidStatus.objects.filter(parent_level_status=selected_status, level=2).distinct()
+    return render(request, 'bids/status_dropdown_list_options.html', {'s_status': s_status})
+
+
 @login_required
 def bidsadd(request):
     f_status = BidStatus.objects.filter(level=1).distinct()
-    # s_status = BidStatus.objects.filter(level=2).distinct()
-    if request.method == 'POST':
 
+    if request.method == 'POST':
         bids_form = BidsAdd(request.POST)
         bids_user_form = UserAdd(request.POST)
         bids_form.user = request.user
+
+
         itn = bids_user_form.data['itn']
         passport_series = bids_user_form.data['passport_series']
         passport_number = bids_user_form.data['passport_number']
 
+        f_choosed = request.POST.get('f-status-list', None)
+        s_choosed = request.POST.get('s-status-list', None)
+        if s_choosed is not None and s_choosed != "None":
+            status = BidStatus.objects.get(id=s_choosed)
+        elif f_choosed is not None:
+            status = BidStatus.objects.get(id=f_choosed)
+        else:
+            status = None
         try:
-            user = ProfileUser.objects.get(itn=itn, passport_series=passport_series,
+            prof = ProfileUser.objects.get(itn=itn, passport_series=passport_series,
                                            passport_number=passport_number)
         except:
             username = "U_" + str(itn) + str(passport_series) + str(passport_number)
-            u_email = "U_" + str(itn) + str(passport_series) + str(passport_number) + "@kvadra.com"
+            u_email = bids_user_form.data['email']
+            if u_email is None or u_email == "":
+                u_email = "U_" + str(itn) + str(passport_series) + str(passport_number) + "@kvadra.com"
             passport_number = "password1029"
-            user = User.objects.create(username=username, email=u_email, password=passport_number)
-        user.save()
-        bid = Bid.objects.filter(user=user)
+            param = {"username": username, "email": u_email, "password": passport_number}
+            user = User.objects.create(**param)
+            user.save()
+            prof = bids_user_form.save(commit=False)
+            prof.user = user
+            prof.save()
+        bid = Bid.objects.filter(user=prof.user)
         if len(bid) > 0:
-            obj = Bid.objects.create(user=user)
+            obj = bids_form.save(commit=False)
+            obj.user = prof.user
             obj.is_double = True
+            group = Group.objects.get_or_create(name='guest')[0]
+            obj.user.groups.add(group)
+            obj.status = status
             obj.save()
             return HttpResponseRedirect('/bids/bidsdouble')
         else:
             if bids_form.is_valid():
                 try:
-                    obj = Bid.objects.create(user=user)
+                    obj = bids_form.save(commit=False)
+                    obj.user = prof.user
+                    group = Group.objects.get_or_create(name='guest')[0]
+                    obj.user.groups.add(group)
+                    obj.status = status
                     obj.save()
                     return HttpResponseRedirect('/bids/bids')
                 except Exception as err:
@@ -194,7 +221,7 @@ def bidsadd(request):
     return render(request, 'bids/bids_add.html',
                   {'bids_form': bids_form,
                    'bids_user_form': bids_user_form,
-                   "f_status": f_status})
+                    "f_status": f_status})
 
 
 class StatusHistoryView(ListView):

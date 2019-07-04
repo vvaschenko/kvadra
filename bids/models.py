@@ -199,7 +199,11 @@ class StatusHistory(models.Model):
                                       null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.new_status.name + str(self.created_date)
+        if self.new_status is None:
+            stat = "NoStatus"
+        else:
+            stat = self.new_status.name
+        return stat + str(self.created_date)
 
     class Meta:
         verbose_name = "История статусов"

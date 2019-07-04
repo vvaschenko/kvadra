@@ -17,4 +17,5 @@ urlpatterns = [
     url(r'^status_history/(?P<edit_id>\d+)/$', StatusHistoryView.as_view(), name='status_history'),
     url(r'^status_history/$', StatusHistoryView.as_view(), name='status_history'),
     url(r'^ajax/load-status/$', views.select_status, name='ajax_load_status'),
+    url(r'^ajax/add_load-status/$', views.add_select_status, name='add_ajax_load_status'),
 ]
