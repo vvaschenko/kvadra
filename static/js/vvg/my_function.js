@@ -1406,6 +1406,7 @@ function migration_bids() {
                 "group_id[]": groups_id},
             success: function (data, textStatus, XHR) {
                     alert('Переброска завершена');
+                    location.reload();  
 
             },
             error: function (xhr, status, error) {

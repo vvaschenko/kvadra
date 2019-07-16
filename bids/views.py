@@ -64,10 +64,25 @@ class BidView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         link = self.request.get_full_path()
+        user = self.request.user
+        user_groups = user.groups.all()
+        context["user_group_list"] = user_groups
         if link.endswith("/bids/"):
-            context["p_bids"] = Bid.objects.select_related().filter(is_double=False)
+            all_bids = Bid.objects.select_related().filter(is_double=False)
+            p_bids = []
+            for bid in all_bids:
+                gr = bid.user.groups.all()
+                if gr & user_groups:
+                    p_bids.append(bid)
+            context["p_bids"] = p_bids
         elif link.endswith("/bidsdouble/"):
-            context["p_bids"] = Bid.objects.select_related().filter(is_double=True)
+            all_bids = Bid.objects.select_related().filter(is_double=True)
+            p_bids = []
+            for bid in all_bids:
+                gr = bid.user.groups.all()
+                if gr & user_groups:
+                    p_bids.append(bid)
+            context["p_bids"] = p_bids
         else:
             context["p_bids"] = Bid.objects.select_related().all()
         context["group_list"] = Group.objects.all()
