@@ -40,7 +40,7 @@ jQuery(document).ready(function () {
         data_imp.append('idgroup',$("#groupview :selected").val());
 
         $.ajax({
-            url: 'bidsimport/',
+            url: '/bids/bidsimport/',
             type: 'POST',
             data: data_imp,
             processData: false,
@@ -89,7 +89,7 @@ function viewfilds(id) {
     $('#myModal').modal('show');
     $.ajax(
         {
-            url: 'bidsimport/',
+            url: '/bids/bidsimport/',
             type: 'POST',
             data: data,
             processData: false,

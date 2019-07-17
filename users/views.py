@@ -16,6 +16,7 @@ from django.db import transaction
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from kvadra import settings
+from .models import *
 # from mon.models import PreferenceMon
 from users.forms import Registration, Login, UserForm, ProfileForm, ChangePassword, RestPassword
 from django.utils.translation import ugettext_lazy as _
@@ -172,6 +173,7 @@ def sign_up(request):
             # new_user.is_staff = False
             new_user.groups.add(group)
             new_user.save()
+            ProfileUser.objects.create(user=new_user)
             group.save()
 
             user = authenticate(username=cd['username'], password=cd['password'])
