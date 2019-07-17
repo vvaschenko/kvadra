@@ -39,38 +39,38 @@ class Bid(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Клиент")
 
     # Дополнительные  телефоны
-    number_phone1 = models.CharField("Номер телефона 1", max_length=20, null=True, blank=True)
-    cod_number_phone1 = models.CharField("Код телефона 1", max_length=4, null=True, blank=True)
+    number_phone1 = models.CharField("Номер телефона 1", max_length=20, blank=True)
+    cod_number_phone1 = models.CharField("Код телефона 1", max_length=4, blank=True)
 
-    number_phone2 = models.CharField("Номер телефона 2", max_length=20, null=True, blank=True)
-    cod_number_phone2 = models.CharField("Код телефона 2", max_length=4, null=True, blank=True)
+    number_phone2 = models.CharField("Номер телефона 2", max_length=20, blank=True)
+    cod_number_phone2 = models.CharField("Код телефона 2", max_length=4, blank=True)
 
-    number_phone3 = models.CharField("Номер телефона 3", max_length=20, null=True, blank=True)
-    cod_number_phone3 = models.CharField("Код телефона 3", max_length=4, null=True, blank=True)
+    number_phone3 = models.CharField("Номер телефона 3", max_length=20, blank=True)
+    cod_number_phone3 = models.CharField("Код телефона 3", max_length=4, blank=True)
 
-    number_phone4 = models.CharField("Номер телефона 4", max_length=20, null=True, blank=True)
-    cod_number_phone4 = models.CharField("Код телефона 4", max_length=4, null=True, blank=True)
+    number_phone4 = models.CharField("Номер телефона 4", max_length=20, blank=True)
+    cod_number_phone4 = models.CharField("Код телефона 4", max_length=4,  blank=True)
 
-    number_phone5 = models.CharField("Номер телефона 5", max_length=20, null=True, blank=True)
-    cod_number_phone5 = models.CharField("Код телефона 5", max_length=4, null=True, blank=True)
+    number_phone5 = models.CharField("Номер телефона 5", max_length=20, blank=True)
+    cod_number_phone5 = models.CharField("Код телефона 5", max_length=4, blank=True)
 
     # Мессенджеры
-    number_Viber = models.CharField("Номер Viber", max_length=30, null=True, blank=True)
+    number_Viber = models.CharField("Номер Viber", max_length=30, blank=True)
 
-    number_WhatsApp = models.CharField("Номер WhatsApp", max_length=30, null=True, blank=True)
+    number_WhatsApp = models.CharField("Номер WhatsApp", max_length=30, blank=True)
 
-    number_Telegram = models.CharField("Номер Telegram", max_length=30, null=True, blank=True)
+    number_Telegram = models.CharField("Номер Telegram", max_length=30, blank=True)
 
-    status_Viber = models.CharField("Статус Viber", max_length=255, null=True, blank=True)
+    status_Viber = models.CharField("Статус Viber", max_length=255, blank=True)
 
     # Трудоустройство
-    place_of_work = models.CharField("Місце Роботи", max_length=255, null=True, blank=True)
+    place_of_work = models.CharField("Місце Роботи", max_length=255, blank=True)
 
-    position = models.CharField("Посада", max_length=255, null=True, blank=True)
+    position = models.CharField("Посада", max_length=255, blank=True)
 
-    number_phone_work = models.CharField("Номер телефона рабочий", max_length=20, null=True, blank=True)
+    number_phone_work = models.CharField("Номер телефона рабочий", max_length=20, blank=True)
 
-    cod_number_phone_work = models.CharField("Код телефона рабочий", max_length=10, null=True, blank=True)
+    cod_number_phone_work = models.CharField("Код телефона рабочий", max_length=10, blank=True)
 
     # Доходы
     income = models.IntegerField("Дохід", null=True, blank=True)
@@ -85,13 +85,13 @@ class Bid(models.Model):
 
     name_base = models.CharField("Назва Бази", max_length=255, blank=True)
 
-    remark = models.CharField("Примітка", max_length=255, null=True, blank=True)
+    remark = models.CharField("Примітка", max_length=255, blank=True)
 
-    base_id = models.CharField("ID бази", max_length=255, null=True, blank=True)
+    base_id = models.CharField("ID бази", max_length=255, blank=True)
 
-    name_project = models.CharField("Назва проекту", max_length=255, null=True, blank=True)
+    name_project = models.CharField("Назва проекту", max_length=255, blank=True)
 
-    project_id = models.CharField("ID проекту", max_length=255, null=True, blank=True)
+    project_id = models.CharField("ID проекту", max_length=255, blank=True)
 
     status = models.ForeignKey(BidStatus,
                                verbose_name="Статус заявки",
@@ -121,37 +121,37 @@ class BidImport(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Клиент")
 
     # Дополнительные  телефоны
-    number_phone1 = models.CharField("Номер телефона 1", max_length=20, null=True, blank=True)
-    cod_number_phone1 = models.CharField("Код телефона 1", max_length=4, null=True, blank=True)
+    number_phone1 = models.CharField("Номер телефона 1", max_length=20, blank=True)
+    cod_number_phone1 = models.CharField("Код телефона 1", max_length=4, blank=True)
 
-    number_phone2 = models.CharField("Номер телефона 2", max_length=20, null=True, blank=True)
-    cod_number_phone2 = models.CharField("Код телефона 2", max_length=4, null=True, blank=True)
+    number_phone2 = models.CharField("Номер телефона 2", max_length=20, blank=True)
+    cod_number_phone2 = models.CharField("Код телефона 2", max_length=4, blank=True)
 
-    number_phone3 = models.CharField("Номер телефона 3", max_length=20, null=True, blank=True)
-    cod_number_phone3 = models.CharField("Код телефона 3", max_length=4, null=True, blank=True)
+    number_phone3 = models.CharField("Номер телефона 3", max_length=20, blank=True)
+    cod_number_phone3 = models.CharField("Код телефона 3", max_length=4, blank=True)
 
-    number_phone4 = models.CharField("Номер телефона 4", max_length=20, null=True, blank=True)
-    cod_number_phone4 = models.CharField("Код телефона 4", max_length=4, null=True, blank=True)
+    number_phone4 = models.CharField("Номер телефона 4", max_length=20, blank=True)
+    cod_number_phone4 = models.CharField("Код телефона 4", max_length=4, blank=True)
 
-    number_phone5 = models.CharField("Номер телефона 5", max_length=20, null=True, blank=True)
-    cod_number_phone5 = models.CharField("Код телефона 5", max_length=4, null=True, blank=True)
+    number_phone5 = models.CharField("Номер телефона 5", max_length=20, blank=True)
+    cod_number_phone5 = models.CharField("Код телефона 5", max_length=4, blank=True)
 
     # Мессенджеры
-    number_Viber = models.CharField("Номер Viber", max_length=30, null=True, blank=True)
+    number_Viber = models.CharField("Номер Viber", max_length=30, blank=True)
 
-    number_WhatsApp = models.CharField("Номер WhatsApp", max_length=30, null=True, blank=True)
+    number_WhatsApp = models.CharField("Номер WhatsApp", max_length=30, blank=True)
 
-    number_Telegram = models.CharField("Номер Telegram", max_length=30, null=True, blank=True)
+    number_Telegram = models.CharField("Номер Telegram", max_length=30, blank=True)
 
-    status_Viber = models.CharField("Статус Viber", max_length=255, null=True, blank=True)
+    status_Viber = models.CharField("Статус Viber", max_length=255, blank=True)
 
     # Трудоустройство
-    place_of_work = models.CharField("Місце Роботи", max_length=255, null=True, blank=True)
+    place_of_work = models.CharField("Місце Роботи", max_length=255, blank=True)
 
-    position = models.CharField("Посада", max_length=255, null=True, blank=True)
+    position = models.CharField("Посада", max_length=255, blank=True)
 
-    number_phone_work = models.CharField("Номер телефона рабочий", max_length=20, null=True, blank=True)
-    cod_number_phone_work = models.CharField("Код телефона рабочий", max_length=10, null=True, blank=True)
+    number_phone_work = models.CharField("Номер телефона рабочий", max_length=20, blank=True)
+    cod_number_phone_work = models.CharField("Код телефона рабочий", max_length=10, blank=True)
 
     # Доходы
     income = models.IntegerField("Дохід", null=True, blank=True)
@@ -163,17 +163,17 @@ class BidImport(models.Model):
     total_income = models.IntegerField("Загальний Дохід", null=True, blank=True)
 
     # "Дополнительные данные"
-    name_base = models.CharField("Назва Бази", max_length=255, null=True, blank=True)
+    name_base = models.CharField("Назва Бази", max_length=255, blank=True)
 
-    remark = models.CharField("Примітка", max_length=255, null=True, blank=True)
+    remark = models.CharField("Примітка", max_length=255, blank=True)
 
-    base_id = models.CharField("ID бази", max_length=255, null=True, blank=True)
+    base_id = models.CharField("ID бази", max_length=255, blank=True)
 
-    name_project = models.CharField("Назва проекту", max_length=255, null=True, blank=True)
+    name_project = models.CharField("Назва проекту", max_length=255, blank=True)
 
-    project_id = models.CharField("ID проекту", max_length=255, null=True, blank=True)
+    project_id = models.CharField("ID проекту", max_length=255, blank=True)
 
-    city = models.CharField("Город", max_length=128, null=True, blank=True)
+    city = models.CharField("Город", max_length=128, blank=True)
 
     created_dt = models.DateTimeField("Дата создания",
                                       auto_now_add=True)
@@ -185,7 +185,7 @@ class BidImport(models.Model):
         verbose_name_plural = "Импорт заявок"
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 class StatusHistory(models.Model):
@@ -227,3 +227,4 @@ def create_history(sender, instance, **kwargs):
     history = StatusHistory.objects.create(bid=instance, new_status=instance.status,
                                            user_who_edit=instance.user_who_edit)
     history.save()
+
