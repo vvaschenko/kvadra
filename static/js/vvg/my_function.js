@@ -1,4 +1,17 @@
 // klick = 0;
+
+  $(document).ready(function () {
+    $(".selectpicker").selectpicker();
+    $(".bootstrap-select").click(function () {
+        if ($(this).hasClass("open")){
+            $(this).removeClass("open");
+        }
+        else{
+           $(this).addClass("open");
+        }
+    });
+  });
+
 function viewlogall() {
     let data_all = {};
     data_all.zero = 0;
@@ -740,7 +753,7 @@ function showquery(id) {
     }
 }
 
-function bids_del(id, regim) {
+function bids_delete(id, regim) {
     let data = {};
     let currentelement = document.getElementById(id);
     data.csrfmiddlewaretoken = getCookie('csrftoken');
@@ -752,15 +765,16 @@ function bids_del(id, regim) {
         data.id = id;
         data.delite = 1;
         data.regim = regim;
+
         switch (regim) {
             case 'add':
                 $.ajax(
                     {
-                        url: 'bids/',
                         type: 'POST',
+                        url: '/bids/bids/',
                         data: data,
                         success: function (data, textStatus, XHR) {
-                            // console.log("запрос DELETE отработал")
+                            // console.log("запрос DELETE отработал");
                             location.reload();
                         },
                         error: function (xhr, status, error) {
@@ -772,7 +786,7 @@ function bids_del(id, regim) {
             case 'double':
                 $.ajax(
                     {
-                        url: 'bidsdouble/',
+                        url: '/bids/bids/',
                         type: 'POST',
                         data: data,
                         success: function (data, textStatus, XHR) {
@@ -786,12 +800,7 @@ function bids_del(id, regim) {
                 );
         }
 
-
-        // alert("Нажата кнопка ДА")
     };
-    // document.querySelector('#delno').onclick = function() {
-    //
-    // };
 
 }
 
@@ -1374,27 +1383,30 @@ $(function () {
 
 });
 
+
+
+
+
 function migration_bids() {
-    let data_d = {};
-    data_d.proekt = document.getElementById('groupbids').value;
-    data_d.csrfmiddlewaretoken = getCookie('csrftoken');
-    data_d.regim = 'migration_bids';
+    let checkboxes = document.getElementsByClassName("checkbox_bids");
+    let bid_id_arr = [];
+    let groups_id = $('.selectpicker').val()
+    for ( let i=0; i<checkboxes.length; i++)
+    {
+        if(checkboxes[i].checked) {
+            bid_id_arr.push(checkboxes[i].getAttribute("data-zp_id"));
+        }
+    }
     $('input:checked').prop('checked', false);
     $.ajax(
         {
-            url: 'bids/',
+            url: '/bids/bids/',
             type: 'POST',
-            data: data_d,
+            data: {"csrfmiddlewaretoken": getCookie('csrftoken'), "bid_id_arr[]": bid_id_arr,
+                "group_id[]": groups_id},
             success: function (data, textStatus, XHR) {
-                if (data.success) {
                     alert('Переброска завершена');
-                    // $('#groupbids')[0].selected = true;
-                    location.reload();
-                }
-                else {
-                    alert('Возникла проблема при переносе в выбранные проект');
-                }
-                // console.log("запрос DELETE отработал")
+                    location.reload();  
 
             },
             error: function (xhr, status, error) {
@@ -1405,25 +1417,61 @@ function migration_bids() {
 
 }
 
+$("#f-status-select").change(function () {
+      var url = $("#j-forms").attr("data-status-url");  // get the url of the `load_cities` view
+      var statusId = $(this).val();  // get the selected country ID from the HTML input
+      var url_string = window.location.href;
+      var page_url = new URL(url_string);
+      var edit_id = page_url.searchParams.get("edit_id");
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'edit_id': edit_id,
+          'status_id':   statusId
+
+            // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+            $("#s-status-select").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+
+$("#f-add-status-select").change(function () {
+      var url = $("#j-forms").attr("data-status-url");  // get the url of the `load_cities` view
+      var statusId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'status_id':   statusId
+
+            // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+            $("#s-add-status-select").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+
 function filterbids() {
     let stime = document.getElementById('datetimepickerbids1').value.split('.');
     let etime = document.getElementById('datetimepickerbids2').value.split('.');
-    let tablebids = document.getElementById("bidsview");
-    let rows = tablebids.rows;
 
     let starttime = Date.parse(new Date(stime[2], stime[1]-1, stime[0]));
     let endtime = Date.parse(new Date(etime[2], etime[1]-1, etime[0]));
-    $("#bidsview tr").each(function () {
 
-        var pr_data = new Date($(this).find('#cr_data')[0].innerHTML).toLocaleDateString();
-        var cur_data = Date.parse(new Date(pr_data.split('.')[2],pr_data.split('.')[1]-1,pr_data.split('.')[0]));
-        // var cur_data = Date.parse($(this).find('#cr_data')[0].innerHTML);
+    let today = new Date();
+    let cur_data = Date.parse(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+
+    $("#bidsview tr").each(function () {
         if(cur_data <= endtime && cur_data >= starttime) {
-            // $(this).css(display, "");
             $(this).show();
         }
         else {
-            // $(this).css(display, "none");
             $(this).hide();
         }
     });

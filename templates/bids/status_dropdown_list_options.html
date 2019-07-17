@@ -1,0 +1,6 @@
+<option value="None" {% if select_status == None or select_status.level == 1 %} selected {% endif %}>-------</option>
+                                                            {% for st_elem in s_status  %}
+                                                                    <option value="{{ st_elem.id }}" {% if select_status == st_elem %} selected {% endif %}>
+                                                                         {{ st_elem.name }}
+                                                                    </option>
+                                                            {% endfor %}

@@ -4,29 +4,27 @@
 {% block content %}
     <!--форма редактирования заявки -->
     <div class="container-fluid">
-        {#    <div class="row">#}
-        {#        <div class="col-md-12">#}
-        {#            <div class="widget-wrap">#}
-        {#                <div class="row">#}
-        {#                    <div class="page-header filled full-block light">#}
         <div class="widget-header ">
-            {#        <div class="widget-header block-header clearfix">#}
             <div class="row">
                 <div class="col-md-6">
                     <h3 style="color: #00008B ">Редактирование заявки</h3>
-                    {#                    <p4 style="font-style:italic;text-decoration:underline">{{ timeobr }}</p4>#}
                 </div>
-                {#                <div class="col-md-6">#}
-                {#                </div>#}
+
             </div>
+            <div class="col-md-12 hidden-sm" >
+                        <div class="history-text">
+                            <a href="/bids/status_history/?edit_id={{ request.GET.edit_id }}" >История статусов</a>
+                        </div>
+                </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="widget-wrap">
                     <div class="widget-container margin-top-0">
                         <div class="widget-content">
-                            <form action="" method="POST" class="j-forms " id="j-forms"
-                                  novalidate="novalidate" enctype="multipart/form-data">
+                            <form action={{ request.get_full_path }} method="post" class="j-forms " id="j-forms"
+                                  novalidate="novalidate" data-status-url="{% url 'ajax_load_status' %}"
+                                  enctype="multipart/form-data" method="post">
                                 {% csrf_token %}
                                 <div class="form-content">
                                     <div id="tabs">
@@ -57,9 +55,9 @@
                                                                        name="contact_phone"
                                                                        placeholder="Номер телефона"
                                                                        class="form-control " maxlength="12"
-                                                                       value='{{ bids_form.contact_phone.value }}'
+                                                                       value='{{ bids_user_form.contact_phone.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.contact_phone }}'
+                                                                       value='{{ bids_user_form.contact_phone }}'
                                                                         {% endif %}
                                                                 >
                                                             </div>
@@ -77,9 +75,9 @@
                                                                 <input type="text" id="itn"
                                                                        name="itn" placeholder="ИНН"
                                                                        class="form-control" maxlength="10"
-                                                                       value='{{ bids_form.itn.value }}'
+                                                                       value='{{ bids_user_form.itn.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.itn }}'
+                                                                       value='{{ bids_user_form.itn }}'
                                                                         {% endif %}
                                                                 >
                                                             </div>
@@ -95,9 +93,9 @@
                                                             </label>
                                                             <input type="text" id="birthday" name="birthday"
                                                                    class="form-control"
-                                                                   value='{{ bids_form.birthday.value }}'
+                                                                   value='{{ bids_user_form.birthday.value }}'
                                                                     {% if request.method == 'POST' %}
-                                                                   value='{{ bids_form.birthday }}'
+                                                                   value='{{ bids_user_form.birthday }}'
                                                                     {% endif %}
 
                                                             >
@@ -113,9 +111,9 @@
                                                             </label>
                                                             <input type="email" id="email" name="email"
                                                                    class="form-control"
-                                                                   value='{{ bids_form.email.value }}'
+                                                                   value='{{ bids_user_form.email.value }}'
                                                                     {% if request.method == 'POST' %}
-                                                                   value='{{ bids_form.email }}'
+                                                                   value='{{ bids_user_form.email }}'
                                                                     {% endif %}
 
                                                             >
@@ -137,9 +135,9 @@
                                                         <input type="text" id="last_name" name="last_name"
                                                                placeholder="Фамилия"
                                                                class="form-control"
-                                                               value='{{ bids_form.last_name.value }}'
+                                                               value='{{ bids_user_form.last_name.value }}'
                                                                 {% if request.method == 'POST' %}
-                                                               value='{{ bids_form.last_name }}'
+                                                               value='{{ bids_user_form.last_name }}'
                                                                 {% endif %}
 
                                                         >
@@ -156,9 +154,9 @@
                                                         <input type="text" id="first_name" name="first_name"
                                                                placeholder="Имя"
                                                                class="form-control"
-                                                               value='{{ bids_form.first_name.value }}'
+                                                               value='{{ bids_user_form.first_name.value }}'
                                                                 {% if request.method == 'POST' %}
-                                                               value='{{ bids_form.first_name }}'
+                                                               value='{{ bids_user_form.first_name }}'
                                                                 {% endif %}
 
                                                         >
@@ -175,9 +173,9 @@
                                                         <input type="text" id="middle_name" name="middle_name"
                                                                placeholder="Отчество"
                                                                class="form-control"
-                                                               value='{{ bids_form.middle_name.value }}'
+                                                               value='{{ bids_user_form.middle_name.value }}'
                                                                 {% if request.method == 'POST' %}
-                                                               value='{{ bids_form.middle_name }}'
+                                                               value='{{ bids_user_form.middle_name }}'
                                                                 {% endif %}
 
                                                         >
@@ -188,14 +186,39 @@
                                             <div class="row"></div>
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-md-2 unit">
+                                                    <div class="col-md-3 unit">
                                                         <label class="label">Статус</label>
-                                                        {{ bids_form.status }}
+                                                       <select class="filter-item__dropdown" id = "f-status-select" name="f-status-list">
+                                                            <option value="None" {% if selected_status == None %} selected {% endif %}>-------</option>
+                                                            {% for st_elem in f_status  %}
+                                                                    <option value="{{ st_elem.id }}" {% if selected_status == st_elem or selected_status.parent_level_status == st_elem%} selected {% endif %}>
+                                                                        {{ st_elem.name }}
+                                                                    </option>
+                                                            {% endfor %}
+                                                        </select>
                                                     </div>
-                                                    <div class="col-md-2 unit">
-                                                        <label class="label">Проект</label>
-                                                        {{ bids_form.groupid }}
-
+                                                    <div class="col-md-3 unit">
+                                                        <label class="label">Статус второго уровня</label>
+                                                       <select class="filter-item__dropdown" id="s-status-select" name="s-status-list">
+                                                            <option value="None" {% if selected_status == None or selected_status.level == 1 %} selected {% endif %}>-------</option>
+                                                            {% for st_elem in s_status  %}
+                                                                    <option value="{{ st_elem.id }}" {% if selected_status == st_elem %} selected {% endif %}>
+                                                                         {{ st_elem.name }}
+                                                                    </option>
+                                                            {% endfor %}
+                                                       </select>
+                                                    </div>
+                                                    <div class="col-md-5 unit">
+                                                        {% if groups.count == 1 %}
+                                                            <label class="label">Проект</label>
+                                                        {% elif  groups.count > 1 %}
+                                                            <label class="label">Проекти</label>
+                                                        {% endif %}
+                                                        <div class="project_names">
+                                                        {% for group in groups %}
+                                                            <span>   {{ group }}  {% if not forloop.last %},{% endif %}</span>
+                                                        {% endfor %}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -556,9 +579,9 @@
                                                                        name="number_phone_work"
                                                                        placeholder="Код телефона рабочий"
                                                                        class="form-control " maxlength="10"
-                                                                       value='{{ bids_form.number_phone_work.value }}'
+                                                                       value='{{ bids_form.cod_number_phone_work.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.number_phone_work }}'
+                                                                       value='{{ bids_form.cod_number_phone_work }}'
                                                                         {% endif %}
 
                                                                 >
@@ -601,7 +624,7 @@
                                                                     <i class="fa fa-file-text-o"></i>
                                                                 </label>
                                                                 <input type="number" id="income"
-                                                                       name="income" value="0"
+                                                                       name="income"
                                                                        placeholder="Дохід"
                                                                        class="form-control " maxlength="200"
                                                                        value='{{ bids_form.income.value }}'
@@ -623,7 +646,7 @@
                                                                     <i class="fa fa-file-text-o"></i>
                                                                 </label>
                                                                 <input type="number" id="other_income"
-                                                                       name="other_income" value="0"
+                                                                       name="other_income"
                                                                        placeholder="Інший Дохід"
                                                                        class="form-control " maxlength="30"
                                                                        value='{{ bids_form.other_income.value }}'
@@ -645,7 +668,7 @@
                                                                     <i class="fa fa-file-text-o"></i>
                                                                 </label>
                                                                 <input type="number" id="family_income"
-                                                                       name="family_income" value="0"
+                                                                       name="family_income"
                                                                        placeholder="Сімейний Дохід"
                                                                        class="form-control " maxlength="30"
                                                                        value='{{ bids_form.family_income.value }}'
@@ -667,7 +690,7 @@
                                                                     <i class="fa fa-file-text-o"></i>
                                                                 </label>
                                                                 <input type="number" id="total_income"
-                                                                       name="total_income" value="0"
+                                                                       name="total_income"
                                                                        placeholder="Загальний Дохід"
                                                                        class="form-control " maxlength="30"
                                                                        value='{{ bids_form.total_income.value }}'
@@ -699,9 +722,9 @@
                                                                        name="registration_area_ur"
                                                                        placeholder="Область Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_area_ur.value }}'
+                                                                       value='{{ bids_user_form.registration_area_ur.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_area_ur }}'
+                                                                       value='{{ bids_user_form.registration_area_ur }}'
                                                                         {% endif %}
 
                                                                 >
@@ -720,9 +743,9 @@
                                                                        name="registration_raion_ur"
                                                                        placeholder="Район Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_raion_ur.value }}'
+                                                                       value='{{ bids_user_form.registration_raion_ur.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_raion_ur }}'
+                                                                       value='{{ bids_user_form.registration_raion_ur }}'
                                                                         {% endif %}
 
                                                                 >
@@ -743,9 +766,9 @@
                                                                        name="registration_city_ur"
                                                                        placeholder="Місто Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_city_ur.value }}'
+                                                                       value='{{ bids_user_form.registration_city_ur.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_city_ur }}'
+                                                                       value='{{ bids_user_form.registration_city_ur }}'
                                                                         {% endif %}
 
                                                                 >
@@ -764,9 +787,9 @@
                                                                        name="registration_street_ur"
                                                                        placeholder="Вулиця Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_street_ur.value }}'
+                                                                       value='{{ bids_user_form.registration_street_ur.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_street_ur }}'
+                                                                       value='{{ bids_user_form.registration_street_ur }}'
                                                                         {% endif %}
 
                                                                 >
@@ -786,9 +809,9 @@
                                                                        name="House_number_ur"
                                                                        placeholder="Номер Будинку Реєстрації"
                                                                        class="form-control " maxlength="3"
-                                                                       value='{{ bids_form.House_number_ur.value }}'
+                                                                       value='{{ bids_user_form.House_number_ur.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.House_number_ur }}'
+                                                                       value='{{ bids_user_form.House_number_ur }}'
                                                                         {% endif %}
 
                                                                 >
@@ -807,9 +830,9 @@
                                                                        name="apartment_number_ur"
                                                                        placeholder="Номер Квартири Реєстрації"
                                                                        class="form-control " maxlength="3"
-                                                                       value='{{ bids_form.apartment_number_ur.value }}'
+                                                                       value='{{ bids_user_form.apartment_number_ur.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.apartment_number_ur }}'
+                                                                       value='{{ bids_user_form.apartment_number_ur }}'
                                                                         {% endif %}
 
                                                                 >
@@ -837,9 +860,9 @@
                                                                        name="registration_area_fiz"
                                                                        placeholder="Область Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_area_fiz.value }}'
+                                                                       value='{{ bids_user_form.registration_area_fiz.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_area_fiz }}'
+                                                                       value='{{ bids_user_form.registration_area_fiz }}'
                                                                         {% endif %}
 
                                                                 >
@@ -857,9 +880,9 @@
                                                                        name="registration_raion_fiz"
                                                                        placeholder="Район Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_raion_fiz.value }}'
+                                                                       value='{{ bids_user_form.registration_raion_fiz.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_raion_fiz }}'
+                                                                       value='{{ bids_user_form.registration_raion_fiz }}'
                                                                         {% endif %}
 
                                                                 >
@@ -879,9 +902,9 @@
                                                                        name="registration_city_fiz"
                                                                        placeholder="Місто Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_city_fiz.value }}'
+                                                                       value='{{ bids_user_form.registration_city_fiz.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_city_fiz }}'
+                                                                       value='{{ bids_user_form.registration_city_fiz }}'
                                                                         {% endif %}
 
                                                                 >
@@ -899,9 +922,9 @@
                                                                        name="registration_street_fiz"
                                                                        placeholder="Вулиця Реєстрації"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.registration_street_fiz.value }}'
+                                                                       value='{{ bids_user_form.registration_street_fiz.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.registration_street_fiz }}'
+                                                                       value='{{ bids_user_form.registration_street_fiz }}'
                                                                         {% endif %}
 
                                                                 >
@@ -921,9 +944,9 @@
                                                                        name="House_number_fiz"
                                                                        placeholder="Номер Будинку Реєстрації"
                                                                        class="form-control " maxlength="3"
-                                                                       value='{{ bids_form.House_number_fiz.value }}'
+                                                                       value='{{ bids_user_form.House_number_fiz.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.House_number_fiz }}'
+                                                                       value='{{ bids_user_form.House_number_fiz }}'
                                                                         {% endif %}
 
                                                                 >
@@ -941,9 +964,9 @@
                                                                        name="apartment_number_fiz"
                                                                        placeholder="Номер Квартири Реєстрації"
                                                                        class="form-control " maxlength="3"
-                                                                       value='{{ bids_form.apartment_number_fiz.value }}'
+                                                                       value='{{ bids_user_form.apartment_number_fiz.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.apartment_number_fiz }}'
+                                                                       value='{{ bids_user_form.apartment_number_fiz }}'
                                                                         {% endif %}
 
                                                                 >
@@ -971,9 +994,9 @@
                                                                        name="passport_series"
                                                                        placeholder="Серия паспорта"
                                                                        class="form-control " maxlength="2"
-                                                                       value='{{ bids_form.passport_series.value }}'
+                                                                       value='{{ bids_user_form.passport_series.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.passport_series }}'
+                                                                       value='{{ bids_user_form.passport_series }}'
                                                                         {% endif %}
 
                                                                 >
@@ -991,9 +1014,9 @@
                                                                        name="passport_number"
                                                                        placeholder="Номер паспорта"
                                                                        class="form-control " maxlength="6"
-                                                                       value='{{ bids_form.passport_number.value }}'
+                                                                       value='{{ bids_user_form.passport_number.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.passport_number }}'
+                                                                       value='{{ bids_user_form.passport_number }}'
                                                                         {% endif %}
 
                                                                 >
@@ -1010,9 +1033,9 @@
                                                             <input type="text" id="date_of_issue"
                                                                    name="date_of_issue"
                                                                    class="form-control"
-                                                                   value='{{ bids_form.date_of_issue.value }}'
+                                                                   value='{{ bids_user_form.date_of_issue.value }}'
                                                                     {% if request.method == 'POST' %}
-                                                                   value='{{ bids_form.date_of_issue }}'
+                                                                   value='{{ bids_user_form.date_of_issue }}'
                                                                     {% endif %}
 
                                                             >
@@ -1033,9 +1056,9 @@
                                                                        placeholder="Паспорт Ким Видано"
                                                                        class="form-control " maxlength="200"
                                                                        class="form-control " maxlength="200"
-                                                                       value='{{ bids_form.issued_by.value }}'
+                                                                       value='{{ bids_user_form.issued_by.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.issued_by }}'
+                                                                       value='{{ bids_user_form.issued_by }}'
                                                                         {% endif %}
 
                                                                 >
@@ -1081,9 +1104,9 @@
                                                                        name="mailing_list"
                                                                        placeholder="Участь в розсилках"
                                                                        class="form-control " maxlength="150"
-                                                                       value='{{ bids_form.mailing_list.value }}'
+                                                                       value='{{ bids_user_form.mailing_list.value }}'
                                                                         {% if request.method == 'POST' %}
-                                                                       value='{{ bids_form.mailing_list }}'
+                                                                       value='{{ bids_user_form.mailing_list }}'
                                                                         {% endif %}
 
                                                                 >
@@ -1151,7 +1174,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-9 unit">
-                                                        <label class="label">ID проектуу</label>
+                                                        <label class="label">ID проекту</label>
                                                         <div class="form-group-input">
                                                             <div class="input">
                                                                 <label class="icon-right" for="project_id">
@@ -1183,9 +1206,9 @@
                                     >Записать
                                     </button>
                                     <button type="button"
-                                            id="edit_otmena"
+                                            id="back_to_edit"
                                             class="btn btn-danger secondary-btn"
-                                            onclick="window.location.href='/bids/bids/'">Отмена
+                                            onclick="window.location.href='/bids/bidsedit/'">Отмена
                                     </button>
                                 </div>
 

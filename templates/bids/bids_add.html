@@ -2,22 +2,14 @@
 {% load static %}
 
 {% block content %}
-    <!--форма редактирования заявки -->
+    <!--форма создания заявки -->
     <div class="container-fluid">
-        {#    <div class="row">#}
-        {#        <div class="col-md-12">#}
-        {#            <div class="widget-wrap">#}
-        {#                <div class="row">#}
-        {#                    <div class="page-header filled full-block light">#}
         <div class="widget-header ">
-            {#        <div class="widget-header block-header clearfix">#}
             <div class="row">
                 <div class="col-md-6">
-                    <h3 style="color: #00008B ">Добавление заявки</h3>
-                    <p4 style="font-style:italic;text-decoration:underline">{{ timeobr }}</p4>
+                    <h3 style="color: #00008B ">Создание заявки</h3>
                 </div>
-                {#                <div class="col-md-6">#}
-                {#                </div>#}
+
             </div>
         </div>
         <div class="row">
@@ -25,8 +17,10 @@
                 <div class="widget-wrap">
                     <div class="widget-container margin-top-0">
                         <div class="widget-content">
-                            <form action="" method="POST" class="j-forms " id="j-forms"
-                                  novalidate="novalidate" enctype="multipart/form-data">
+                            <form action={{ request.get_full_path }} method="post" class="j-forms " id="j-forms"
+                                  novalidate="novalidate" data-status-url="{% url 'add_ajax_load_status' %}"
+                                  enctype="multipart/form-data"
+                                  method="post">
                                 {% csrf_token %}
                                 <div class="form-content">
                                     <div id="tabs">
@@ -45,62 +39,64 @@
                                         <div id="tabs-1">
                                             <div class="form-group">
                                                 <!-- start name -->
-                                                <div class="col-md-2 unit">
-                                                    <label class="label">Номер телефона</label>
-                                                    <div class="form-group-input">
-                                                        <div class="input">
-                                                            <label class="icon-right" for="name">
-                                                                <i class="fa fa-phone"></i>
-                                                            </label>
-                                                            <input type="text" id="contact_phone"
-                                                                   name="contact_phone"
-                                                                   placeholder="Номер телефона"
-                                                                   class="form-control " maxlength="12">
+                                                <div class="row">
+                                                    <div class="col-md-2 unit">
+                                                        <label class="label">Номер телефона</label>
+                                                        <div class="form-group-input">
+                                                            <div class="input">
+                                                                <label class="icon-right" for="name">
+                                                                    <i class="fa fa-phone"></i>
+                                                                </label>
+                                                                <input type="text" id="contact_phone"
+                                                                       name="contact_phone"
+                                                                       placeholder="Номер телефона"
+                                                                       class="form-control " maxlength="12">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <!-- end name -->
-                                                <!-- start inn -->
-                                                <div class="col-md-2 unit">
-                                                    <label class="label">ИНН</label>
-                                                    <div class="form-group-input">
-                                                        <div class="input">
-                                                            <label class="icon-right" for="name">
-                                                                <i class="fa fa-phone"></i>
-                                                            </label>
-                                                            <input type="text" id="itn"
-                                                                   name="itn" placeholder="ИНН"
-                                                                   class="form-control" maxlength="10">
+                                                    <!-- end name -->
+                                                    <!-- start inn -->
+                                                    <div class="col-md-2 unit">
+                                                        <label class="label">ИНН</label>
+                                                        <div class="form-group-input">
+                                                            <div class="input">
+                                                                <label class="icon-right" for="name">
+                                                                    <i class="fa fa-phone"></i>
+                                                                </label>
+                                                                <input type="text" id="itn"
+                                                                       name="itn" placeholder="ИНН"
+                                                                       class="form-control" maxlength="10">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <!-- end inn -->
-                                                <!-- start birthday-->
-                                                <div class="col-md-2 unit">
-                                                    <label class="label">Дата рождения</label>
-                                                    <div class="input ">
-                                                        <label class="icon-right" for="date_from">
-                                                            <i class="fa fa-calendar"></i>
-                                                        </label>
-                                                        <input type="text" id="birthday" name="birthday"
-                                                               class="form-control">
+                                                    <!-- end inn -->
+                                                    <!-- start birthday-->
+                                                    <div class="col-md-2 unit">
+                                                        <label class="label">Дата рождения</label>
+                                                        <div class="input ">
+                                                            <label class="icon-right" for="date_from">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </label>
+                                                            <input type="text" id="birthday" name="birthday"
+                                                                   placeholder="Дата рождения"
+                                                                   class="form-control">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <!-- end birthday-->
-                                                <!-- start email-->
-                                                <div class="col-md-6 unit">
-                                                    <label class="label">Email</label>
-                                                    <div class="input">
-                                                        <label class="icon-right" for="email">
-                                                            <i class="fa fa-envelope-o"></i>
-                                                        </label>
-                                                        <input type="email" id="email" name="email"
-                                                               class="form-control">
+                                                    <!-- end birthday-->
+                                                    <!-- start email-->
+                                                    <div class="col-md-6 unit">
+                                                        <label class="label">Email</label>
+                                                        <div class="input">
+                                                            <label class="icon-right" for="email">
+                                                                <i class="fa fa-envelope-o"></i>
+                                                            </label>
+                                                            <input type="email" id="email" name="email" placeholder="Email"
+                                                                   class="form-control">
+                                                        </div>
                                                     </div>
+
+                                                    <!-- end email-->
                                                 </div>
-
-                                                <!-- end email-->
-
                                             </div>
                                             <div class="row"></div>
                                             <div class="form-group">
@@ -145,6 +141,28 @@
                                                 <!-- end middle_name-->
                                             </div>
                                             <div class="row"></div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                     <div class="col-md-3 unit">
+                                                        <label class="label">Статус</label>
+                                                       <select class="filter-item__dropdown" id="f-add-status-select" name="f-status-list">
+                                                            <option value="None" selected >-------</option>
+                                                            {% for st_elem in f_status  %}
+                                                                    <option value="{{ st_elem.id }}" >
+                                                                        {{ st_elem.name }}
+                                                                    </option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3 unit">
+                                                        <label class="label">Статус второго уровня</label>
+                                                       <select class="filter-item__dropdown" id="s-add-status-select" name="s-status-list">
+                                                            <option value="None"  selected >-------</option>
+
+                                                       </select>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         </div>
                                         <div id="tabs-2">
@@ -316,7 +334,8 @@
                                                                 <input type="text" id="number_Viber"
                                                                        name="number_Viber"
                                                                        placeholder="Номер Viber"
-                                                                       class="form-control " maxlength="30">
+                                                                       class="form-control " maxlength="30"
+                                                                       value='{{ bids_form.number_Viber.value }}'>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -441,7 +460,7 @@
                                                                     <i class="fa fa-file-text-o"></i>
                                                                 </label>
                                                                 <input type="number" id="income"
-                                                                       name="income" value="0"
+                                                                       name="income"
                                                                        placeholder="Дохід"
                                                                        class="form-control " maxlength="200">
                                                             </div>
@@ -457,7 +476,7 @@
                                                                     <i class="fa fa-file-text-o"></i>
                                                                 </label>
                                                                 <input type="number" id="other_income"
-                                                                       name="other_income" value="0"
+                                                                       name="other_income"
                                                                        placeholder="Інший Дохід"
                                                                        class="form-control " maxlength="30">
                                                             </div>
@@ -473,7 +492,7 @@
                                                                     <i class="fa fa-file-text-o"></i>
                                                                 </label>
                                                                 <input type="number" id="family_income"
-                                                                       name="family_income" value="0"
+                                                                       name="family_income"
                                                                        placeholder="Сімейний Дохід"
                                                                        class="form-control " maxlength="30">
                                                             </div>
@@ -489,7 +508,7 @@
                                                                     <i class="fa fa-file-text-o"></i>
                                                                 </label>
                                                                 <input type="number" id="total_income"
-                                                                       name="total_income" value="0"
+                                                                       name="total_income"
                                                                        placeholder="Загальний Дохід"
                                                                        class="form-control " maxlength="30">
                                                             </div>
@@ -757,6 +776,7 @@
                                                                 <input type="text" id="issued_by"
                                                                        name="issued_by"
                                                                        placeholder="Паспорт Ким Видано"
+                                                                       class="form-control " maxlength="200"
                                                                        class="form-control " maxlength="200">
                                                             </div>
                                                         </div>
@@ -840,7 +860,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-9 unit">
-                                                        <label class="label">ID проектуу</label>
+                                                        <label class="label">ID проекту</label>
                                                         <div class="form-group-input">
                                                             <div class="input">
                                                                 <label class="icon-right" for="project_id">
@@ -858,18 +878,18 @@
 
                                         </div>
                                     </div>
+                                    <div id="response"></div>
                                 </div>
                                 <div class="form-footer block-form-footer">
                                     <button type="submit"
                                             class="btn btn-success primary-btn multi-submit-btn"
-                                    >Добавить
+                                    >Записать
                                     </button>
-                                    {#                                        <button type="button"#}
-                                    {#                                                class="btn btn-primary primary-btn multi-next-btn">Вперед#}
-                                    {#                                        </button>#}
-                                    {#                                        <button type="button" class="btn btn-info secondary-btn multi-prev-btn"#}
-                                    {#                                                style="display: none;">Назад#}
-                                    {#                                        </button>#}
+                                    <button type="button"
+                                            id="back_to_edit"
+                                            class="btn btn-danger secondary-btn"
+                                            onclick="window.location.href='/bids/bidsedit/'">Отмена
+                                    </button>
                                 </div>
 
                             </form>
@@ -883,4 +903,3 @@
 
 
 {% endblock %}
-
