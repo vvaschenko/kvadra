@@ -9,6 +9,33 @@
  * Released under the MIT license
  * https://github.com/fians/Waves/blob/master/LICENSE
  */
+
+.history-text{
+  height: 26px;
+  text-align: right;
+  color: #00008B;
+}
+
+.project_names{
+  vertical-align: center;
+  width: 100%;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.filter-item__dropdown{
+  height: 39px;
+  width: 100%;
+}
+
+.title{
+  text-align: center;
+}
+
+#id_status{
+  height: 40px;
+  width: 100%;
+}
 .waves-effect {
   position: relative;
   cursor: pointer;

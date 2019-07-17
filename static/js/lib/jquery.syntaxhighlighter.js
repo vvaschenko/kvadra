@@ -213,7 +213,7 @@
         linkEl.media = 'screen';
         linkEl.href = url;
         linkEl.id = id;
-        bodyEl.appendChild(linkEl);
+        // bodyEl.appendChild(linkEl);
 
         // Chain
         return $;
@@ -263,7 +263,7 @@
         scriptEl.type = 'text/javascript';
         scriptEl.src = url;
         scriptEl.id = id;
-        bodyEl.appendChild(scriptEl);
+        // bodyEl.appendChild(scriptEl);
 
         // Chain
         return $;

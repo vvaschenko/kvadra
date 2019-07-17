@@ -7,6 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>Kvadra CRM</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
     <!-- Bootstrap -->
 
     <link type="text/css" rel="stylesheet" href={% static 'bootstrap/css/bootstrap.min.css' %}>
@@ -29,7 +34,82 @@
     <link type="text/css" rel="stylesheet" href={% static 'css/common.css' %}>
     <link type="text/css" rel="stylesheet" href={% static 'css/responsive.css' %}>
     <link type="text/css" rel="stylesheet" href={% static 'css/jquery-ui.css' %}>
+    <link type="text/css" rel="stylesheet" href={% static 'css/prettify.css' %}>
 
+
+    {% block style %}
+    {% endblock %}
+
+<script defer src={% static 'bootstrap/js/moment-with-locales.js' %}></script>
+<script defer src={% static 'js/lib/jquery-1.12.4.js' %}></script>
+<script defer src={% static 'js/lib/jquery-ui_1.js' %}></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<script defer src={% static 'bootstrap/js/bootstrap.min.js' %}></script>
+<script defer src={% static 'bootstrap/js/bootstrap-datetimepicker.min.js' %}></script>
+
+
+<script defer src={% static 'js/lib/jquery.fitvids.js' %}></script>
+<script defer src={% static 'js/lib/jquery.slimscroll.js' %}></script>
+<script defer src={% static 'js/lib/jquery.syntaxhighlighter.js' %}></script>
+<script defer src={% static 'js/lib/jquery-jvectormap.js' %}></script>
+<script defer src={% static 'js/lib/jquery-jvectormap-world-mill.js' %}></script>
+<script defer src={% static 'js/lib/jquery-jvectormap-us-aea.js' %}></script>
+<script defer src={% static 'js/lib/jquery.switch.button.js' %}></script>
+<script defer src={% static 'js/lib/jquery.searcher.js' %}></script>
+<script defer src={% static 'js/lib/jquery.scrollTo-min.js' %}></script>
+<script defer src={% static 'js/lib/jquery.highlight.js' %}></script>
+
+
+<script defer src={% static 'js/lib/jRespond.js' %}></script>
+<script defer src={% static 'js/lib/nav.accordion.js' %}></script>
+<script defer src={% static 'js/lib/hover.intent.js' %}></script>
+<script defer src={% static 'js/lib/hammerjs.js' %}></script>
+<script defer src={% static 'js/lib/jquery.hammer.js' %}></script>
+<script defer src={% static 'js/lib/scrollup.js' %}></script>
+<script defer src={% static 'js/lib/smoothscroll.js' %}></script>
+<script defer src={% static 'js/lib/velocity.js' %}></script>
+<script defer src={% static 'js/lib/smart-resize.js' %}></script>
+<script defer src={% static 'js/lib/highlight.js' %}></script>
+
+<!--Data Tables-->
+<script defer src={% static 'js/lib/jquery.dataTables.js' %}></script>
+<script defer src={% static 'js/lib/dataTables.responsive.js' %}></script>
+<script defer src={% static 'js/lib/dataTables.tableTools.js' %}></script>
+<script defer src={% static 'js/lib/dataTables.bootstrap.js' %}></script>
+<script defer src={% static 'js/lib/footable.all.js' %}></script>
+
+<!--Forms-->
+    <script defer src={% static 'js/lib/jquery.maskedinput.js' %}></script>
+    <script defer src={% static 'js/lib/jquery.validate.js' %}></script>
+    <script defer src={% static 'js/lib/jquery.form.js' %}></script>
+    <script defer src={% static 'js/lib/j-forms.js' %}></script>
+    <script defer src={% static 'js/lib/jquery.loadmask.js' %}></script>
+    <script defer src={% static 'js/apps.js' %}></script>
+
+
+    <script defer src={% static 'js/lib/bootstrap-filestyle.js' %}></script>
+
+    <script defer src={% static 'js/lib/jquery.tagsinput.js' %}></script>
+    <script defer src={% static 'js/lib/jquery.mask.js' %}></script>
+    <script defer src={% static 'js/lib/jquery.tagsinput.js' %}></script>
+    <script defer src={% static 'js/lib/jquery.bootstrap-touchspin.js' %}></script>
+
+    <script defer src={% static 'js/lib/selectize.js' %}></script>
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+
+<!--start my script -->
+<script defer src={% static 'js/vvg/my_function.js' %}></script>
+<script defer src={% static 'js/vvg/jquery-resume.js' %}></script>
+<script defer src={% static 'js/vvg/graph_data.js' %}></script>
+<script defer src={% static 'js/vvg/sendfile.js' %}></script>
+<script defer src={% static 'js/vvg/menuact.js' %}></script>
+<script defer src={% static 'js/vvg/poisktext.js' %}></script>
+<script defer src={% static 'js/bidsimport.js' %}></script>
+{#<script src={% static 'js/vvg/datepicker.js' %}></script>#}
 
 </head>
 
@@ -181,8 +261,12 @@
                 <a href="#"><i class="zmdi zmdi-view-dashboard"></i><span class="list-label">Заявки</span></a>
                 <ul>
                     <li class="menunumber"><a href={% url 'bids' %}>Заявки просмотр</a></li>
-                    <li class="menunumber"><a href={% url 'bidsdouble' %}>Заявки дубль</a></li>
-                    <li class="menunumber"><a href={% url 'bidsimport' %}>Импорт заявок</a></li>
+                    {% if perms.bids.view_bid_double %}
+                        <li class="menunumber"><a href={% url 'bidsdouble' %}>Заявки дубль</a></li>
+                    {% endif %}
+                    {% if perms.bids.view_bidimport %}
+                        <li class="menunumber"><a href={% url 'bidsimport' %}>Импорт заявок</a></li>
+                    {% endif %}
 {#                    <li class="menunumber"><a href={% url 'mon_partitions' %}>Partitions viewer</a></li>#}
 {#                    <li class="menunumber"><a href={% url 'last' %}>Replication Delays</a></li>#}
                 </ul>
@@ -293,98 +377,6 @@
 
 </section>
 
-
-<script src={% static 'bootstrap/js/moment-with-locales.js' %}></script>
-<script src={% static 'js/lib/jquery-1.12.4.js' %}></script>
-{#<script src={% static 'js/lib/jquery.min.js' %}></script>#}
-{#<script src={% static 'js/lib/jquery-migrate.js' %}></script>#}
-{#<script src={% static 'js/lib/jquery.ui.js' %}></script>#}
-<script src={% static 'js/lib/jquery-ui_1.js' %}></script>
-
-
-<script src={% static 'bootstrap/js/bootstrap.min.js' %}></script>
-
-{#<script src={% static 'bootstrap/js/moment.min.js' %}></script>#}
-{#<script src={% static 'js/lib/moment.js' %}></script>#}
-<script src={% static 'bootstrap/js/bootstrap-datetimepicker.min.js' %}></script>
-
-
-<script src={% static 'js/lib/jquery.fitvids.js' %}></script>
-<script src={% static 'js/lib/jquery.slimscroll.js' %}></script>
-<script src={% static 'js/lib/jquery.syntaxhighlighter.js' %}></script>
-<script src={% static 'js/lib/jquery-jvectormap.js' %}></script>
-<script src={% static 'js/lib/jquery-jvectormap-world-mill.js' %}></script>
-<script src={% static 'js/lib/jquery-jvectormap-us-aea.js' %}></script>
-<script src={% static 'js/lib/jquery.switch.button.js' %}></script>
-<script src={% static 'js/lib/jquery.searcher.js' %}></script>
-<script src={% static 'js/lib/jquery.scrollTo-min.js' %}></script>
-<script src={% static 'js/lib/jquery.highlight.js' %}></script>
-
-
-<script src={% static 'js/lib/jRespond.js' %}></script>
-<script src={% static 'js/lib/nav.accordion.js' %}></script>
-<script src={% static 'js/lib/hover.intent.js' %}></script>
-<script src={% static 'js/lib/hammerjs.js' %}></script>
-<script src={% static 'js/lib/jquery.hammer.js' %}></script>
-<script src={% static 'js/lib/scrollup.js' %}></script>
-<script src={% static 'js/lib/smoothscroll.js' %}></script>
-<script src={% static 'js/lib/velocity.js' %}></script>
-<script src={% static 'js/lib/smart-resize.js' %}></script>
-<script src={% static 'js/lib/highlight.js' %}></script>
-
-
-<!--start my script -->
-<script src={% static 'js/vvg/my_function.js' %}></script>
-<script src={% static 'js/vvg/jquery-resume.js' %}></script>
-<script src={% static 'js/vvg/graph_data.js' %}></script>
-<script src={% static 'js/vvg/sendfile.js' %}></script>
-<script src={% static 'js/vvg/menuact.js' %}></script>
-<script src={% static 'js/vvg/poisktext.js' %}></script>
-<script src={% static 'js/bidsimport.js' %}></script>
-{#<script src={% static 'js/vvg/datepicker.js' %}></script>#}
-
-
-<!--end my script -->
-
-
-
-
-
-<!--Data Tables-->
-<script src={% static 'js/lib/jquery.dataTables.js' %}></script>
-<script src={% static 'js/lib/dataTables.responsive.js' %}></script>
-<script src={% static 'js/lib/dataTables.tableTools.js' %}></script>
-<script src={% static 'js/lib/dataTables.bootstrap.js' %}></script>
-<script src={% static 'js/lib/footable.all.js' %}></script>
-
-<!--Forms-->
-<script src={% static 'js/lib/jquery.maskedinput.js' %}></script>
-<script src={% static 'js/lib/jquery.validate.js' %}></script>
-<script src={% static 'js/lib/jquery.form.js' %}></script>
-<script src={% static 'js/lib/j-forms.js' %}></script>
-<script src={% static 'js/lib/jquery.loadmask.js' %}></script>
-<script src={% static 'js/apps.js' %}></script>
-
-
-<script src={% static 'js/lib/bootstrap-filestyle.js' %}></script>
-
-<script src={% static 'js/lib/jquery.tagsinput.js' %}></script>
-<script src={% static 'js/lib/jquery.mask.js' %}></script>
-<script src={% static 'js/lib/jquery.tagsinput.js' %}></script>
-<script src={% static 'js/lib/jquery.bootstrap-touchspin.js' %}></script>
-
-<script src={% static 'js/lib/selectize.js' %}></script>
-
-
-<!--start graph -->
-
-{#<script src={% static 'highcharts/highstock.js' %}></script>#}
-{#<script src={% static 'highcharts/modules/exporting.js' %}></script>#}
-{#<script src={% static 'highcharts/highcharts-more.js' %}></script>#}
-
-
-
-<!--end graph -->
 
 
 </body>

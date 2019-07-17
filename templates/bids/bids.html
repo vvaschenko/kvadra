@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+
     <!-- Modal dialog del alert -->
     <div id="bids_del" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-sm">
@@ -29,27 +30,13 @@
                     <ul class="list-page-breadcrumb">
                         <li>
                             <a href="{% url 'bids' %}">Заявки<i class="zmdi zmdi-chevron-right"></i></a>
-                            <a href="{% url 'bidsdouble' %}">Дубли<i class="zmdi zmdi-chevron-right"></i></a>
+                            {% if perms.bids.view_bid_double %}<a href="{% url 'bidsdouble' %}">Дубли<i class="zmdi zmdi-chevron-right"></i></a>{% endif %}
                         </li>
                     </ul>
             </div>
     <div class="row">
         <div class="col-md-12">
             <div class="widget-wrap">
-
-                {#                <div class="widget-header block-header clearfix">#}
-                {#                    <div class="col-md-6">#}
-                {#                        <h3 style="color: #00008B ">Просмотр заявок</h3>#}
-                {#                        <p4 style="font-style:italic;text-decoration:underline">Время : <span#}
-                {#                                style="font-weight: bold">{{ timeobr }}</span></p4>#}
-                {#                    </div>#}
-                {##}
-                {#                    <div class="col-md-6">#}
-                {#                        <div class="data-align-right">#}
-                {#                            <a href="{% url 'bidsedit' %}" class="btn add-row btn-primary">Добавить заявку</a>#}
-                {#                        </div>#}
-                {#                    </div>#}
-                {#                </div>#}
                 <div>
                     <div class="widget-header block-header clearfix">
                         <h3 style="color: #00008B ">Просмотр заявок</h3>
@@ -88,16 +75,16 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3" id="groupview">
-                    <label class="tfh-label"></label>
-                        <select name="groupitem" class="form-control" id="groupbids" data-regim="groupview">
-                            <option value="0" selected>Выберите проект</option>
-                            {% for post_gr in grouplist %}
-                                <option value="{{ post_gr.id }}">"{{ post_gr.name }}"</option>
+                    <br/>
+                        <select  class="form-control selectpicker" multiple name="groupitem" id="groupbids">
+                            <option value="0" disabled >Выберите проект</option>
+                            {% for post_gr in group_list %}
+                                <option value="{{ post_gr.id }}">{{ post_gr.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="col-md-3 unit">
-                        <label class="tfh-label"></label>
+                        <br/>
                         <div class="data-align-left">
                             <button id="migration_bids" type="button" class="btn btn-primary green_button"
                                     onclick="migration_bids()"
@@ -138,21 +125,20 @@
                             </tr>
                             </tfoot>
                             <tbody id="bidsview">
+
                             {% for post in p_bids %}
                                 <tr role="row" class="even">
                                     <td>
                                         <input id="my_checkbox_{{ post.pk }}" type="checkbox" class="checkbox_bids"
-                                               data-zp_id="{{ post.id }}"
-                                               value={{ post.vybor }} {% if post.vybor == 1%} checked {% endif %}
-                                        >
+                                               data-zp_id="{{ post.id }}">
                                     </td>
                                     <td title="Двойное нажатие откроет редактор заявки"
                                         ondblclick="window.location.href='/bids/bidsedit/?edit_id={{ post.id }}'"
-                                        style="width: 50px;cursor: pointer;">{{ post.last_name }}</td>
+                                        style="width: 50px;cursor: pointer;">{{ post.user.profileuser.last_name}}</td>
                                     <td  title="Двойное нажатие откроет редактор заявки"
                                         ondblclick="window.location.href='/bids/bidsedit/?edit_id={{ post.id }}'"
-                                        style="width: 50px;cursor: pointer;">{{ post.first_name }}</td>
-                                    <td>{{ post.contact_phone }}</td>
+                                        style="width: 50px;cursor: pointer;">{{ post.user.profileuser.first_name }}</td>
+                                    <td>{{ post.user.profileuser.contact_phone }}</td>
                                     <td>{{ post.status }}</td>
                                     <td id="cr_data">{{ post.created_dt|date:"Y-m-d" }} {{ post.created_dt|time:"H:i" }}</td>
                                     <td>{{ post.updated_dt|date:"Y-m-d" }} {{ post.updated_dt|time:"H:i" }}</td>
@@ -162,10 +148,11 @@
                                            data-edit_id="{{ post.id }}"
                                         ><span class="zmdi zmdi-edit"></span></a>
                                         <a title="Удалить" class="row-delete" id="del_{{ post.id }}"
-                                           onclick="bids_del(id,'add')"><span class="zmdi zmdi-close"></span></a>
+                                           onclick="bids_delete({{ post.id }},'add')"><span class="zmdi zmdi-close"></span></a>
                                     </td>
                                 </tr>
                             {% endfor %}
+
                            </tbody>
                         </table>
                     </div>

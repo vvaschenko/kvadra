@@ -167,12 +167,12 @@ def sign_up(request):
         if form.is_valid():
             cd = form.cleaned_data
             new_user = User.objects.create_user(cd['username'], cd['email'], cd['password'])
-            group = Group.objects.get(name='guest')
+            group = Group.objects.get_or_create(name='guest')[0]
             new_user.is_staff = True
+            # new_user.is_staff = False
             new_user.groups.add(group)
             new_user.save()
-            # new_profile = ProfileUser()
-            # signals.post_save()
+            group.save()
 
             user = authenticate(username=cd['username'], password=cd['password'])
             if user is not None:
@@ -184,7 +184,6 @@ def sign_up(request):
             else:
                 return HttpResponse('Return an invalid login error message.')
 
-
     else:
         form = Registration()
 
@@ -193,7 +192,7 @@ def sign_up(request):
 
 def log_out(request):
     if 'back' in request.POST:
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/bids/bids/')
     elif 'log_out' in request.POST:
         auth.logout(request)
         return HttpResponseRedirect('/')
