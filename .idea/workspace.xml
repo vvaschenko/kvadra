@@ -3,23 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="987f31cc-6d15-4285-a081-0148584b2e3e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0002_auto_20190426_1602.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0003_auto_20190426_1604.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0004_auto_20190506_1706.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0005_auto_20190506_1707.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0006_auto_20190506_1708.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0007_auto_20190506_1708.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0008_auto_20190506_1710.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0009_auto_20190508_1306.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0010_bidimport_user.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0011_remove_bidimport_user.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0012_bid_vybor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0013_auto_20190524_1043.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0014_auto_20190524_1043.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/0015_auto_20190531_1207.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bids/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/kvadra/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/kvadra/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,8 +90,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/kvadra/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-701">
-              <caret line="87" column="9" selection-start-line="87" selection-start-column="9" selection-end-line="87" selection-end-column="9" />
+            <state relative-caret-position="775">
+              <caret line="145" column="23" selection-start-line="145" selection-start-column="23" selection-end-line="145" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -291,44 +274,51 @@
       <workItem from="1559892830253" duration="2934000" />
       <workItem from="1559896290023" duration="7280000" />
     </task>
-    <task id="LOCAL-00001" summary="Merge branch 'master' of https://github.com/vvaschenko/kvadra&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml">
-      <created>1560243815582</created>
+    <task id="LOCAL-00001" summary="merges">
+      <created>1563361089916</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1560243815582</updated>
+      <updated>1563361089916</updated>
     </task>
     <task id="LOCAL-00002" summary="merges">
-      <created>1560243923497</created>
+      <created>1563361183847</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1560243923497</updated>
+      <updated>1563361183847</updated>
     </task>
+    <task id="LOCAL-00003" summary="merges">
+      <created>1563361264411</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1563361264411</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98000" />
+    <option name="totallyTimeSpent" value="920000" />
   </component>
   <component name="TodoView" selected-index="4" />
   <component name="ToolWindowManager">
     <frame x="44" y="-11" width="1877" height="1092" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2646255" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2646255" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39916405" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49917987" visible="true" weight="0.39916405" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50027335" side_tool="true" weight="0.3291536" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5008201" side_tool="true" weight="0.39916405" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3678161" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49972662" weight="0.3291536" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -542,8 +532,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/kvadra/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-701">
-          <caret line="87" column="9" selection-start-line="87" selection-start-column="9" selection-end-line="87" selection-end-column="9" />
+        <state relative-caret-position="775">
+          <caret line="145" column="23" selection-start-line="145" selection-start-column="23" selection-end-line="145" selection-end-column="23" />
         </state>
       </provider>
     </entry>
