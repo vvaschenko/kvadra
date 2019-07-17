@@ -2,8 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="987f31cc-6d15-4285-a081-0148584b2e3e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0002_auto_20190426_1602.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0003_auto_20190426_1604.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0004_auto_20190506_1706.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0005_auto_20190506_1707.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0006_auto_20190506_1708.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0007_auto_20190506_1708.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0008_auto_20190506_1710.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0009_auto_20190508_1306.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0010_bidimport_user.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0011_remove_bidimport_user.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0012_bid_vybor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0013_auto_20190524_1043.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0014_auto_20190524_1043.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/0015_auto_20190531_1207.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kvadra/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/kvadra/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,11 +65,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bids/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="191" column="36" lean-forward="true" selection-start-line="191" selection-start-column="36" selection-end-line="191" selection-end-column="36" />
+            <state relative-caret-position="3546">
+              <caret line="197" column="4" selection-start-line="197" selection-start-column="4" selection-end-line="197" selection-end-column="4" />
               <folding>
                 <element signature="e#15#37#0" expanded="true" />
               </folding>
@@ -62,19 +78,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/js/apps.js">
+        <entry file="file://$PROJECT_DIR$/templates/bids/bids_edit_old.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="26262">
-              <caret line="1459" column="17" selection-start-line="1459" selection-start-column="17" selection-end-line="1459" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bids/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1494">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="21870">
+              <caret line="1215" column="40" selection-start-line="1215" selection-start-column="40" selection-end-line="1215" selection-end-column="65" />
             </state>
           </provider>
         </entry>
@@ -82,8 +89,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/bids/bids_edit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21402">
-              <caret line="1189" selection-start-line="1189" selection-end-line="1189" />
+            <state relative-caret-position="21186">
+              <caret line="1177" column="61" selection-end-line="1203" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/bids/bids_add_old.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3510">
+              <caret line="195" column="45" selection-start-line="195" selection-start-column="45" selection-end-line="195" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/kvadra/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-701">
+              <caret line="87" column="9" selection-start-line="87" selection-start-column="9" selection-end-line="87" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -100,8 +125,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/bids/bids.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="133" column="56" selection-start-line="133" selection-start-column="56" selection-end-line="133" selection-end-column="56" />
+            <state relative-caret-position="1548">
+              <caret line="86" column="26" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -131,7 +156,7 @@
         <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="5382">
-              <caret line="299" selection-start-line="299" selection-end-line="299" />
+              <caret line="299" selection-start-line="299" selection-start-column="2" selection-end-line="299" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -140,6 +165,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -154,6 +184,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -233,7 +264,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="RunDashboard">
@@ -278,13 +308,14 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77000" />
+    <option name="totallyTimeSpent" value="98000" />
   </component>
   <component name="TodoView" selected-index="4" />
   <component name="ToolWindowManager">
-    <frame x="45" y="-4" width="1875" height="1084" extended-state="6" />
+    <frame x="44" y="-11" width="1877" height="1092" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.261345" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2646255" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -406,13 +437,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bids/bids.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="133" column="56" selection-start-line="133" selection-start-column="56" selection-end-line="133" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/css/components.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-181712">
@@ -434,41 +458,92 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bids/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore" />
+    <entry file="file://$PROJECT_DIR$/static/js/lib/j-forms.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1674" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bids/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3546">
+          <caret line="197" column="4" selection-start-line="197" selection-start-column="4" selection-end-line="197" selection-end-column="4" />
+          <folding>
+            <element signature="e#15#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bids/bids_edit_old.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21870">
+          <caret line="1215" column="40" selection-start-line="1215" selection-start-column="40" selection-end-line="1215" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bids/bids_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21186">
+          <caret line="1177" column="61" selection-end-line="1203" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bids/bids_add_old.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3510">
+          <caret line="195" column="45" selection-start-line="195" selection-start-column="45" selection-end-line="195" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bids/bids_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="22" selection-end-line="886" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bids/bids.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1548">
+          <caret line="86" column="26" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/vvg/my_function.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23598">
+          <caret line="1311" column="24" selection-start-line="1311" selection-start-column="24" selection-end-line="1311" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bids/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="7" column="50" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5382">
-          <caret line="299" selection-start-line="299" selection-end-line="299" />
+          <caret line="299" selection-start-line="299" selection-start-column="2" selection-end-line="299" selection-end-column="63" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/kvadra/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
+        <state relative-caret-position="-701">
           <caret line="87" column="9" selection-start-line="87" selection-start-column="9" selection-end-line="87" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bids/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1494">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bids/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="191" column="36" lean-forward="true" selection-start-line="191" selection-start-column="36" selection-end-line="191" selection-end-column="36" />
-          <folding>
-            <element signature="e#15#37#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
