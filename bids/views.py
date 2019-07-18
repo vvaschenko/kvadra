@@ -327,7 +327,7 @@ def bidsimport(request):
                     number_of_columns = sheet.ncols
                     for item in range(0, number_of_columns):
                         list_column_name[item] = (sheet.cell(0, item).value)
-
+                count_i = 0
                 for item_rows in range(1, number_of_rows):
                     for lineitem in range(0, number_of_columns):
                         for poledb in list_table.values():
@@ -335,12 +335,19 @@ def bidsimport(request):
                                 name_pole_db = get_key(list_table, poledb)
                                 bachlist[name_pole_db] = get_value_excel(book, sheet, item_rows, lineitem)
                     # bachlist["groupid"] = str(request.user.groups.values_list('id', flat=True).first())
-                    bachlist["groupid"] = group_id
+                    # bachlist["groupid"] = group_id
                     # bachlist["user_id"] = curentuser_id
                     # bachlist["user"] = curentuser
                     if 'itn' in bachlist:
                         if bachlist['itn'].isdigit():
-                            pass
+                            new_user = User.objects.filter(username="U_" + bachlist["itn"])
+                            if not new_user.exists():
+                                new_user = User.objects.create_user(username="U_" + bachlist["itn"], email=bachlist.get("email", ""), password="password1029")
+                                group = Group.objects.get(id=group_id)
+                                new_user.groups.add(group)
+                                new_user.save()
+                            else:
+                                new_user = new_user.first()
                         else:
                             results['success'] = False
                             results['error'] = 'ИНН должен быть заполнен'
@@ -361,12 +368,26 @@ def bidsimport(request):
                         results['success'] = False
                         results['error'] = 'Поле номер паспорта должно быть заполнено'
                         return JsonResponse(results)
-
                     try:
                         # import_db = BidImport.objects.create(**bachlist)
                         if len(bachlist) > 0:
-                            obj = BidImport.objects.create(**bachlist)
-                            obj.save()
+                            fields_profile = [f.name for f in ProfileUser._meta.get_fields()]
+                            profile_user = ProfileUser.objects.filter(user_id=new_user.id)
+                            pr = {}
+                            d_iter = bachlist.copy()
+                            for k, v in d_iter.items():
+                                if k in fields_profile:
+                                    pr[k] = v
+                                    del bachlist[k]
+                            if not profile_user.exists():
+                                ProfileUser.objects.create(user_id=new_user.id, **pr)
+                            if not BidImport.objects.filter(user_id=new_user.id, **bachlist).exists():
+                                obj = BidImport.objects.create(user_id=new_user.id, **bachlist)
+                                obj.save()
+                            if not Bid.objects.filter(user_id=new_user.id, **bachlist).exists():
+                                bid_n = Bid.objects.create(user_id=new_user.id, **bachlist)
+                                bid_n.save()
+                            count_i += 1
                         results['success'] = True
                     except Exception as err:
                         results['success'] = False
@@ -376,25 +397,22 @@ def bidsimport(request):
 
                 book.release_resources()
                 del book
-                count_dubl = 0
-                for stroka in BidImport.objects.all():
-                    dict_str = stroka.__dict__
-                    del dict_str['_state']
+                #count_dubl = 0
+                #for stroka in BidImport.objects.all():
+                #    dict_str = stroka.__dict__
+                #    del dict_str['_state']
                     # del dict_str['_user_cache']
                     # dict_str['user'] = curentuser
-                    try:
+                #    try:
                         # Bid.objects.get(**dict_str)
-                        Bid.objects.get(itn=dict_str['itn'], passport_series=dict_str['passport_series'],
-                                        passport_number=dict_str['passport_number'])
+                #        Bid.objects.get(id=dict_str['id'])
                         # obj = BidDouble.objects.create(**dict_str)
-                        obj.save()
-                        count_dubl += 1
-                    except Bid.DoesNotExist:
-                        obj = Bid.objects.create(**dict_str)
-                        obj.save()
+                #        count_dubl += 1
+                #    except Bid.DoesNotExist:
+                #        Bid.objects.create(**dict_str)
 
                 # return render(request, 'bids/bids_import.html', context)
-                results['count_dubl'] = count_dubl
+                results['count_dubl'] = count_i
             else:
                 pass
             # else:
