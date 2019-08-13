@@ -1350,7 +1350,10 @@ $(function () {
         my_enddt = $('#datetimepickerbids2').data("DateTimePicker").date().format();
         // var now = moment();
     });
-
+    $('.group_filter').on('change', function (e) {
+        let button_graph = document.getElementById('filterbids');
+        button_graph.disabled = false;
+    });
     $('#datetimepicker1').on('dp.change', function (e) {
         $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
         let button_graph = document.getElementById('show_graph_detail');
@@ -1390,7 +1393,7 @@ $(function () {
 function migration_bids() {
     let checkboxes = document.getElementsByClassName("checkbox_bids");
     let bid_id_arr = [];
-    let groups_id = $('.selectpicker').val()
+    let groups_id = $('.groupbids').val();
     for ( let i=0; i<checkboxes.length; i++)
     {
         if(checkboxes[i].checked) {
@@ -1460,21 +1463,41 @@ $("#f-add-status-select").change(function () {
 function filterbids() {
     let stime = document.getElementById('datetimepickerbids1').value.split('.');
     let etime = document.getElementById('datetimepickerbids2').value.split('.');
+    let group_filter =  $('#group_filter > div > button > span.filter-option.pull-left').text()
+    console.log(group_filter);
+    let group_filters = [];
+    if (group_filter) {
+        group_filters = group_filter.split(', ')
+    }
+    if (stime || etime) {
+        let starttime = Date.parse(new Date(stime[2], stime[1]-1, stime[0]));
+        let endtime = Date.parse(new Date(etime[2], etime[1]-1, etime[0]));
 
-    let starttime = Date.parse(new Date(stime[2], stime[1]-1, stime[0]));
-    let endtime = Date.parse(new Date(etime[2], etime[1]-1, etime[0]));
+        let today = new Date();
+        let cur_data = Date.parse(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
 
-    let today = new Date();
-    let cur_data = Date.parse(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
-
+        $("#bidsview tr").each(function () {
+            if(cur_data <= endtime && cur_data >= starttime) {
+                $(this).show();
+            }
+            else {
+                $(this).hide();
+            }
+        });
+    }
     $("#bidsview tr").each(function () {
-        if(cur_data <= endtime && cur_data >= starttime) {
+        if(group_filters.includes($(this).attr('data-group-name'))) {
             $(this).show();
         }
         else {
             $(this).hide();
         }
     });
+    if (group_filter == "Nothing selected") {
+        $("#bidsview tr").each(function () {
+            $(this).show();
+        })
+    }
 }
 
 function detaildelay() {

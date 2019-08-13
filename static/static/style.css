@@ -3,7 +3,14 @@
     /*text-align: center;*/
 
 }
-
+.title a {
+    text-decoration: none;
+    color: white
+}
+.title a:hover {
+    text-decoration: none;
+    color: white
+}
 .leftlink, .rightlink {
     float: left;
     width: 50%;
@@ -109,7 +116,6 @@ a{
 	margin-top: 15px;
 	margin-bottom: 15px;
 }
-
 .logo_img{
 	margin-left: 5px;
 }

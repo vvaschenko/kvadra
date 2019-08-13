@@ -1,4 +1,5 @@
 # coding=utf-8
+import re
 from re import search
 
 from django.core.exceptions import ValidationError
@@ -27,7 +28,7 @@ def validate_birthday(value):
 
 
 def validate_contact_phone_numeric(value):
-    if not value.isnumeric():
+    if not re.search(r'^\+?3?8?(0\d{9})$', value):
         raise ValidationError(
             message="Номер телефона должен быть в формате 380991115599"
         )

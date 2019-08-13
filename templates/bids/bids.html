@@ -30,7 +30,16 @@
                     <ul class="list-page-breadcrumb">
                         <li>
                             <a href="{% url 'bids' %}">Заявки<i class="zmdi zmdi-chevron-right"></i></a>
-                            {% if perms.bids.view_bid_double %}<a href="{% url 'bidsdouble' %}">Дубли<i class="zmdi zmdi-chevron-right"></i></a>{% endif %}
+                            {% if 'bidsdouble' in request.path %}
+                            <a href="{% url 'bidsdouble' %}">Дубли
+                                <i class="zmdi zmdi-chevron-right"></i>
+                            </a>
+                            {% endif %}
+                            {% if 'bidsimport' in request.path %}
+                            <a href="{% url 'bidsimport' %}">Импорт
+                                <i class="zmdi zmdi-chevron-right"></i>
+                            </a>
+                            {% endif %}
                         </li>
                     </ul>
             </div>
@@ -59,6 +68,7 @@
                             />
                         </div>
                     </div>
+
                     <div class="col-md-3 unit">
                         <div class="data-align-left green_button-container">
                             <button id="filterbids" type="button" class="btn btn-primary green_button"
@@ -72,11 +82,21 @@
                             <a href="{% url 'bidsadd' %}" class="btn add-row btn-primary green_button">Добавить заявку</a>
                         </div>
                     </div>
+                    <br>
+                    <div class="col-md-3" id="group_filter">
+                        <label class="tfh-label">Выберите проект</label>
+                        <select  class="form-control selectpicker group_filter" multiple name="groupitem" id="group_filter">
+                            <option value="0" disabled >Выберите проект</option>
+                            {% for post_gr in group_list %}
+                                <option value="{{ post_gr.id }}">{{ post_gr.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3" id="groupview">
                     <br/>
-                        <select  class="form-control selectpicker" multiple name="groupitem" id="groupbids">
+                        <select  class="form-control selectpicker groupbids" multiple name="groupitem" id="groupbids">
                             <option value="0" disabled >Выберите проект</option>
                             {% for post_gr in group_list %}
                                 <option value="{{ post_gr.id }}">{{ post_gr.name }}</option>
@@ -127,7 +147,7 @@
                             <tbody id="bidsview">
 
                             {% for post in p_bids %}
-                                <tr role="row" class="even">
+                                <tr role="row" class="even" data-group-name="{{ post.user.groups.first.name }}">
                                     <td>
                                         <input id="my_checkbox_{{ post.pk }}" type="checkbox" class="checkbox_bids"
                                                data-zp_id="{{ post.id }}">

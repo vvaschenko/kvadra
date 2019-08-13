@@ -2,6 +2,7 @@
 
 import json
 import logging
+import uuid
 
 import xlrd
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -42,7 +43,6 @@ class BidView(ListView):
     def post(self, request):
         del_id = request.POST.get('id', None)
         group_id = self.request.POST.getlist('group_id[]', None)
-        print(del_id)
         bid_arr = self.request.POST.getlist('bid_id_arr[]', None)
         if del_id is not None:
             try:
@@ -125,7 +125,7 @@ def bidsedit(request):
             s_choosed = request.POST.get('s-status-list', None)
             if s_choosed is not None and s_choosed != "None":
                 status = BidStatus.objects.get(id=s_choosed)
-            elif f_choosed is not None:
+            elif f_choosed is not None and f_choosed != "None":
                 status = BidStatus.objects.get(id=f_choosed)
             else:
                 status = None
@@ -178,59 +178,63 @@ def bidsadd(request):
     if request.method == 'POST':
         bids_form = BidsAdd(request.POST)
         bids_user_form = UserAdd(request.POST)
-        bids_form.user = request.user
+        if bids_form.is_valid() and bids_user_form.is_valid():
+            bids_form.user = request.user
 
-        itn = bids_user_form.data['itn']
-        passport_series = bids_user_form.data['passport_series']
-        passport_number = bids_user_form.data['passport_number']
+            itn = bids_user_form.data['itn']
+            passport_series = bids_user_form.data['passport_series']
+            passport_number = bids_user_form.data['passport_number']
 
-        f_choosed = request.POST.get('f-status-list', None)
-        s_choosed = request.POST.get('s-status-list', None)
-        if s_choosed is not None and s_choosed != "None":
-            status = BidStatus.objects.get(id=s_choosed)
-        elif f_choosed is not None:
-            status = BidStatus.objects.get(id=f_choosed)
-        else:
-            status = None
-        try:
-            prof = ProfileUser.objects.get(itn=itn, passport_series=passport_series,
-                                           passport_number=passport_number)
-        except:
-            username = "U_" + str(itn) + str(passport_series) + str(passport_number)
-            u_email = bids_user_form.data['email']
-            if u_email is None or u_email == "":
-                u_email = "U_" + str(itn) + str(passport_series) + str(passport_number) + "@kvadra.com"
-            passport_number = "password1029"
-            param = {"username": username, "email": u_email, "password": passport_number}
-            user = User.objects.create(**param)
-            user.save()
-            prof = bids_user_form.save(commit=False)
-            prof.user = user
-            prof.save()
-        bid = Bid.objects.filter(user=prof.user)
-        if len(bid) > 0:
-            obj = bids_form.save(commit=False)
-            obj.user = prof.user
-            obj.is_double = True
-            group = Group.objects.get_or_create(name='guest')[0]
-            obj.user.groups.add(group)
-            obj.status = status
-            obj.save()
-            return HttpResponseRedirect('/bids/bidsdouble')
-        else:
-            if bids_form.is_valid():
-                try:
-                    obj = bids_form.save(commit=False)
-                    obj.user = prof.user
-                    group = Group.objects.get_or_create(name='guest')[0]
-                    obj.user.groups.add(group)
-                    obj.status = status
-                    obj.save()
-                    return HttpResponseRedirect('/bids/bids')
-                except Exception as err:
-                    print(err)
+            f_choosed = request.POST.get('f-status-list', None)
+            s_choosed = request.POST.get('s-status-list', None)
+            if s_choosed is not None and s_choosed != "None":
+                status = BidStatus.objects.get(id=s_choosed)
+            elif f_choosed is not None and f_choosed != "None":
+                status = BidStatus.objects.get(id=f_choosed)
             else:
-                messages.error(request, 'Please correct the error below.')
+                status = None
+            try:
+                prof = ProfileUser.objects.get(itn=itn, passport_series=passport_series,
+                                               passport_number=passport_number)
+            except:
+                username = "U_" + str(itn) + str(passport_series) + str(passport_number)
+                u_email = bids_user_form.data['email']
+                if u_email is None or u_email == "":
+                    u_email = "U_" + str(itn) + str(passport_series) + str(passport_number) + "@kvadra.com"
+                passport_number = "password1029"
+                param = {"username": username, "email": u_email, "password": passport_number}
+                user = User.objects.create(**param)
+                user.save()
+                prof = bids_user_form.save(commit=False)
+                prof.user = user
+                prof.save()
+            bid = Bid.objects.filter(user=prof.user)
+            if len(bid) > 0:
+                obj = bids_form.save(commit=False)
+                obj.user = prof.user
+                obj.is_double = True
+                group = Group.objects.get_or_create(name='guest')[0]
+                obj.user.groups.add(group)
+                obj.status = status
+                obj.save()
+                return HttpResponseRedirect('/bids/bidsdouble')
+            else:
+                if bids_form.is_valid():
+                    try:
+                        obj = bids_form.save(commit=False)
+                        obj.user = prof.user
+                        group = Group.objects.get_or_create(name='guest')[0]
+                        obj.user.groups.add(group)
+                        obj.status = status
+                        obj.save()
+                        return HttpResponseRedirect('/bids/bids')
+                    except Exception as err:
+                        print(err)
+                else:
+                    messages.error(request, 'Please correct the error below.')
+        else:
+            bids_user_form = UserAdd()
+            bids_form = BidsAdd()
     else:
         bids_user_form = UserAdd()
         bids_form = BidsAdd()
@@ -275,6 +279,12 @@ def bidsimport(request):
     if request.is_ajax() and request.method == 'POST':
         regim = request.POST.get('regim', None)
         group_id = request.POST.get('idgroup', None)
+        if group_id:
+            group = Group.objects.get(id=group_id)
+        else:
+            group = ""
+        db_name = request.POST.get('db_name', None)
+        base_id = uuid.uuid4()
         # curentuser_id = request.user.id
         # curentuser = request.user
 
@@ -384,13 +394,29 @@ def bidsimport(request):
                                     del bachlist[k]
                             if not profile_user.exists():
                                 ProfileUser.objects.create(user_id=new_user.id, **pr)
-                            if not BidImport.objects.filter(user_id=new_user.id, **bachlist).exists():
-                                obj = BidImport.objects.create(user_id=new_user.id, **bachlist)
-                                obj.save()
                             if not Bid.objects.filter(user_id=new_user.id, **bachlist).exists():
-                                bid_n = Bid.objects.create(user_id=new_user.id, **bachlist)
+                                bid_n = Bid.objects.create(user_id=new_user.id, name_base=db_name,
+                                                           name_project=group.name,
+                                                           base_id=base_id,
+                                                           project_id=group_id,
+                                                           **bachlist)
                                 bid_n.save()
-                            count_i += 1
+                            else:
+                                if not BidImport.objects.filter(user_id=new_user.id, **bachlist).exists():
+                                    obj = BidImport.objects.create(user_id=new_user.id, name_base=db_name,
+                                                                   base_id=base_id,
+                                                                   name_project=group.name,
+                                                                   project_id=group_id,
+                                                                   **bachlist)
+                                    obj.save()
+                                bid_n = Bid.objects.create(user_id=new_user.id, name_base=db_name,
+                                                           name_project=group.name,
+                                                           base_id=base_id,
+                                                           project_id=group_id,
+                                                           is_double=True,
+                                                           **bachlist)
+                                bid_n.save()
+                                count_i += 1
                         results['success'] = True
                     except Exception as err:
                         results['success'] = False

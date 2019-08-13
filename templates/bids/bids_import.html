@@ -5,7 +5,23 @@
 
 
     {#{% endblock %}#}
-
+    <div class="row">
+                    <ul class="list-page-breadcrumb">
+                        <li>
+                            <a href="{% url 'bids' %}">Заявки<i class="zmdi zmdi-chevron-right"></i></a>
+                            {% if 'bidsdouble' in request.path %}
+                            <a href="{% url 'bidsdouble' %}">Дубли
+                                <i class="zmdi zmdi-chevron-right"></i>
+                            </a>
+                            {% endif %}
+                            {% if 'bidsimport' in request.path %}
+                            <a href="{% url 'bidsimport' %}">Импорт
+                                <i class="zmdi zmdi-chevron-right"></i>
+                            </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+            </div>
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-lg">
@@ -42,7 +58,10 @@
                       enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
-                        <div class="col-md-1">
+                        <div class="col-md-2">
+                            <input class="form-control button-form required" placeholder="Укажите название базы"
+                                   id="db_name"
+                                   type="text" name="db_name" required>
                         </div>
                         <div class="col-md-2" id="groupview">
                             <select name="groupitem" class="form-control" id="groupitem" data-regim="groupview">

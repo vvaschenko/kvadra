@@ -90,11 +90,15 @@
                     email: true
                 },
                 phone: {
-                    required: true
+                    required: true,
+                    minlength: 12,
+                    digits: true
                 },
                 contact_phone: {
                     required: true,
-                    minlength: 12
+                    minlength: 12,
+                    digits: true
+
                 },
                 itn:{
                     required: true,

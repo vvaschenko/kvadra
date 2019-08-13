@@ -140,7 +140,8 @@
             <ul class="left-branding pull-left clickablemenu ttmenu dark-style menu-color-gradient">
                 <li><span class="left-toggle-switch"><i class="zmdi zmdi-menu"></i></span></li>
                 <li>
-                        <li><h3 class="title"> Kvadra CRM </h3></li>
+                        <li><h3
+                    class="title"><a href="/bids/bids/"> Kvadra CRM </a></h3></li>
                 </li>
             </ul>
              </div>
@@ -152,7 +153,6 @@
     </div>
     <div class="logo">
         <img src="{% static 'images/photologo.jpg' %}" height="50px" width="50px" class="logo_img">
-    </div>
     </div>
     <div class="container-fluid">
 {#        <div class="page-header filled full-block light">#}
@@ -226,8 +226,11 @@
                     <ul>
 
                         {% if user.is_authenticated %}
-                            <li><a href="#">{{ user.username }}</a></li>
+                            <li><a href="#">Вы вошли как: <stong>{{ user.username }}</stong></a></li>
                             <li><a href="#">{{ user.email }}</a></li>
+                            <li>Проект: {{ user.groups.first.name }}</li>
+                            <li>{{ user.email }}</li>
+                            <li>{{ user.email }}</li>
                         {% else %}
                             <li><a href="#">username</a></li>
                             <li><a href="#">email</a></li>

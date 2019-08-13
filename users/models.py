@@ -91,6 +91,7 @@ class ProfileUser(models.Model):
     date_of_issue = models.DateField("Паспорт Дата Видачі", null=True, blank=True)
 
     mailing_list = models.BooleanField("Участь в розсилках", default=True)
+    comment = models.TextField(blank=True)
 
     def __str__(self):
         return str(self.last_name) + " " + str(self.first_name) + " " + str(self.middle_name) + " " + str(
