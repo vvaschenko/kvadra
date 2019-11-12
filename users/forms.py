@@ -127,7 +127,7 @@ class ChangePassword(forms.Form):
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['email']
 
 
 class ProfileForm(forms.ModelForm):
@@ -136,7 +136,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = ProfileUser
-        fields = ['birthday', 'avatar', 'id_telegram']
+        fields = ['first_name', 'middle_name', 'last_name', 'birthday', 'avatar', 'id_telegram']
         localized_fields = ('birthday',)
         widgets = {
             'birthday': forms.DateInput(format=['%Y-%m-%d']), }

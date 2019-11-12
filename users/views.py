@@ -230,8 +230,6 @@ def log_out(request):
 @login_required()
 @transaction.atomic
 def profile(request):
-    # , {"p_query": posts}
-    # context = RequestContext(request)
     context = {}
     context["timeobr"] = datetime.strftime(datetime.now(), "%A, %d. %B %Y %I:%M%p")
     if request.method == 'POST':

@@ -5,8 +5,10 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
-from users.validators import (validate_birthday, validate_contact_phone_numeric, validate_contact_phone_length,
-                              validate_passport_series)
+from users.validators import (
+    validate_contact_phone_numeric,
+    validate_contact_phone_length,
+    validate_passport_series)
 
 
 class ProfileUser(models.Model):
@@ -94,7 +96,16 @@ class ProfileUser(models.Model):
     comment = models.TextField(blank=True)
 
     def __str__(self):
-        return str(self.last_name) + " " + str(self.first_name) + " " + str(self.middle_name) + " " + str(
-            self.user.groups.values_list('name', flat=True))
+        return "%s %s %s %s" % (
+            self.last_name,
+            self.first_name,
+            self.middle_name,
+            self.user.groups.values_list("name", flat=True)
+        )
 
 
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        ProfileUser.objects.create(user=instance)
+    instance.profileuser.save()

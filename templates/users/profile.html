@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
 
@@ -34,40 +35,14 @@
                                     <label class=" col-md-2 control-label">Личные данные</label>
                                     <div class=" col-md-10">
                                         <div class="form-group-input">
-                                             <input type="text" class="form-control" name="first_name" placeholder="First Name"
-{#                                                    {% if request.method == 'POST' %}value="{{ user_form.instance.first_name }}" {% endif %}#}
-                                                    value="{{ user_form.instance.first_name }}"
-                                             >
-                                             <input type="text" class="form-control" name ="last_name" placeholder="Last Name"
-{#                                                    {% if request.method == 'POST' %}value="{{ user_form.instance.last_name }}" {% endif %}#}
-                                                    value="{{ user_form.instance.last_name }}"
-                                             >
+                                            {% render_field profile_form.first_name class="form-control" placeholder="Имя" %}
+                                            {% render_field profile_form.middle_name class="form-control" placeholder="Отчество" %}
+                                            {% render_field profile_form.last_name class="form-control" placeholder="Фамилия" %}
 
-                                                 {% if profile_form.errors %}
-                                                     {% for error in  profile_form.errors %}
-                                                         <div class="input-group date addon-datepicker">
-{#                                                         addon-datepicker#}
-                                                              <input type="text" class="form-control" name="birthday" placeholder="Date of Birth"
-     {#                                                        {% if request.method == 'POST' %}value="{{ profile_form.instance.birthday }}" {% endif %}#}
-{#                                                              value="{{ profile_form.instance.birthday }}"#}
-                                                              >
-
-                                                         <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-
-                                                         </div>
-                                                         <span class="error-view"><p>{{ error|escape}}</p></span>
-
-                                                     {% endfor %}
-                                                 {% else %}
-                                                  <div class="input-group date addon-datepicker">
-{#                                                  addon-datepicker#}
-                                                     <input type="text" class="form-control" name="birthday"  placeholder="Date of Birth"
-{#                                                        {% if request.method == 'POST' %}value="{{ profile_form.instance.birthday }}" {% endif %}#}
-                                                        value="{{ profile_form.instance.birthday|date:"Y-m-d" }}"
-                                                     >
-                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-                                                  </div>
-                                                 {% endif %}
+                                            <div class="input-group date addon-datepicker">
+                                                {% render_field profile_form.birthday class="form-control" placeholder="Дата рожденяия"  %}
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -76,10 +51,7 @@
                                     <label class=" col-md-2 control-label">Email</label>
                                     <div class=" col-md-10">
                                          <div class="form-group-input">
-                                              <input type="text" class="form-control" name="email" placeholder="Ваш Email"
-{#                                                     {% if request.method == 'POST' %}value="{{ user_form.instance.email }}" {% endif %}#}
-                                                     value="{{ user_form.instance.email }}"
-                                              >
+                                             {% render_field user_form.email class="form-control" %}
                                          </div>
                                     </div>
                                 </div>
@@ -87,11 +59,7 @@
                                     <label class=" col-md-2 control-label">ID Telegramm</label>
                                     <div class=" col-md-10">
                                         <div class="form-group-input">
-                                            <input type="text" class="form-control" name="id_telegramm"
-                                                   placeholder="Ваш ID в телеграмм"
-                                                    {#                                                     {% if request.method == 'POST' %}value="{{ user_form.instance.email }}" {% endif %}#}
-                                                   value="{{ profile_form.instance.id_telegramm }}"
-                                            >
+                                            {% render_field profile_form.id_telegram class="form-control" %}
                                         </div>
                                     </div>
                                 </div>
