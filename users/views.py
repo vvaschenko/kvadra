@@ -1,8 +1,4 @@
 # coding=utf-8
-import base64
-import re
-import requests
-import json
 from smtplib import SMTPAuthenticationError
 
 from django.contrib import auth, messages
@@ -18,7 +14,7 @@ from django.shortcuts import render, redirect
 from kvadra import settings
 from .models import *
 # from mon.models import PreferenceMon
-from users.forms import Registration, Login, UserForm, ProfileForm, ChangePassword, RestPassword
+from users.forms import Registration, Login, UserForm, ContactFormset, ProfileForm, ChangePassword, RestPassword
 from django.utils.translation import ugettext_lazy as _
 from datetime import datetime
 from django.core.mail import EmailMessage
@@ -234,12 +230,13 @@ def profile(request):
     context["timeobr"] = datetime.strftime(datetime.now(), "%A, %d. %B %Y %I:%M%p")
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
-
         profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profileuser)
+        contact_formset = ContactFormset(request.POST, instance=request.user)
 
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid() and contact_formset.is_valid():
             user_form.save()
             profile_form.save()
+            contact_formset.save()
             messages.success(request, _('Your profile was successfully updated!'))
             return HttpResponseRedirect('/users/profile/')
             # return redirect('users/profile.html')
@@ -248,12 +245,12 @@ def profile(request):
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profileuser)
-
+        contact_formset = ContactFormset(instance=request.user)
     # context["user_form"] = user_form.initial
 
     return render(request, 'users/profile.html',
                   {'timeobr': datetime.strftime(datetime.now(), "%A, %d. %B %Y %I:%M%p"), 'user_form': user_form,
-                   'profile_form': profile_form})
+                   'profile_form': profile_form, 'contact_formset': contact_formset})
 
 
 @login_required()

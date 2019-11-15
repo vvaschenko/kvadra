@@ -31,6 +31,11 @@ class ProfileUser(models.Model):
                                  null=True,
                                  blank=True)
 
+    vicidial_id = models.CharField("Номер Vicidial",
+                                   max_length=255,
+                                   null=True,
+                                   blank=True)
+
     birthday = models.CharField("Дата рождения",
                                 max_length=10,
                                 # validators=[validate_birthday],
@@ -65,17 +70,17 @@ class ProfileUser(models.Model):
 
     # Фактический адрес
 
-    registration_area_fiz = models.CharField("Область Проживання", max_length=255, null=True, blank=True)
+    registration_area_fiz = models.CharField("Область Проживания", max_length=255, null=True, blank=True)
 
-    registration_raion_fiz = models.CharField("Район Проживання", max_length=255, null=True, blank=True)
+    registration_raion_fiz = models.CharField("Район Проживания", max_length=255, null=True, blank=True)
 
-    registration_city_fiz = models.CharField("Місто Проживання", max_length=255, null=True, blank=True)
+    registration_city_fiz = models.CharField("Город Проживания", max_length=255, null=True, blank=True)
 
-    registration_street_fiz = models.CharField("Вулиця Проживання", max_length=255, null=True, blank=True)
+    registration_street_fiz = models.CharField("Улия Проживания", max_length=255, null=True, blank=True)
 
-    House_number_fiz = models.CharField("Номер Будинку Проживання", max_length=10, null=True, blank=True)
+    house_number_fiz = models.CharField("Номер Дома Проживания", max_length=10, null=True, blank=True)
 
-    apartment_number_fiz = models.CharField("Номер Квартири Проживання", max_length=10, null=True, blank=True)
+    apartment_number_fiz = models.CharField("Номер Квартиры Проживания", max_length=10, null=True, blank=True)
 
     # Паспорт / ID карта
     passport_series = models.CharField("Серия паспорта",
@@ -95,6 +100,8 @@ class ProfileUser(models.Model):
     mailing_list = models.BooleanField("Участь в розсилках", default=True)
     comment = models.TextField(blank=True)
 
+    day_in_system = models.IntegerField(null=True, blank=True)
+
     def __str__(self):
         return "%s %s %s %s" % (
             self.last_name,
@@ -102,6 +109,20 @@ class ProfileUser(models.Model):
             self.middle_name,
             self.user.groups.values_list("name", flat=True)
         )
+
+
+class Contact(models.Model):
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE,
+                             related_name="relative_contacts")
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+
+    phone_number = models.CharField(validators=[
+                                         validate_contact_phone_numeric,
+                                         validate_contact_phone_length
+                                    ], max_length=12)
+
 
 
 @receiver(post_save, sender=User)

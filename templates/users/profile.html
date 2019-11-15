@@ -32,6 +32,20 @@
                             {% csrf_token %}
 {#                            <div class="form-content">#}
                                 <div class="form-group">
+                                     <label class=" col-md-2 control-label">Фото профиля</label>
+                                     <div class="col-md-10 unit">
+                                          <div class="input append-small-btn">
+                                               <div class="file-button">Browse
+                                                        <input class="btn btn-success" id="avatar_file" type="file" accept="image/jpeg,image/png" name="avatar" >
+                                               </div>
+                                               <input type="text" class="form-control"  id="append-small-btn" readonly placeholder="no file selected"
+{#                                                      {% if request.method == 'POST' %}value="{{ profile_form.instance.avatar }}" {% endif %}#}
+                                                      value="{{ profile_form.instance.avatar }}"
+                                               >
+                                          </div>
+                                     </div>
+                                </div>
+                                <div class="form-group">
                                     <label class=" col-md-2 control-label">Личные данные</label>
                                     <div class=" col-md-10">
                                         <div class="form-group-input">
@@ -56,34 +70,97 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class=" col-md-2 control-label">ID Telegramm</label>
+                                    <label class=" col-md-2 control-label">ID Vicidial</label>
                                     <div class=" col-md-10">
                                         <div class="form-group-input">
-                                            {% render_field profile_form.id_telegram class="form-control" %}
+                                            {% render_field profile_form.vicidial_id class="form-control" %}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                     <label class=" col-md-2 control-label">Фото профиля</label>
-                                     <div class="col-md-10 unit">
-                                          <div class="input append-small-btn">
-                                               <div class="file-button">Browse
-                                                        <input class="btn btn-success" id="avatar_file" type="file" accept="image/jpeg,image/png" name="avatar" >
-                                               </div>
-                                               <input type="text" class="form-control"  id="append-small-btn" readonly placeholder="no file selected"
-{#                                                      {% if request.method == 'POST' %}value="{{ profile_form.instance.avatar }}" {% endif %}#}
-                                                      value="{{ profile_form.instance.avatar }}"
-                                               >
-                                          </div>
-                                     </div>
+                                    <label class=" col-md-2 control-label">Номер телефона</label>
+                                    <div class=" col-md-10">
+                                        <div class="form-group-input">
+                                            {% render_field profile_form.contact_phone class="form-control" %}
+                                        </div>
+                                    </div>
                                 </div>
-{#                            </div>#}
+                                <div class="row form-group">
+                                    <label class=" col-md-2 control-label">Адрес</label>
+                                    <div class=" col-md-10">
+                                        <div class="form-group-input">
+                                            {% render_field profile_form.registration_area_fiz class="form-control" placeholder="Страна"  %}
+                                            {% render_field profile_form.registration_raion_fiz class="form-control" placeholder="Район"  %}
+                                            {% render_field profile_form.registration_city_fiz class="form-control" placeholder="Город" %}
+                                            {% render_field profile_form.registration_street_fiz class="form-control" placeholder="Улица" %}
+                                            {% render_field profile_form.house_number_fiz class="form-control" placeholder="Номер дома" %}
+                                            {% render_field profile_form.apartment_number_fiz class="form-control" placeholder="Номер квартиры" %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{ contact_formset.management_form }}
+                                {{ contact_formset.non_form_errors }}
+                                <div class="row form-group">
+                                    <label class=" col-md-2 control-label">Контакты близких</label>
+                                    <div class="col-md-10">
+                                        <div class="container-fluid">
+                                        {% for contact_form in contact_formset %}
+                                            <div class="row form-row spacer relative-contact-form">
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group {% if contact_form.first_name.errors %}has-error{% endif %}">
+                                                        {% for hidden in form.hidden_fields %}
+                                                            {{ hidden }}
+                                                        {% endfor %}
+                                                        {{ contact_form.id }}
+                                                        {% render_field contact_form.first_name class="form-control" placeholder="Имя"  %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group {% if contact_form.last_name.errors %}has-error{% endif %}">
+                                                        {% render_field contact_form.last_name class="form-control" placeholder="Фамилия"  %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group {% if contact_form.phone_number.errors %}has-error{% endif %}">
+                                                        {% render_field contact_form.phone_number class="form-control" placeholder="Номер телефона"  %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    {% if contact_form.instance.pk %}
+                                                        {{ contact_form.DELETE }}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+{#                                            <div class="relative-contact-form form-inline">#}
+{#                                                <div class="from-group col-md-4"> {% render_field contact_form.first_name class="form-control" placeholder="Имя"  %}</div>#}
+{#                                                <div class="from-group col-md-4"> {% render_field contact_form.last_name class="form-control" placeholder="Фамилия"  %}</div>#}
+{#                                                <div class="from-group col-md-4"> {% render_field contact_form.phone_number class="form-control" placeholder="Номер телефона"  %}</div>#}
+{#                                                {{ contact_form.id }}#}
+{#                                            </div>#}
+                                        {% endfor %}
+                                        <div class="row form-row spacer">
+                                            <div class="add-button-place"></div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                <label class=" col-md-2 control-label">Коментарий</label>
+                                <div class=" col-md-10">
+                                    <div class="form-group-input">
+                                        {% render_field profile_form.comment class="form-control" %}
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-footer">
                                  <button type="submit" class="btn btn-success primary-btn">Сохранить</button>
                                  <button type="reset" class="btn btn-danger secondary-btn">Очистить</button>
                             </div>
-                            </form>
 
+                            </form>
                         </div>
 
                        </div>
@@ -95,4 +172,16 @@
     </div>
 
 {% endblock %}
-
+{% block custom_scripts %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+    <script type="text/javascript">
+    $('.relative-contact-form').formset({
+        addText: 'Добавить контакт',
+        deleteText: 'Удалить',
+        prefix: 'relative_contacts',
+        deleteCssClass: 'delete btn btn-danger',
+        addCssClass: 'add btn btn-success col-xs-6 col-xs-offset-6',
+    });
+    </script>
+{% endblock %}

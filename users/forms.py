@@ -2,18 +2,12 @@
 import datetime
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.forms import PasswordInput, SelectDateWidget, ModelForm
+from django.forms.models import inlineformset_factory
 from django.contrib.auth.models import User
-# from django_auth_ldap.backend import LDAPBackend
-
-from kvadra import settings
-# from mon.models import PreferenceMon
-from users.models import ProfileUser
 
 
-# import ldap
-# from django_auth_ldap.config import LDAPSearch, PosixGroupType
+from users.models import ProfileUser, Contact
 
 
 class Registration(forms.Form):
@@ -130,13 +124,31 @@ class UserForm(ModelForm):
         fields = ['email']
 
 
+ContactFormset = inlineformset_factory(User, Contact, extra=1, fields="__all__", can_delete=True)
+
+
 class ProfileForm(forms.ModelForm):
     # avatar = forms.CharField(max_length=1000)
     # birthday = forms.DateInput
 
     class Meta:
         model = ProfileUser
-        fields = ['first_name', 'middle_name', 'last_name', 'birthday', 'avatar', 'id_telegram']
+        fields = [
+            'first_name',
+            'middle_name',
+            'last_name',
+            'birthday',
+            'avatar',
+            'vicidial_id',
+            'contact_phone',
+            'registration_area_fiz',
+            'registration_raion_fiz',
+            'registration_city_fiz',
+            'registration_street_fiz',
+            'house_number_fiz',
+            'apartment_number_fiz',
+            'comment',
+        ]
         localized_fields = ('birthday',)
         widgets = {
             'birthday': forms.DateInput(format=['%Y-%m-%d']), }
