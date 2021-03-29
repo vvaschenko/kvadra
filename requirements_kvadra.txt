@@ -76,7 +76,7 @@ pyexcel-io==0.5.5
 pyexcel-webio==0.1.4
 pyexcel-xls==0.5.5
 pyexcel-xlsx==0.5.5
-Pygments==2.3.0
+Pygments==2.7.4
 Pyphen==0.9.4
 python-dateutil==2.7.2
 pytz==2018.5
