@@ -21,7 +21,7 @@ django-admin-multiple-choice-list-filter==0.1.1
 django-admin-rangefilter==0.3.6
 django-appconf==1.0.2
 django-compressor==2.2
-django-debug-toolbar==1.9.1
+django-debug-toolbar==1.11.1
 django-excel==0.0.9
 django-filter==1.1.0
 django-formtools==2.1
