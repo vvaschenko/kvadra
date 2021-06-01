@@ -101,7 +101,7 @@ typed-ast==1.4.0
 typing-extensions==3.7.4.1
 tzlocal==1.5.1
 unicodecsv==0.14.1
-urllib3==1.22
+urllib3==1.26.5
 vine==1.1.4
 WeasyPrint==0.42
 webencodings==0.5.1
